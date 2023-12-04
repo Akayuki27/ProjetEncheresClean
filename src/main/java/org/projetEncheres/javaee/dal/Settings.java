@@ -17,8 +17,8 @@ public class Settings {
 	
 	}
 
-	public static Properties getProperties() {
-		return properties;
-	}
+	public static String getProperty(String key) {
+        return properties.getProperty(key);
+    }
 
 }
