@@ -10,4 +10,5 @@ public interface DAO<T> {
 	public void update (T data) throws DALException;
 	public void delete(int id) throws DALException;
 	
+	
 }
