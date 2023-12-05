@@ -19,14 +19,14 @@ import org.projetEncheres.javaee.dal.DALException;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
-	private final static String INSERT = "INSERT INTO ARTICLES VALUES(?,?,?,?,?,?,?,?)";
-	private final static String SELECTBYID = "SELECT * FROM ARTICLES WHERE no_article=?";
-	private final static String SELECTALL = "SELECT * FROM ARTICLES";
-	private final static String UPDATE = "UPDATE ARTICLES SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, "
+	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?)";
+	private final static String SELECTBYID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article=?";
+	private final static String SELECTALL = "SELECT * FROM ARTICLES_VENDUS";
+	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, "
 			+ "prix_vente=?, no_utilisateur=?, no_categorie=?";
-	private final static String DELETE = "DELETE FROM ARTICLES WHERE no_article=?";
-	private final static String SELECTBYID_CATEGORIE = "SELECT * FROM ARTICLES WHERE no_categorie=?";
-	private final static String SELECTBYNOM_ARTICLE = "SELECT * FROM ARTICLES WHERE nom_article=?";
+	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
+	private final static String SELECTBYID_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=?";
+	private final static String SELECTBYNOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article=?";
 
 	public ArticleDAOJdbcImpl() {
 
@@ -43,7 +43,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYID);) {
 			rqt.setInt(1, id);
 			ResultSet rs = rqt.executeQuery();
+			if(rs.next()) {
 			a = mapping(rs);
+			}
 
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -155,7 +157,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			int nbRows = rqt.executeUpdate();
 			if (nbRows == 1) {
 				try (ResultSet rs = rqt.getGeneratedKeys()) {
+					if(rs.next()) {
 					a.setNoArticle(rs.getInt(1));
+					}
 				}
 			}
 

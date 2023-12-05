@@ -44,6 +44,20 @@ public class ArticleVendu {
 		this.no_utilisateur = no_utilisateur;
 		this.no_categorie = no_categorie;
 	}
+	
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, int no_utilisateur, int no_categorie) {
+		super();
+		
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.no_utilisateur = no_utilisateur;
+		this.no_categorie = no_categorie;
+	}
 
 	public int getNoArticle() {
 		return noArticle;
