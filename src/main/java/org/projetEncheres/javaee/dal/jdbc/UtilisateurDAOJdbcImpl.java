@@ -22,7 +22,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			+ "credit=?, administrateur=?";
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?";
 	private static final String LOGIN = "SELECT * FROM UTILISATEURS WHERE pseudo =? and motDePasse=?";
-	private static UtilisateurDAO instance = null;
+	
 	
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
