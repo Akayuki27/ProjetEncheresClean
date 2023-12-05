@@ -25,6 +25,7 @@ public abstract class DAOFactory {
 		 return new EnchereDAOJdbcImpl();
 	 }
 
+
 	    // Ajoutez des méthodes similaires pour d'autres DAO si nécessaire
 
 }

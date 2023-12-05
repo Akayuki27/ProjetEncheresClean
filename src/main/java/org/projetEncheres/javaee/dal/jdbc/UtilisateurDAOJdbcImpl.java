@@ -21,7 +21,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?"
 			+ "credit=?, administrateur=?";
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?";
-
+	private static final String LOGIN = "SELECT * FROM UTILISATEURS WHERE pseudo =? and motDePasse=?";
+	private static UtilisateurDAO instance = null;
+	
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
 		Utilisateur u = null;
@@ -152,5 +154,47 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 		return u;
 	}
+	
+	public Utilisateur login(String pseudo, String motDePasse) throws DALException{
 
+		Utilisateur utilisateur = null;
+		
+		try {
+			Connection con = JDBCTools.getConnection();
+			PreparedStatement rqt = con.prepareStatement(LOGIN);
+			rqt.setString(1, pseudo);
+			rqt.setString(2, motDePasse);
+			ResultSet rs = rqt.executeQuery();
+			utilisateur = mapping(rs);
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException("Problème dans la récupération des données utilisateur pour le login");
+		}
+		
+		return utilisateur;
+	}
+
+	public Utilisateur loginEmail(String email, String motDePasse) throws DALException {
+		Utilisateur utilisateur = null;
+		
+		try {
+			Connection con = JDBCTools.getConnection();
+			PreparedStatement rqt = con.prepareStatement(LOGIN);
+			rqt.setString(1, email);
+			rqt.setString(2, motDePasse);
+			ResultSet rs = rqt.executeQuery();
+			utilisateur = mapping(rs);
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException("Problème dans la récupération des données utilisateur pour le login");
+		}
+		
+		return utilisateur;
+	}
+
+	
 }

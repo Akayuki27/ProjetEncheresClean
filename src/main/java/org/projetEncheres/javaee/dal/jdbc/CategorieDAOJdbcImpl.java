@@ -22,7 +22,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	@Override
 	public void insert(Categorie c) throws DALException {
-		try (Connection con = JDBCTools.getConnection();
+		try ( 
 				PreparedStatement rqt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			rqt.setString(1, c.getLibelle());
 			int nbRows = rqt.executeUpdate();
