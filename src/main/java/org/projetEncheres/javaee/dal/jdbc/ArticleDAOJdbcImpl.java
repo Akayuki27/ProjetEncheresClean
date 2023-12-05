@@ -13,8 +13,9 @@ import org.projetEncheres.javaee.bo.ArticleVendu;
 import org.projetEncheres.javaee.bo.Categorie;
 import org.projetEncheres.javaee.bo.Utilisateur;
 import org.projetEncheres.javaee.dal.ArticleDAO;
+import org.projetEncheres.javaee.dal.ConnectionProvider;
 import org.projetEncheres.javaee.dal.DALException;
-import org.projetEncheres.javaee.dal.JDBCTools;
+
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
@@ -39,7 +40,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	@Override
 	public ArticleVendu selectByID(int id) throws DALException {
 		ArticleVendu a = null;
-		try (Connection con = JDBCTools.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYID);) {
+		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYID);) {
 			rqt.setInt(1, id);
 			ResultSet rs = rqt.executeQuery();
 			a = mapping(rs);
@@ -54,7 +55,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	@Override
 	public List<ArticleVendu> selectAll() throws DALException {
 		List<ArticleVendu> articles = new ArrayList<>();
-		try (Connection con = JDBCTools.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTALL);) {
+		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTALL);) {
 			ResultSet rs = rqt.executeQuery();
 			while (rs.next()) {
 				ArticleVendu a = mapping(rs);
@@ -70,7 +71,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	@Override
 	public void update(ArticleVendu a) throws DALException {
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 			PreparedStatement rqt = con.prepareStatement(UPDATE);){
 			rqt.setString(1, a.getNomArticle());
 			rqt.setString(2, a.getDescription());
@@ -90,7 +91,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	@Override
 	public void delete(int id) throws DALException {
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(DELETE);) {
 			rqt.setInt(1, id);
 			rqt.executeUpdate();
@@ -105,7 +106,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	@Override
 	public List<ArticleVendu> selectByCategorie(int id_categorie) throws DALException {
 		List<ArticleVendu> articles = new ArrayList<>();
-		try (Connection con = JDBCTools.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYID_CATEGORIE);) {
+		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYID_CATEGORIE);) {
 			rqt.setInt(1, id_categorie);
 			ResultSet rs = rqt.executeQuery();
 			while (rs.next()) {
@@ -124,7 +125,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	@Override
 	public List<ArticleVendu> selectByNom(String nom) throws DALException {
 		List<ArticleVendu> articles = new ArrayList<>();
-		try (Connection con = JDBCTools.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYNOM_ARTICLE);) {
+		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYNOM_ARTICLE);) {
 			rqt.setString(1, nom);
 			ResultSet rs = rqt.executeQuery();
 			while (rs.next()) {
@@ -141,7 +142,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	@Override
 	public void insertArticle(ArticleVendu a, Utilisateur u, Categorie c) throws DALException {
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			rqt.setString(1, a.getNomArticle());
 			rqt.setString(2, a.getDescription());

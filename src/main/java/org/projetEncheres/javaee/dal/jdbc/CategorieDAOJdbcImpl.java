@@ -9,8 +9,9 @@ import java.util.List;
 
 import org.projetEncheres.javaee.bo.Categorie;
 import org.projetEncheres.javaee.dal.CategorieDAO;
+import org.projetEncheres.javaee.dal.ConnectionProvider;
 import org.projetEncheres.javaee.dal.DALException;
-import org.projetEncheres.javaee.dal.JDBCTools;
+
 
 public class CategorieDAOJdbcImpl implements CategorieDAO {
 	
@@ -23,7 +24,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	@Override
 	public void insert(Categorie c) throws DALException {
 		try ( 
-				Connection con = JDBCTools.getConnection();
+				Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			rqt.setString(1, c.getLibelle());
 			int nbRows = rqt.executeUpdate();
@@ -51,7 +52,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	public List<Categorie> selectAll() throws DALException {
 		
 		List<Categorie> categories = new ArrayList<>();	
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(SELECTALL);) {
 			ResultSet rs = rqt.executeQuery();
 			while(rs.next()) {
@@ -71,7 +72,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	@Override
 	public void update(Categorie c) throws DALException {
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(UPDATE);) {
 			rqt.setString(1, c.getLibelle());
 			rqt.executeUpdate();
@@ -84,7 +85,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	@Override
 	public void delete(int id) throws DALException {
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(DELETE);) {
 			rqt.setInt(1, id);
 			rqt.executeUpdate();
@@ -99,7 +100,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	@Override
 	public List<Categorie> selectByLibelle(String libelle) throws DALException {
 		List<Categorie> categories = new ArrayList<>();	
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(SELECT_BY_LIBELLE);) {
 			rqt.setString(1, libelle);
 			ResultSet rs = rqt.executeQuery();

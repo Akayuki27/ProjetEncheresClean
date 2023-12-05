@@ -9,9 +9,9 @@ import java.util.List;
 import org.projetEncheres.javaee.bo.ArticleVendu;
 import org.projetEncheres.javaee.bo.Enchere;
 import org.projetEncheres.javaee.bo.Utilisateur;
+import org.projetEncheres.javaee.dal.ConnectionProvider;
 import org.projetEncheres.javaee.dal.DALException;
 import org.projetEncheres.javaee.dal.EnchereDAO;
-import org.projetEncheres.javaee.dal.JDBCTools;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
@@ -44,7 +44,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	@Override
 	public void insertEnchere(Enchere e, ArticleVendu a, Utilisateur u) throws DALException {
-		try (Connection con = JDBCTools.getConnection(); PreparedStatement rqt = con.prepareStatement(INSERT);) {
+		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(INSERT);) {
 			rqt.setInt(1, u.getNoUtilisateur());
 			rqt.setInt(2, a.getNoArticle());
 			rqt.setDate(3, Date.valueOf(e.getDateEnchere()));

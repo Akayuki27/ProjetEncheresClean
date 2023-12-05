@@ -26,7 +26,7 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		Utilisateur u = new Utilisateur("Akayuki", "Yuki", "Aka", "emilie@gmail.com", "02154789855", "rue des eservlets", "54000", "nancy", "motdepasse", 0, false);
+		Utilisateur u = new Utilisateur("Simon", "Ben", "Bleu", "eni@gmail.com", "02158789855", "rue des hordes", "666", "enfer", "motDepasse", 0, false);
 		UtilisateurDAO uDAO = DAOFactory.getUtilisateurDAO();
 		try {
 			uDAO.insert(u);

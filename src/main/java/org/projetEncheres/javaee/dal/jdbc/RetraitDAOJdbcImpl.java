@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.projetEncheres.javaee.bo.ArticleVendu;
 import org.projetEncheres.javaee.bo.Retrait;
+import org.projetEncheres.javaee.dal.ConnectionProvider;
 import org.projetEncheres.javaee.dal.DALException;
-import org.projetEncheres.javaee.dal.JDBCTools;
 import org.projetEncheres.javaee.dal.RetraitDAO;
 
 public class RetraitDAOJdbcImpl implements RetraitDAO {
@@ -42,7 +42,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 	@Override
 	public void insertRetrait(Retrait retrait, ArticleVendu a) throws DALException {
-		try (Connection con = JDBCTools.getConnection(); PreparedStatement rqt = con.prepareStatement(INSERT);) {
+		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(INSERT);) {
 			rqt.setInt(1, a.getNoArticle());
 			rqt.setString(2, retrait.getRue());
 			rqt.setString(3, retrait.getCodePostal());

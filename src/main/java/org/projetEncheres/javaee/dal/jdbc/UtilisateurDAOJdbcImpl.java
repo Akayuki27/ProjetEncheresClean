@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.projetEncheres.javaee.bo.Utilisateur;
+import org.projetEncheres.javaee.dal.ConnectionProvider;
 import org.projetEncheres.javaee.dal.DALException;
-import org.projetEncheres.javaee.dal.JDBCTools;
 import org.projetEncheres.javaee.dal.UtilisateurDAO;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
@@ -26,7 +26,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
 		Utilisateur u = null;
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(SELECT_BY_PSEUDO);) {
 			rqt.setString(1, pseudo);
 			ResultSet rs = rqt.executeQuery();
@@ -40,7 +40,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public void insert(Utilisateur u) throws DALException {
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			rqt.setString(1, u.getPseudo());
 			rqt.setString(2, u.getNom());
@@ -70,7 +70,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	@Override
 	public Utilisateur selectByID(int id) throws DALException {
 		Utilisateur u = null;
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(SELECT_BY_NO_UTILISATEUR);) {
 			rqt.setInt(1, id);
 			ResultSet rs = rqt.executeQuery();
@@ -86,7 +86,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	@Override
 	public List<Utilisateur> selectAll() throws DALException {
 		List<Utilisateur> utilisateurs = new ArrayList<>();
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(SELECTALL);) {
 				ResultSet rs = rqt.executeQuery();
 				while(rs.next()) {
@@ -102,7 +102,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public void update(Utilisateur u) throws DALException {
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(UPDATE);) {
 			rqt.setString(1, u.getPseudo());
 			rqt.setString(2, u.getNom());
@@ -125,7 +125,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public void delete(int id) throws DALException {
-		try (Connection con = JDBCTools.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(DELETE);) {
 			rqt.setInt(1, id);
 			rqt.executeUpdate();
@@ -159,7 +159,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		Utilisateur utilisateur = null;
 		
 		try {
-			Connection con = JDBCTools.getConnection();
+			Connection con = ConnectionProvider.getConnection();
 			PreparedStatement rqt = con.prepareStatement(LOGIN);
 			rqt.setString(1, pseudo);
 			rqt.setString(2, motDePasse);
@@ -179,7 +179,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		Utilisateur utilisateur = null;
 		
 		try {
-			Connection con = JDBCTools.getConnection();
+			Connection con = ConnectionProvider.getConnection();
 			PreparedStatement rqt = con.prepareStatement(LOGIN);
 			rqt.setString(1, email);
 			rqt.setString(2, motDePasse);
