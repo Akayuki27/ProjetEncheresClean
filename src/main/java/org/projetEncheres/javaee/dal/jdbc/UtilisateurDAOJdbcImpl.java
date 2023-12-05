@@ -1,52 +1,156 @@
 package org.projetEncheres.javaee.dal.jdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.projetEncheres.javaee.bo.Utilisateur;
 import org.projetEncheres.javaee.dal.DALException;
+import org.projetEncheres.javaee.dal.JDBCTools;
 import org.projetEncheres.javaee.dal.UtilisateurDAO;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
+	private static final String SELECT_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo=?";
+	private static final String INSERT = "INSERT INTO UTILISATEURS VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String SELECT_BY_NO_UTILISATEUR = "SELECT * FROM UTILISATEURS WHERE no_utilisateur=?";
+	private static final String SELECTALL = "SELECT * FROM UTILISATEURS";
+	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?"
+			+ "credit=?, administrateur=?";
+	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?";
+
 	@Override
-	public void insert(Object data) throws DALException {
-		// TODO Auto-generated method stub
-		
+	public Utilisateur selectByPseudo(String pseudo) throws DALException {
+		Utilisateur u = null;
+		try (Connection con = JDBCTools.getConnection();
+				PreparedStatement rqt = con.prepareStatement(SELECT_BY_PSEUDO);) {
+			rqt.setString(1, pseudo);
+			ResultSet rs = rqt.executeQuery();
+			u = mapping(rs);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException();
+		}
+		return u;
 	}
 
 	@Override
-	public void update(Object data) throws DALException {
-		
-	}
-
-	@Override
-	public void insert(Utilisateur data) throws DALException {
-		
+	public void insert(Utilisateur u) throws DALException {
+		try (Connection con = JDBCTools.getConnection();
+				PreparedStatement rqt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
+			rqt.setString(1, u.getPseudo());
+			rqt.setString(2, u.getNom());
+			rqt.setString(3, u.getPrenom());
+			rqt.setString(4, u.getEmail());
+			rqt.setString(5, u.getTelephone());
+			rqt.setString(6, u.getRue());
+			rqt.setString(7, u.getCodePostal());
+			rqt.setString(8, u.getVille());
+			rqt.setString(9, u.getMotDePasse());
+			rqt.setInt(10, u.getCredit());
+			rqt.setBoolean(11, u.getAdministrateur());
+			int nbRows = rqt.executeUpdate();
+			if (nbRows == 1) {
+				try (ResultSet rs = rqt.getGeneratedKeys();) {
+					if (rs.next()) {
+						u.setNoUtilisateur(rs.getInt(1));
+					}
+				}
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException("L'insertion de l'utilisateur " + u + " a échouée");
+		}
 	}
 
 	@Override
 	public Utilisateur selectByID(int id) throws DALException {
-		return null;
+		Utilisateur u = null;
+		try (Connection con = JDBCTools.getConnection();
+				PreparedStatement rqt = con.prepareStatement(SELECT_BY_NO_UTILISATEUR);) {
+			rqt.setInt(1, id);
+			ResultSet rs = rqt.executeQuery();
+			u = mapping(rs);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException("Sélection par id a échouée");
+		}
+		return u;
+		
 	}
 
 	@Override
 	public List<Utilisateur> selectAll() throws DALException {
-		return null;
+		List<Utilisateur> utilisateurs = new ArrayList<>();
+		try (Connection con = JDBCTools.getConnection();
+				PreparedStatement rqt = con.prepareStatement(SELECTALL);) {
+				ResultSet rs = rqt.executeQuery();
+				while(rs.next()) {
+					Utilisateur u = mapping(rs);
+					utilisateurs.add(u);
+				}
+		}catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException("La sélection des utilisateurs a échouée");
+		}
+		return utilisateurs;
 	}
 
 	@Override
 	public void update(Utilisateur u) throws DALException {
+		try (Connection con = JDBCTools.getConnection();
+				PreparedStatement rqt = con.prepareStatement(UPDATE);) {
+			rqt.setString(1, u.getPseudo());
+			rqt.setString(2, u.getNom());
+			rqt.setString(3, u.getPrenom());
+			rqt.setString(4, u.getEmail());
+			rqt.setString(5, u.getTelephone());
+			rqt.setString(6, u.getRue());
+			rqt.setString(7, u.getCodePostal());
+			rqt.setString(8, u.getVille());
+			rqt.setString(9, u.getMotDePasse());
+			rqt.setInt(10, u.getCredit());
+			rqt.setBoolean(11, u.getAdministrateur());
+			rqt.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException("La modification des données de l'utilisateur " + u + " a échouée");
+		}
 		
 	}
 
 	@Override
 	public void delete(int id) throws DALException {
-		
+		try (Connection con = JDBCTools.getConnection();
+				PreparedStatement rqt = con.prepareStatement(DELETE);) {
+			rqt.setInt(1, id);
+			rqt.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException("La suppression des données de l'utilisateur no" + id + " a échouée");
+		}
 	}
 
-	@Override
-	public Utilisateur selectByPseudo(String pseudo) throws DALException {
-		return null;
+	private Utilisateur mapping(ResultSet rs) throws SQLException {
+		Utilisateur u = null;
+		int userId = rs.getInt("no_utilisateur");
+		String pseudo = rs.getString("pseudo");
+		String nom = rs.getString("nom");
+		String prenom = rs.getString("prenom");
+		String email = rs.getString("email");
+		String telephone = rs.getString("telephone");
+		String rue = rs.getString("rue");
+		String codeP = rs.getString("code_postal");
+		String ville = rs.getString("ville");
+		String password = rs.getString("mot_de_passe");
+		int credit = rs.getInt("credit");
+		boolean admin = rs.getBoolean("administrateur");
+		u = new Utilisateur(userId, pseudo, nom, prenom, email, telephone, rue, codeP, ville, password, credit, admin);
+
+		return u;
 	}
 
 }
