@@ -1,18 +1,18 @@
-  <!-- Logo renvoyant Ã  l'accueil -->
+  <!-- Logo renvoyant à l'accueil -->
     <div>  
-            <a href="accueil.html"><img src="/ressources/LOSNA2.jpg" alt="Logo"></a> <!-- Logo renvoyant Ã  l'accueil -->
+            <a href="accueil.html"><img src="<%=request.getContextPath() %>/ressources/LOSNA2.jpg" alt="Logo"></a> <!-- Logo renvoyant à l'accueil -->
     </div>
 
     <!-- menu -->
     <div>
         <nav>           
             <ul>
-              <li><a href="/WEB-INF/encheres.html">EnchÃ¨res</a></li>
+              <li><a href="/WEB-INF/encheres.html">Enchères</a></li>
               <li><a href="/WEB-INF/vendre.html">Vendre un Article</a></li>
               <li><a href="afficherProfilServlet">Mon Profil</a></li>
               <li>
                 <form id="deconnexionForm" action="deconnexionServlet" method="post">
-                  <button type="submit">DÃ©connexion</button>
+                  <button type="submit">Déconnexion</button>
                 </form>
               </li>
             </ul>

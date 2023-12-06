@@ -10,12 +10,10 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/header.html">
+<jsp:include page="/WEB-INF/Header.jsp">
 	<jsp:param value="" name="Accueil"/>
 </jsp:include>
     <h1>Liste des enchères</h1>
-    <a href="accueil.jsp"><img src="/ressources/LOSNA2.jpg" alt="Logo"></a>
-
 <div>
     <form id="EnchereForm" action="EnchereFormServlet" method="get"><!-- insérer servlet -->
       <label for="nomArticle">Le nom de l'article contient:</label>
