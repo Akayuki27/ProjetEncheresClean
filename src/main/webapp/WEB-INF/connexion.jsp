@@ -24,8 +24,10 @@
     </label>
 
     <button type="submit">Se connecter</button>
+    <br/>
+    <a href="inscriptionServlet">S'inscrire</a>
 
-    <p><a href="modifierProfil">Mot de passe oublié</a></p><!-- insérer un truc -->
+    <p><a href="modifierProfilServlet">Mot de passe oublié</a></p><!-- insérer un truc -->
     <!-- insérer boutton créer un compte -->
   </form>
 </div>

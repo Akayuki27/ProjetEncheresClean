@@ -7,7 +7,7 @@
     <div>
         <nav>           
             <ul>
-              <li><a href="/WEB-INF/encheres.html">Enchères</a></li>
+              <li><a href="connexionServlet">Connexion/Inscription</a></li>
               <li><a href="/WEB-INF/vendre.html">Vendre un Article</a></li>
               <li><a href="afficherProfilServlet">Mon Profil</a></li>
               <li>

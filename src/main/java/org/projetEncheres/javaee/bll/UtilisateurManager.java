@@ -63,7 +63,7 @@ public class UtilisateurManager {
 	
 	public void ajouterUtilisateur(Utilisateur u) throws DALException, BLLException{
 		try {
-			if (verificationEmail(u.getEmail()) && verificationPassword(u.getMotDePasse()) && verificationPseudo(u.getPseudo())) {
+			if (verificationEmail(u.getEmail()) && verificationPseudo(u.getPseudo()) && verificationPassword(u.getMotDePasse()) ) {
 				this.utilisateur.insert(u);
 			} else {
 				throw new BLLException ("Le format de vos informations n'est pas adapté");
@@ -128,8 +128,8 @@ public class UtilisateurManager {
 	}
 	
 	public boolean verificationPseudo(String pseudo) {
-		String pattern = "^((?=[A-Za-z0-9@])(?![_\\-]).)*$";
-		if (pseudo.contains(pattern)) {
+		String pattern = "^[A-Za-z0-9@]+$";
+		if (pseudo.matches(pattern)) {
 			return true;
 		} else {
 			return false;

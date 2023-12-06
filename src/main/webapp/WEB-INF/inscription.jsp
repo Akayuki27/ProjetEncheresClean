@@ -11,8 +11,9 @@
 <jsp:param value="" name="header"/>
 </jsp:include>
 	<p>Inscription</p>
+	<!--Le mot de passe doit contenir 8 charactères, au moins 1 Maj, 1 min et 1 chiffre, à mettre en popup-->
 <div>
-    <form id="inscriptionForm" action="inscriptionServlet" method="post"><!-- insérer servlet -->
+    <form id="inscriptionForm" action="inscriptionServlet" method="post">
         <label for="pseudo">Pseudo:</label>
         <input type="text" id="pseudo" name="pseudo" required>
     
