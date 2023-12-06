@@ -4,36 +4,85 @@ import java.util.List;
 
 import org.projetEncheres.javaee.bo.*;
 import org.projetEncheres.javaee.dal.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UtilisateurManager {
 
 	private UtilisateurDAO utilisateur;
-	
-	
+
 	public UtilisateurManager() {
 		this.utilisateur = DAOFactory.getUtilisateurDAO();
 	}
 
-	public Utilisateur login(String pseudo, String motDePasse) throws DALException {
+	public Utilisateur login(String pseudo, String motDePasse) throws DALException, BLLException {
+		try {
 		return this.utilisateur.login(pseudo, motDePasse);
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans le login by pseudo");
+		}
 	}
 
-	public Utilisateur loginEmail(String email, String motDePasse) throws DALException {
+	public Utilisateur loginEmail(String email, String motDePasse) throws DALException, BLLException {
+		try {
 		return this.utilisateur.login(email, motDePasse);
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans le login by email");
+		}
 	}
 
-	public Utilisateur selectByPseudo(String pseudo) throws DALException {
+	public Utilisateur selectByPseudo(String pseudo) throws DALException, BLLException {
+		try {
 		return this.utilisateur.selectByPseudo(pseudo);
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans la sélection par pseudo");
+		}
 	}
 
-	public Utilisateur selectByID(int id) throws DALException {
+	public Utilisateur selectByID(int id) throws DALException,BLLException {
+		try {
 		return this.utilisateur.selectByID(id);
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans la sélection par no_utilisateur");
+		}
 	}
 
-	public List<Utilisateur> selectAll() throws DALException {
+	public List<Utilisateur> selectAll() throws DALException, BLLException {
+		try {
 		return this.utilisateur.selectAll();
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans la sélection des utilisateurs");
+		}
+	}
+	
+	public void deleteUtilisateur(int id) throws DALException, BLLException {
+		try {
+			this.utilisateur.delete(id);
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans la suppression de l'utilisateur");
+		}
+	}
+	
+	public void ajouterUtilisateur(Utilisateur u) throws DALException, BLLException{
+		try {
+			if (verificationEmail(u.getEmail()) && verificationPassword(u.getMotDePasse()) && verificationPseudo(u.getPseudo())) {
+				this.utilisateur.insert(u);
+			} else {
+				throw new BLLException ("Le format de vos informations n'est pas adapté");
+			}
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans l'insertion de l'utilisateur");
+		}
+	}
+	
+	public void updateUtilisateur(Utilisateur u) throws DALException, BLLException {
+		try {
+			if (verificationEmail(u.getEmail()) && verificationPassword(u.getMotDePasse()) && verificationPseudo(u.getPseudo())) {
+				this.utilisateur.update(u);
+			} else {
+				throw new BLLException ("Le format de vos informations n'est pas adapté");
+			}
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans la mise à jour de l'utilisateur");
+		}
 	}
 
 	public boolean verificationEmail(String email) {
@@ -76,6 +125,15 @@ public class UtilisateurManager {
 			verif = true;
 		}
 		return verif;
+	}
+	
+	public boolean verificationPseudo(String pseudo) {
+		String pattern = "^((?=[A-Za-z0-9@])(?![_\\-]).)*$";
+		if (pseudo.contains(pattern)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
