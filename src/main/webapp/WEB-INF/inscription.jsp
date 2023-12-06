@@ -8,6 +8,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/header.html">
+<jsp:param value="" name="header"/>
+</jsp:include>
 	<p>Inscription</p>
 <div>
     <form id="inscriptionForm" action="inscriptionServlet" method="post"><!-- insérer servlet -->
@@ -42,7 +44,7 @@
         <input type="password" id="confirmation" name="confirmation" required> <!-- controle MDP-->
     
         <button type="submit">Créer</button>
-        <button type="button" onclick="location.href='accueil.html'">Annuler</button>
+        <button type="button" onclick="location.href='accueil.jsp'">Annuler</button>
       </form>
 </div>
 </body>

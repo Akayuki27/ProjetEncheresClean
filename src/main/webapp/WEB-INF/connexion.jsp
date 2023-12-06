@@ -8,6 +8,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/header.html">
+<jsp:param value="" name="header"/>
+</jsp:include>
     <h1>Connexion</h1>
 <div>
   <form id="connexionForm" action="connexionServlet" method="post"><!-- insérer servlet -->
@@ -23,7 +25,7 @@
 
     <button type="submit">Se connecter</button>
 
-    <p><a href="??????">Mot de passe oublié</a></p><!-- insérer un truc -->
+    <p><a href="modifierProfil">Mot de passe oublié</a></p><!-- insérer un truc -->
     <!-- insérer boutton créer un compte -->
   </form>
 </div>

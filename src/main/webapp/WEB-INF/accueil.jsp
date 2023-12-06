@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -9,7 +11,11 @@
 <body>
 
 <jsp:include page="/WEB-INF/header.html">
+	<jsp:param value="" name="Accueil"/>
+</jsp:include>
     <h1>Liste des enchères</h1>
+    <a href="accueil.jsp"><img src="/ressources/LOSNA2.jpg" alt="Logo"></a>
+
 <div>
     <form id="EnchereForm" action="EnchereFormServlet" method="get"><!-- insérer servlet -->
       <label for="nomArticle">Le nom de l'article contient:</label>

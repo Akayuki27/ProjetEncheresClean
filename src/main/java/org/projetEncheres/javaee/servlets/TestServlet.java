@@ -7,6 +7,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,25 +32,12 @@ public class TestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		ArticleVendu a = new ArticleVendu("nom","description", LocalDate.of(2019, Month.AUGUST, 16), LocalDate.of(2019, Month.AUGUST, 17), 100, 100, 1, 1);
-		ArticleDAO cat = DAOFactory.getArticleDAO();
-		List<ArticleVendu> cats = new ArrayList<>();
-		Categorie c = new Categorie(2,"sport");
-		Utilisateur u = new Utilisateur(2,"Simon", "Ben", "Bleu", "eni@gmail.com", "02158789855", "rue des hordes", "666", "enfer", "motDepasse", 0, true);
+	
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
+		rd.forward(request, response);
 		
-		try {
-			cat.delete(1);
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		out.print(a);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

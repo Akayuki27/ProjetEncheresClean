@@ -8,6 +8,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/header.html">
+<jsp:param value="" name="header"/>
+</jsp:include>
     <h1><!-- nom user a inserer ? --></h1>
 
     <div>
@@ -30,7 +32,7 @@
 
     <!-- le boutton n'apparait que si c'est mon profil -->
     <div>
-        <button type="submit">Modifier</button>
+        <a href="modifProfilServlet"><button type="submit">Modifier</button></a>
     </div>
 </body>
 </html>

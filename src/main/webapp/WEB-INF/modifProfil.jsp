@@ -9,6 +9,8 @@
 <body>
 <body>
 <jsp:include page="/WEB-INF/header.html">
+<jsp:param value="" name="header"/>
+</jsp:include>
     <p>Modification de mon profil</p>
 <div>
     <form id="inscriptionForm" action="modificationServlet" method="post"><!-- insérer servlet -->
