@@ -7,7 +7,7 @@
 <title>Inscription</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/header.html">
+<jsp:include page="/WEB-INF/Header.jsp">
 <jsp:param value="" name="header"/>
 </jsp:include>
 	<p>Inscription</p>

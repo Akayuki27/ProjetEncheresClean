@@ -7,7 +7,7 @@
 <title>Profil<!-- nom user a inserer ? --></title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/header.html">
+<jsp:include page="/WEB-INF/Header.jsp">
 <jsp:param value="" name="header"/>
 </jsp:include>
     <h1><!-- nom user a inserer ? --></h1>
