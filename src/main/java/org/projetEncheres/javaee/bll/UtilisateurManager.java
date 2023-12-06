@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class UtilisateurManager {
 
 	private UtilisateurDAO utilisateur;
-	private static final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$";
+	
 	
 	public UtilisateurManager() {
 		this.utilisateur = DAOFactory.getUtilisateurDAO();

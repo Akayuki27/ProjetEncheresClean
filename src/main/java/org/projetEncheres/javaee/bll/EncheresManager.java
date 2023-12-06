@@ -16,13 +16,46 @@ public class EncheresManager {
 	}
 	
 	public void insertEnchere (Enchere e, ArticleVendu a, Utilisateur u) throws DALException, BLLException {
+		
 		try {
+			if(selectByIdArt(e.getNo_article()) == null) {
+			
 			this.encheres.insertEnchere(e, a, u);
+			} else {
+				update(e);
+			}
 		} catch (DALException d){
 			throw new BLLException ("Erreur dans l'insertion de l'enchère");
 		}
 	}
 	
+	public Enchere selectByIdArt(int id) throws DALException, BLLException {
+		try {
+		return this.encheres.selectByIdArticle(id);
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans la sélection de l'enchère par le no_article");
+		}
+	}
 	
+	public Enchere selectByIdUser(int id) throws DALException, BLLException {
+		try {
+			return this.encheres.selectByIdUtilisateur(id);
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans la sélection de l'enchère par le no_utilisateur");
+		}
+	}
+	
+	public void update(Enchere e) throws DALException, BLLException{
+		Enchere init = selectByIdArt(e.getNo_article());
+		try {
+			if (init.getMontantEnchere() < e.getMontantEnchere()) {
+		this.encheres.update(e);
+			} else {
+				throw new BLLException("L'enchère ne peut pas être inférieure à celle déjà faite");
+			}
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans l'update de l'enchère par le no_utilisateur");
+		}
+	}
 }
 
