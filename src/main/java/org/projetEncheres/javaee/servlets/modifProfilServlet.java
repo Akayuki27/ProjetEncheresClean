@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.projetEncheres.javaee.bll.UtilisateurManager;
+import org.projetEncheres.javaee.bo.Utilisateur;
 
 /**
  * Servlet implementation class modifProfilServlet
@@ -17,12 +21,41 @@ public class modifProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("modifProfilServlet");
+		HttpSession session = request.getSession();
+		Utilisateur u;
+		u = (Utilisateur) session.getAttribute("userCo");
+		request.setAttribute("u", u);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modifProfil.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		UtilisateurManager mgr = new UtilisateurManager();
+		Utilisateur u = null;
+		String pseudo = request.getParameter("pseudo");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
+		String tel = request.getParameter("telephone");
+		String rue = request.getParameter("rue");
+		String codePostal = request.getParameter("codePostal");
+		String ville = request.getParameter("ville");
+		String motdePasse = request.getParameter("motDePasse");
+		String confirmation = request.getParameter("confirmation");
+		int id = Integer.parseInt(request.getParameter("id"));
+		if (motdePasse.equals(confirmation)) {
+			try {
+				u = new Utilisateur(id,pseudo, nom, prenom, email, tel, rue, codePostal, ville, motdePasse, 0, false);
+				mgr.updateUtilisateur(u);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		HttpSession session = request.getSession();
+		session.setAttribute("userCo", u);
+		
+		response.sendRedirect("afficherProfilServlet");
+		
 	}
 
 }
