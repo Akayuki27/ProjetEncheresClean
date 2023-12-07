@@ -43,16 +43,16 @@
         <!-- insérer mdp actuel -->
     
         <label for="motDePasse">Nouveau mot de passe:</label>
-        <input type="password" id="motDePasse" name="motDePasse" required>
+        <input type="password" id="motDePasse" name="motDePasse" >
     
         <label for="confirmation">Confirmation:</label>
-        <input type="password" id="confirmation" name="confirmation" required>
+        <input type="password" id="confirmation" name="confirmation" >
 
         <p>Crédit : ${u.credit}</p>
         <!-- insérer crédit -->
     
         <button type="submit">Enregister</button>
-        <button type="submit" formaction="supprimerCompteServlet">Supprimer mon compte</button><!-- insérer servlet -->
+        <button type="submit" formaction="supprimerProfilServlet">Supprimer mon compte</button><!-- insérer servlet -->
         <button type="button" onclick="location.href='accueilServlet'">Annuler</button><!-- pas dans la maquette mais bon -->
       </form>     
 </div>
