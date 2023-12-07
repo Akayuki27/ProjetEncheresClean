@@ -98,24 +98,23 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	}
 
 	@Override
-	public List<Categorie> selectByLibelle(String libelle) throws DALException {
-		List<Categorie> categories = new ArrayList<>();	
+	public Categorie selectByLibelle(String libelle) throws DALException {
+		Categorie c = null;	
 		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(SELECT_BY_LIBELLE);) {
 			rqt.setString(1, libelle);
 			ResultSet rs = rqt.executeQuery();
-			while(rs.next()) {
+			if (rs.next()) {
 				int no_categorie = rs.getInt("no_categorie");
 				String cate_libelle = rs.getString("libelle");
-				Categorie c = new Categorie(no_categorie, cate_libelle);
-				categories.add(c);
+				c = new Categorie(no_categorie, cate_libelle);
 			}
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			throw new DALException("La sélection par libelle a échouée");
 		}
-		return categories;
+		return c;
 	}
 
 }

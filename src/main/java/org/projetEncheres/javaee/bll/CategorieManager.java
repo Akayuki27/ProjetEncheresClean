@@ -56,11 +56,11 @@ public class CategorieManager {
 		}
 	}
 	
-	public List<Categorie> selectByLibelle(String libelle) throws DALException, BLLException {
+	public Categorie selectByLibelle(String libelle) throws DALException, BLLException {
 		try {
 			return this.categorie.selectByLibelle(libelle);
 		} catch (DALException d){
-			throw new BLLException ("Erreur dans la selection des catégories");
+			throw new BLLException ("Erreur dans la selection de la catégorie par libelle");
 		}
 	}
 }
