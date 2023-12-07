@@ -1,6 +1,9 @@
 package org.projetEncheres.javaee.bll;
 
+import java.util.List;
+
 import org.projetEncheres.javaee.bo.ArticleVendu;
+import org.projetEncheres.javaee.bo.Categorie;
 import org.projetEncheres.javaee.bo.Enchere;
 import org.projetEncheres.javaee.bo.Utilisateur;
 import org.projetEncheres.javaee.dal.DALException;
@@ -26,6 +29,14 @@ public class EncheresManager {
 			}
 		} catch (DALException d){
 			throw new BLLException ("Erreur dans l'insertion de l'enchère");
+		}
+	}
+	
+	public List<Enchere> selectAll() throws DALException, BLLException {
+		try {
+			return this.encheres.selectAll();
+		} catch (DALException d){
+			throw new BLLException ("Erreur dans la selection des enchères");
 		}
 	}
 	

@@ -15,7 +15,7 @@
 </jsp:include>
     <h1>Liste des enchères</h1>
 <div>
-    <form id="EnchereForm" action="EnchereFormServlet" method="get"><!-- insérer servlet -->
+    <form id="EnchereForm" action="AfficherEnchereServlet" method="get"><!-- insérer servlet -->
       <label for="nomArticle">Le nom de l'article contient:</label>
       <input type="text" id="nomArticle" name="nomArticle">
   
@@ -30,6 +30,25 @@
   
       <button type="submit" name="rechercher">Rechercher</button>
     </form>
+</div>
+<div>
+	<h2>Liste des enchères</h2>
+	
+		<c:forEach var="articles" items="${articles}">
+			<div><p>${articles.nomArticle}</p>
+			<p>	Prix : <c:choose>
+					<c:when test="${encheres.montantEncheres !=null}">${encheres.montantEncheres}</c:when>
+					<c:otherwise>${articles.miseAPrix }</c:otherwise>
+				</c:choose>
+			</p>
+				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>
+				<%if (session.getAttribute("userCo") !=null) { %>
+				<a href ="afficherVendeurServlet?id=${u.noUtilisateur}"><p>Vendeur : ${u.pseudo}</p></a>
+				<%} else {%>
+				<p>Vendeur : ${u.pseudo}</p>
+				 <%} %>
+			</div>		
+		</c:forEach>
 </div>
 </body>
 </html>
