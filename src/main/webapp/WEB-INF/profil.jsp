@@ -32,10 +32,10 @@
     </div>
 
     <!-- le boutton n'apparait que si c'est mon profil -->
-    <c:if test="${v.id} == ${u.id}">
+
     <div>
         <a href="modifProfilServlet"><button type="submit">Modifier</button></a>
     </div>
-    </c:if>
+
 </body>
 </html>

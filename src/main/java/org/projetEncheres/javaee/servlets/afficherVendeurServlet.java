@@ -23,14 +23,14 @@ public class afficherVendeurServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Utilisateur u = null;
+		Utilisateur u2 = null;
 		UtilisateurManager mgr = new UtilisateurManager();
 		HttpSession session = request.getSession();
-		Utilisateur v = (Utilisateur) session.getAttribute("userCo");
+		Utilisateur u = (Utilisateur) session.getAttribute("userCo");
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		try {
-			u = mgr.selectByID(id);
+			u2 = mgr.selectByID(id);
 			
 		} catch (DALException e) {
 			// TODO Auto-generated catch block

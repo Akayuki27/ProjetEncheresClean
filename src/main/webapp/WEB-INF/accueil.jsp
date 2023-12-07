@@ -32,8 +32,6 @@
     </form>
 </div>
 <div>
-	<h2>Liste des enchères</h2>
-	
 		<c:forEach var="articles" items="${articles}">
 			<div><p>${articles.nomArticle}</p>
 			<p>	Prix : <c:choose>
@@ -42,11 +40,14 @@
 				</c:choose>
 			</p>
 				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>
+				<form id="inputalacon" action="AfficherEnchereServlet" method="get">
+				<input type="hidden" id="id" name ="id" value="${articles.no_utilisateur}">
+				</form>
 				<%if (session.getAttribute("userCo") !=null) { %>
-				<a href ="afficherVendeurServlet?id=${u.noUtilisateur}"><p>Vendeur : ${u.pseudo}</p></a>
+				<a href ="afficherVendeurServlet?id=${articles.no_utilisateur}"><p>Vendeur : ${u2.pseudo}</p></a>
 				<%} else {%>
-				<p>Vendeur : ${u.pseudo}</p>
-				 <%} %>
+				<p>Vendeur : ${u2.pseudo}</p>
+				<%} %>			
 			</div>		
 		</c:forEach>
 </div>

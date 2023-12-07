@@ -62,7 +62,7 @@ public class ajoutArticleServlet extends HttpServlet {
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect("accueilServlet"); //ou on crée une page pour afficher nos ventes en cours
+		response.sendRedirect("AfficherEnchereServlet"); //ou on crée une page pour afficher nos ventes en cours
 	}
 
 }
