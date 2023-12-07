@@ -1,7 +1,12 @@
 package org.projetEncheres.javaee.bll;
 
 public class BLLException extends Exception {
-	//Constructeurs
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+			//Constructeurs
 			public BLLException() {
 				super();
 			}

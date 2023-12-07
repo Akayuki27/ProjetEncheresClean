@@ -23,40 +23,45 @@ import org.projetEncheres.javaee.dal.DALException;
 public class connexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 		rd.forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Utilisateur u = null;
-		UtilisateurManager mger= new UtilisateurManager();
-        HttpSession session;
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        try {
-        	if(email.contains("@")){
-			u = mger.loginEmail(email, password);
-			}else {u = mger.login(email, password);}
+		UtilisateurManager mger = new UtilisateurManager();
+		HttpSession session;
+		String email = request.getParameter("identifiant");
+		String password = request.getParameter("motDePasse");
+		try {
+			if (email.contains("@")) {
+				u = mger.loginEmail(email, password);
+			} else {
+				u = mger.login(email, password);
+			}
 		} catch (DALException e) {
 			e.printStackTrace();
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
-        if (u != null) {
-            session = request.getSession();
-            session.setAttribute("userCo", u);
-            Cookie gato;
-            gato= new Cookie("lastLogin",u.getEmail());
-            gato.setMaxAge(31*24*60*60);
-            response.addCookie(gato);
-            response.sendRedirect("TestServlet");
-        } else {
-            response.sendRedirect("connexionServlet");
-        } 
+		if (u != null) {
+			session = request.getSession();
+			session.setAttribute("userCo", u);
+			Cookie gato;
+			gato = new Cookie("lastLogin", u.getEmail());
+			gato.setMaxAge(31 * 24 * 60 * 60);
+			response.addCookie(gato);
+			response.sendRedirect("accueilServlet");
+		} else {
+			response.sendRedirect("connexionServlet");
+		}
 	}
 
 }
