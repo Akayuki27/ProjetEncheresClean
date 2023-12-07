@@ -38,13 +38,13 @@ public class connexionServlet extends HttpServlet {
 		Utilisateur u = null;
 		UtilisateurManager mger = new UtilisateurManager();
 		HttpSession session;
-		String email = request.getParameter("identifiant");
+		String identifiant = request.getParameter("identifiant");
 		String password = request.getParameter("motDePasse");
 		try {
-			if (email.contains("@")) {
-				u = mger.loginEmail(email, password);
+			if (identifiant.contains("@")) {
+				u = mger.loginEmail(identifiant, password);
 			} else {
-				u = mger.login(email, password);
+				u = mger.login(identifiant, password);
 			}
 		} catch (DALException e) {
 			e.printStackTrace();

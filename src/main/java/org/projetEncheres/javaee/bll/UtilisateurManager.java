@@ -23,7 +23,7 @@ public class UtilisateurManager {
 
 	public Utilisateur loginEmail(String email, String motDePasse) throws DALException, BLLException {
 		try {
-		return this.utilisateur.login(email, motDePasse);
+		return this.utilisateur.loginEmail(email, motDePasse);
 		} catch (DALException d){
 			throw new BLLException ("Erreur dans le login by email");
 		}
