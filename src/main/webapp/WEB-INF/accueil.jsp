@@ -27,22 +27,22 @@
         <option value="vetement">Vêtement</option>
         <option value="sport_loisirs">Sport & Loisirs</option>
       </select>
-  
+		
       <button type="submit" name="rechercher">Rechercher</button>
     </form>
 </div>
 <div>
-		<c:forEach var="articles" items="${articles}">
+		  <c:forEach var="articles" items="${articles}">
 			<div><p>${articles.nomArticle}</p>
 			<p>	Prix : <c:choose>
 					<c:when test="${encheres.montantEncheres !=null}">${encheres.montantEncheres}</c:when>
 					<c:otherwise>${articles.miseAPrix }</c:otherwise>
 				</c:choose>
 			</p>
-				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>
-				<form id="inputalacon" action="AfficherEnchereServlet" method="get">
+				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>		
+				<form id="truc" action="AfficherEnchereServlet" method="get">	
 				<input type="hidden" id="id" name ="id" value="${articles.no_utilisateur}">
-				</form>
+				</form>	
 				<%if (session.getAttribute("userCo") !=null) { %>
 				<a href ="afficherVendeurServlet?id=${articles.no_utilisateur}"><p>Vendeur : ${u2.pseudo}</p></a>
 				<%} else {%>

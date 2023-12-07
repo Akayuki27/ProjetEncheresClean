@@ -26,23 +26,7 @@ public class AfficherEnchereServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 * 
-        
-        ArticleManager mgr = new ArticleManager();
-        Utilisateur u = null;
-        
-        try {
-            List<ArticleVendu> articles = mgr.selectAll();
-            request.setAttribute("articles", articles);
-        } catch (DALException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
-        rd.forward(request, response);
-    }
-		 */
+
 		ArticleManager mgr = new ArticleManager();
 		UtilisateurManager umgr = new UtilisateurManager();
 		Utilisateur u2 = null;
@@ -51,6 +35,7 @@ public class AfficherEnchereServlet extends HttpServlet {
 			List<ArticleVendu> articles = mgr.selectAll();
 			request.setAttribute("articles", articles);
 			int id = Integer.parseInt(request.getParameter("id"));
+			System.out.println(id);
 			try {
 				u2 = umgr.selectByID(id);
 				request.setAttribute("u2", u2);
