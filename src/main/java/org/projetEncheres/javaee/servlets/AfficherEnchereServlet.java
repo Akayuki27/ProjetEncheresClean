@@ -33,21 +33,20 @@ public class AfficherEnchereServlet extends HttpServlet {
 		
 		try {
 			List<ArticleVendu> articles = mgr.selectAll();
-			request.setAttribute("articles", articles);
-			int id = Integer.parseInt(request.getParameter("id"));
-			System.out.println(id);
-			try {
+			for(ArticleVendu a : articles) {
+				int id = a.getNo_utilisateur();
 				u2 = umgr.selectByID(id);
 				request.setAttribute("u2", u2);
-			} catch (BLLException e) {
-				e.printStackTrace();
 			}
-		} catch (DALException e) {
+			request.setAttribute("articles", articles);
+			
+		} catch (DALException | BLLException e) {
 			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		rd.forward(request, response);
-	}
+	}	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

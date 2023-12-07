@@ -2,6 +2,7 @@ package org.projetEncheres.javaee.servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +32,7 @@ public class afficherVendeurServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		try {
 			u2 = mgr.selectByID(id);
+			request.setAttribute("u2", u2);
 			
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
@@ -39,6 +41,9 @@ public class afficherVendeurServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/profilVendeur.jsp");
+		rd.forward(request, response);
 		
 	}
 

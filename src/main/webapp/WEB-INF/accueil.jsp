@@ -25,7 +25,7 @@
         <option value="informatique">Informatique</option>
         <option value="ameublement">Ameublement</option>
         <option value="vetement">Vêtement</option>
-        <option value="sport_loisirs">Sport & Loisirs</option>
+        <option value="sport_loisirs">Sport et Loisirs</option>
       </select>
 		
       <button type="submit" name="rechercher">Rechercher</button>
@@ -40,11 +40,9 @@
 				</c:choose>
 			</p>
 				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>		
-				<form id="truc" action="AfficherEnchereServlet" method="get">	
-				<input type="hidden" id="id" name ="id" value="${articles.no_utilisateur}">
-				</form>	
+				
 				<%if (session.getAttribute("userCo") !=null) { %>
-				<a href ="afficherVendeurServlet?id=${articles.no_utilisateur}"><p>Vendeur : ${u2.pseudo}</p></a>
+				<p><a href ="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${u2.pseudo}</a></p>
 				<%} else {%>
 				<p>Vendeur : ${u2.pseudo}</p>
 				<%} %>			
