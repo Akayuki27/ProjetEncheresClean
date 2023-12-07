@@ -41,7 +41,7 @@ public class ajoutArticleServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur u;
 		u = (Utilisateur) session.getAttribute("userCo");
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		ArticleVendu a;
 		Categorie c;
 		CategorieManager crg = new CategorieManager();
