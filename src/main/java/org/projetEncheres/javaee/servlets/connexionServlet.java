@@ -5,9 +5,16 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.projetEncheres.javaee.bll.BLLException;
+import org.projetEncheres.javaee.bll.UtilisateurManager;
+import org.projetEncheres.javaee.bo.Utilisateur;
+import org.projetEncheres.javaee.dal.DALException;
 
 /**
  * Servlet implementation class accesEncheres
@@ -25,7 +32,31 @@ public class connexionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		Utilisateur u = null;
+		UtilisateurManager mger= new UtilisateurManager();
+        HttpSession session;
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        try {
+        	if(email.contains("@")){
+			u = mger.loginEmail(email, password);
+			}else {u = mger.login(email, password);}
+		} catch (DALException e) {
+			e.printStackTrace();
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+        if (u != null) {
+            session = request.getSession();
+            session.setAttribute("userCo", u);
+            Cookie gato;
+            gato= new Cookie("lastLogin",u.getEmail());
+            gato.setMaxAge(31*24*60*60);
+            response.addCookie(gato);
+            response.sendRedirect("TestServlet");
+        } else {
+            response.sendRedirect("connexionServlet");
+        } 
 	}
 
 }

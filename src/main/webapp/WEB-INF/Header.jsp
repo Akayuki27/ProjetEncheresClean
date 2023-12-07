@@ -1,6 +1,6 @@
   <!-- Logo renvoyant à l'accueil -->
     <div>  
-            <a href="accueil.html"><img src="<%=request.getContextPath() %>/ressources/LOSNA_lowres.png" alt="Logo"></a> <!-- Logo renvoyant à l'accueil -->
+            <a href="accueil.jsp"><img src="<%=request.getContextPath() %>/ressources/LOSNA_lowres.png" alt="Logo"></a> <!-- Logo renvoyant à l'accueil -->
     </div>
 
     <!-- menu -->
