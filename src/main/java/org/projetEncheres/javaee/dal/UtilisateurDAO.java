@@ -1,8 +1,5 @@
 package org.projetEncheres.javaee.dal;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import org.projetEncheres.javaee.bo.Utilisateur;
 
 public interface UtilisateurDAO extends DAO<Utilisateur> {
