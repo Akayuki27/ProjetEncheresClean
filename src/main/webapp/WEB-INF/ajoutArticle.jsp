@@ -33,14 +33,7 @@
         <option value="vetement">Vêtements</option>
         <option value="sport_loisirs">Sport et Loisirs</option>
       	</select>
-        <label for="rue">Rue : </label>
-		<input type="text" id="rue" name="rue" required>
-		
-		<label for="codePostal">Code postal : </label>
-		<input type="text" id="codePostal" name="codePostal" required>
-		
-		<label for="ville">Ville : </label>
-		<input type="text" id="ville" name="ville" required>
+        
     
         <button type="submit">Créer</button>
         <button type="button" onclick="location.href='accueil.jsp'">Annuler</button>
