@@ -32,24 +32,33 @@ public class AfficherEnchereServlet extends HttpServlet {
 		UtilisateurManager umgr = new UtilisateurManager();
 		Utilisateur u2 = null;
 		List<ArticleVendu> articles = null;
+		String nomArticle = request.getParameter("nomArticle");
+        int categorie = Integer.parseInt(request.getParameter("categories"));
 
 		try {
-			if (request.getParameter("nomArticle") != null) {
-				String tri = request.getParameter("nomArticle");
-				articles = mgr.selectByNom(tri);
-				for (ArticleVendu a : articles) {
-					int id = a.getNo_utilisateur();
-					u2 = umgr.selectByID(id);
-					request.setAttribute("u2", u2);
-				}
+			if (nomArticle != null && categorie != 0) {
+	            // Filtre par nom et catégorie
+	            articles = mgr.selectByNometCategorie(nomArticle, categorie);
+	        } else if (nomArticle != null) {
+	            // Filtre par nom
+	            articles = mgr.selectByNom(nomArticle);
+	        } else if (categorie != 0) {
+	            // Filtre par catégorie
+	            articles = mgr.selectByCategorie(categorie);
+	       // } else {
+	            // Aucun filtre, affiche tous les articles par ordre ID descendant
+	          //  articles = mgr.selectAllOrderedByIdDesc();
+	        //}
+			
 			} else {
-				articles = mgr.selectAll();
+				articles = mgr.selectAll();}
 				for (ArticleVendu a : articles) {
 					int id = a.getNo_utilisateur();
 					u2 = umgr.selectByID(id);
 					request.setAttribute("u2", u2);
 				}
-			}
+			
+			
 			request.setAttribute("articles", articles);
 
 		} catch (DALException | BLLException e) {

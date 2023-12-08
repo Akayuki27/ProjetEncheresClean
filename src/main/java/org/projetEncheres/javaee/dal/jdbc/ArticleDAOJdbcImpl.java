@@ -27,6 +27,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
 	private final static String SELECTBYID_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=?";
 	private final static String SELECTBYNOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE '%?%'";
+	private final static String SELECTBYNOM_ARTICLEETCATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE '%?%' AND no_categorie =?";
 
 	public ArticleDAOJdbcImpl() {
 
@@ -194,6 +195,25 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				no_categorie);
 
 		return a;
+	}
+	
+	@Override
+	public List<ArticleVendu> selectByNometCategorie(String nom, int id) throws DALException {
+		List<ArticleVendu> articles = new ArrayList<>();
+		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYNOM_ARTICLEETCATEGORIE);) {
+			rqt.setString(1, nom);
+			rqt.setInt(2, id);
+			ResultSet rs = rqt.executeQuery();
+			while (rs.next()) {
+				ArticleVendu a = mapping(rs);
+				articles.add(a);
+			}
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException("La selection des articles nommés " + nom + id + " a échouée");
+		}
+		return articles;
 	}
 
 }

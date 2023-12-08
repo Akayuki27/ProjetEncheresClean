@@ -57,6 +57,8 @@ public class ArticleManager {
 		return this.article.selectByNom(nom);
 	}
 	
+	
+	
 	public boolean verifDateEncheres(ArticleVendu a) throws BLLException {
 		boolean dateOk = true;
 		if (a.getDateDebutEncheres().isAfter(a.getDateFinEncheres())) {
@@ -74,4 +76,11 @@ public class ArticleManager {
 		}
 		return prixOk;
 	}
+	
+	public List<ArticleVendu> selectByNometCategorie(String nom, int id) throws DALException {
+
+		return this.article.selectByNometCategorie(nom, id);
+		
+	}
+	
 }
