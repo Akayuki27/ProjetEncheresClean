@@ -73,9 +73,13 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 	}
 
 	@Override
-	public void insertRetrait(Retrait retrait, ArticleVendu a) throws DALException {
-		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(INSERT);) {
-			rqt.setInt(1, a.getNoArticle());
+	public void insertRetrait(Retrait retrait) throws DALException {
+		try (Connection con = ConnectionProvider.getConnection(); 
+				PreparedStatement rqt = con.prepareStatement(INSERT);) {
+			
+			
+			
+			rqt.setInt(1, retrait.getNo_article());
 			rqt.setString(2, retrait.getRue());
 			rqt.setString(3, retrait.getCodePostal());
 			rqt.setString(4, retrait.getVille());

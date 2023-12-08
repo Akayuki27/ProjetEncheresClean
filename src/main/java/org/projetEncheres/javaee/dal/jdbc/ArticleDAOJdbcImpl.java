@@ -143,9 +143,13 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
-	public void insertArticle(ArticleVendu a, Utilisateur u, Categorie c) throws DALException {
+	public int insertArticle(ArticleVendu a, Utilisateur u, Categorie c) throws DALException {
+		
+		int numeroArticle = -1;
+		
 		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
+			
 			rqt.setString(1, a.getNomArticle());
 			rqt.setString(2, a.getDescription());
 			rqt.setDate(3, Date.valueOf(a.getDateDebutEncheres()));
@@ -154,20 +158,22 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			rqt.setInt(6, a.getPrixVente());
 			rqt.setInt(7, u.getNoUtilisateur());
 			rqt.setInt(8, c.getNoCategorie());
+			
 			int nbRows = rqt.executeUpdate();
 			if (nbRows == 1) {
 				try (ResultSet rs = rqt.getGeneratedKeys()) {
 					if(rs.next()) {
 					a.setNoArticle(rs.getInt(1));
+					numeroArticle = rs.getInt(1);
 					}
 				}
 			}
-
+			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			throw new DALException("Linsertion de l'article " + a + " a échouée");
 		}
-
+		return numeroArticle;
 	}
 
 	private ArticleVendu mapping(ResultSet rs) throws SQLException {
