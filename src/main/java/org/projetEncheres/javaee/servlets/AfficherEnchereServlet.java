@@ -36,6 +36,17 @@ public class AfficherEnchereServlet extends HttpServlet {
 		List<ArticleVendu> articles = null;
 		String nomArticle = request.getParameter("nomArticle");
         int categorie = Integer.parseInt(request.getParameter("categories"));
+        List<Categorie> cat;
+		//recuperer categorie pour la liste de choix		
+		CategorieManager catrg = new CategorieManager();
+			try {
+				cat = catrg.selectAll();
+				request.setAttribute("categories", cat);
+			} catch (DALException e) {
+				e.printStackTrace();
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
 
 		try {
 			if (nomArticle != null && categorie != 0) {
@@ -76,17 +87,7 @@ public class AfficherEnchereServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Categorie> cat;
-		//recuperer categorie pour la liste de choix		
-		CategorieManager catrg = new CategorieManager();
-			try {
-				cat = catrg.selectAll();
-				request.setAttribute("categories", cat);
-			} catch (DALException e) {
-				e.printStackTrace();
-			} catch (BLLException e) {
-				e.printStackTrace();
-			}
+		
 		doGet(request, response);
 	}
 
