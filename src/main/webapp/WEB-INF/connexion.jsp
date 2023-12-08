@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Connexion</title>
+<link rel="stylesheet" href="/ProjetEncheresClean/static/style.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/Header.jsp">

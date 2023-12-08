@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/*
+#4c7c48 vert logo
+#2f5a1a vert sombre
+#f96852 orange logo
+#b3311d orange sombre
+*/
+
+body{
+	background-color: rgb(240, 235, 213);
+	color: #251f12;
+	font-family: verdana;
+}
+
+h1 {
+	color: #4c7c48;
+}
+
+a {
+	color: #f96852; 
+}
+
+a:hover {
+	color: #b3311d;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0; 
+    margin: 0;
+}

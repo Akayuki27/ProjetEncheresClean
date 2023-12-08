@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Modification du profil</title>
+<link rel="stylesheet" href="/ProjetEncheresClean/static/style.css"> 
 </head>
 <body>
 <body>

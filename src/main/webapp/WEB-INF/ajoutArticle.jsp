@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/ProjetEncheresClean/static/style.css">
 </head>
 <body>
 <h1>Nouvel Article</h1>
