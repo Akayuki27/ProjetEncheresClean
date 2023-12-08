@@ -3,6 +3,7 @@ package org.projetEncheres.javaee.servlets;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,6 +31,20 @@ public class ajoutArticleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Utilisateur u;
+		List<Categorie> cat;
+		
+		//recuperer categorie pour la liste de choix		
+		CategorieManager catrg = new CategorieManager();
+			try {
+				cat = catrg.selectAll();
+				request.setAttribute("categories", cat);
+			} catch (DALException e) {
+				e.printStackTrace();
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
+
+	
 		u = (Utilisateur) session.getAttribute("userCo");
 		request.setAttribute("u", u);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ajoutArticle.jsp");
