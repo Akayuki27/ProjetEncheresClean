@@ -26,7 +26,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			+ "prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article=?";
 	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
 	private final static String SELECTBYID_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=?";
-	private final static String SELECTBYNOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article=?";
+	private final static String SELECTBYNOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE '%?%'";
 
 	public ArticleDAOJdbcImpl() {
 
