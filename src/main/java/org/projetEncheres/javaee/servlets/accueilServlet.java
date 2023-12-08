@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.projetEncheres.javaee.bll.ArticleManager;
 import org.projetEncheres.javaee.bll.BLLException;
 import org.projetEncheres.javaee.bll.CategorieManager;
+import org.projetEncheres.javaee.bll.UtilisateurManager;
+import org.projetEncheres.javaee.bo.ArticleVendu;
 import org.projetEncheres.javaee.bo.Categorie;
+import org.projetEncheres.javaee.bo.Utilisateur;
 import org.projetEncheres.javaee.dal.DALException;
 
 /**
@@ -28,11 +32,22 @@ public class accueilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<Categorie> cat;
+		List<ArticleVendu> articles;
+		ArticleManager amgr = new ArticleManager();
 		//recuperer categorie pour la liste de choix		
 		CategorieManager catrg = new CategorieManager();
+		Utilisateur u2 = null;
+		UtilisateurManager umgr = new UtilisateurManager();
 			try {
 				cat = catrg.selectAll();
+				articles = amgr.selectAll();
+				for (ArticleVendu a : articles) {
+					int id = a.getNo_utilisateur();
+					u2 = umgr.selectByID(id);
+					request.setAttribute("u2", u2);
+				}
 				request.setAttribute("categories", cat);
+				request.setAttribute("articles", articles);
 			} catch (DALException e) {
 				e.printStackTrace();
 			} catch (BLLException e) {

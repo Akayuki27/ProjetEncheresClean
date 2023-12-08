@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.projetEncheres.javaee.bll.ArticleManager;
 import org.projetEncheres.javaee.bll.BLLException;
+import org.projetEncheres.javaee.bll.CategorieManager;
 import org.projetEncheres.javaee.bll.UtilisateurManager;
 import org.projetEncheres.javaee.bo.ArticleVendu;
+import org.projetEncheres.javaee.bo.Categorie;
 import org.projetEncheres.javaee.bo.Utilisateur;
 import org.projetEncheres.javaee.dal.DALException;
 
@@ -74,6 +76,17 @@ public class AfficherEnchereServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		List<Categorie> cat;
+		//recuperer categorie pour la liste de choix		
+		CategorieManager catrg = new CategorieManager();
+			try {
+				cat = catrg.selectAll();
+				request.setAttribute("categories", cat);
+			} catch (DALException e) {
+				e.printStackTrace();
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
 		doGet(request, response);
 	}
 

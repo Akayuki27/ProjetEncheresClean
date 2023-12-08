@@ -91,6 +91,6 @@ public class ajoutArticleServlet extends HttpServlet {
 	        e.printStackTrace();
 	    }
 
-	    response.sendRedirect("AfficherEnchereServlet");
+	    response.sendRedirect("accueilServlet");
 	}
 }
