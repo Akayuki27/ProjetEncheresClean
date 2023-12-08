@@ -30,7 +30,7 @@
         <label for="categories">Catégorie :</label>
       	<select id="categories" name="categories" required>
   			<c:forEach var="categorie" items="${categories}">
-           		<option value="${categorie.noCategorie}">${categorie.libelle}</option>
+           		<option value="${categorie.libelle}">${categorie.libelle}</option>
         	</c:forEach>
       	</select>
       	

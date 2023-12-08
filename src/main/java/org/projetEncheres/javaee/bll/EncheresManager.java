@@ -3,7 +3,6 @@ package org.projetEncheres.javaee.bll;
 import java.util.List;
 
 import org.projetEncheres.javaee.bo.ArticleVendu;
-import org.projetEncheres.javaee.bo.Categorie;
 import org.projetEncheres.javaee.bo.Enchere;
 import org.projetEncheres.javaee.bo.Utilisateur;
 import org.projetEncheres.javaee.dal.DALException;
@@ -21,10 +20,11 @@ public class EncheresManager {
 	public void insertEnchere (Enchere e, ArticleVendu a, Utilisateur u) throws DALException, BLLException {
 		
 		try {
-			if(selectByIdArt(e.getNo_article()) == null) {
+			if(selectByIdArt(e.getNo_article()) == null && enchereValide(e)) {
 			
 			this.encheres.insertEnchere(e, a, u);
 			} else {
+				e.setNo_utilisateur(u.getNoUtilisateur());
 				update(e);
 			}
 		} catch (DALException d){
@@ -48,7 +48,7 @@ public class EncheresManager {
 		}
 	}
 	
-	public Enchere selectByIdUser(int id) throws DALException, BLLException {
+	public List<Enchere> selectByIdUser(int id) throws DALException, BLLException {
 		try {
 			return this.encheres.selectByIdUtilisateur(id);
 		} catch (DALException d){
@@ -57,9 +57,9 @@ public class EncheresManager {
 	}
 	
 	public void update(Enchere e) throws DALException, BLLException{
-		Enchere init = selectByIdArt(e.getNo_article());
+		
 		try {
-			if (init.getMontantEnchere() < e.getMontantEnchere()) {
+			if (enchereValide(e)) {
 		this.encheres.update(e);
 			} else {
 				throw new BLLException("L'enchère ne peut pas être inférieure à celle déjà faite");
@@ -67,6 +67,24 @@ public class EncheresManager {
 		} catch (DALException d){
 			throw new BLLException ("Erreur dans l'update de l'enchère par le no_utilisateur");
 		}
+	}
+	
+	public boolean enchereValide(Enchere e) {
+		boolean enchereOK = true;
+		ArticleVendu a;
+		ArticleManager amgr = new ArticleManager();
+		try {
+			a = amgr.selectByID(e.getNo_article());
+			if (e.getDateEnchere().isAfter(a.getDateFinEncheres())) {
+				enchereOK = false;
+			}
+			if (e.getMontantEnchere() <= a.getPrixVente() || e.getMontantEnchere() <= a.getMiseAPrix()) {
+				enchereOK = false;
+			}
+		} catch (DALException e1) {
+			e1.printStackTrace();
+		}
+		return enchereOK;
 	}
 }
 

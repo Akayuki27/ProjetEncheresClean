@@ -23,7 +23,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private final static String SELECTBYID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article=?";
 	private final static String SELECTALL = "SELECT * FROM ARTICLES_VENDUS";
 	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, "
-			+ "prix_vente=?, no_utilisateur=?, no_categorie=?";
+			+ "prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article=?";
 	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
 	private final static String SELECTBYID_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=?";
 	private final static String SELECTBYNOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article=?";
@@ -83,6 +83,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			rqt.setInt(6, a.getPrixVente());
 			rqt.setInt(7, a.getNo_utilisateur());
 			rqt.setInt(8, a.getNo_categorie());
+			rqt.setInt(9, a.getNoArticle());
 			rqt.executeUpdate();
 		
 		} catch (SQLException e1) {

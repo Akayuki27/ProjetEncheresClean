@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.projetEncheres.javaee.bo.ArticleVendu;
@@ -98,19 +99,21 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	}
 
 	@Override
-	public Enchere selectByIdUtilisateur(int idUser) throws DALException {
+	public List<Enchere> selectByIdUtilisateur(int idUser) throws DALException {
 		Enchere e = null;
+		List<Enchere> encheres = new ArrayList<>();
 		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYID_USER);) {
 			rqt.setInt(1, idUser);
 			ResultSet rs = rqt.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
 				e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), (rs.getDate("date_enchere").toLocalDate()), rs.getInt("montant_enchere"));
+				encheres.add(e);
 			}
 		} catch(SQLException e1) {
 			e1.printStackTrace();
 			throw new DALException("La sélection de l'enchere par no utilisateur a échouée");
 		}
-		return e;
+		return encheres;
 	}
 
 }

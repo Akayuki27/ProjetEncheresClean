@@ -32,14 +32,12 @@
 <div>
 		  <c:forEach var="articles" items="${articles}">
 			<div><p>${articles.nomArticle}</p>
-			<p>	Prix : <c:choose>
-					<c:when test="${encheres.montantEncheres !=null}">${encheres.montantEncheres}</c:when>
-					<c:otherwise>${articles.miseAPrix }</c:otherwise>
-				</c:choose>
+			<p>	Prix : ${articles.prixVente}
 			</p>
-				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>		
-				
+				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>
+						
 				<%if (session.getAttribute("userCo") !=null) { %>
+				<p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Enchérir</a>
 				<p><a href ="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${u2.pseudo}</a></p>
 				<%} else {%>
 				<p>Vendeur : ${u2.pseudo}</p>

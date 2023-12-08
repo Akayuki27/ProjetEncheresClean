@@ -20,6 +20,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	private static final String SELECTALL = "SELECT * FROM CATEGORIES";
 	private static final String UPDATE = "UPDATE CATEGORIES SET libelle=?";
 	private static final String DELETE = "DELETE FROM CATEGORIES WHERE no_categorie=?";
+	private static final String SELECTBYID = "SELECT * FROM CATEGORIES WHERE no_categorie=?";
 
 	@Override
 	public void insert(Categorie c) throws DALException {
@@ -44,8 +45,24 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	@Override
 	public Categorie selectByID(int id) throws DALException {
+		Categorie c = null;	
+		try (Connection con = ConnectionProvider.getConnection();
+				PreparedStatement rqt = con.prepareStatement(SELECTBYID);) {
+			rqt.setInt(1, id);
+			ResultSet rs = rqt.executeQuery();
+			if (rs.next()) {
+				int no_categorie = rs.getInt("no_categorie");
+				String cate_libelle = rs.getString("libelle");
+				c = new Categorie(no_categorie, cate_libelle);
+			}
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException("La sélection par id a échouée");
+		}
+		return c;
 		
-		return null;
+		
 	}
 
 	@Override
