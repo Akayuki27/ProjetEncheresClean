@@ -10,7 +10,7 @@ public interface ArticleDAO extends DAO<ArticleVendu>{
 	
 	List<ArticleVendu> selectByCategorie(int id_categorie) throws DALException;
 	List<ArticleVendu> selectByNom(String libelle) throws DALException;
-	public void insertArticle(ArticleVendu a, Utilisateur u, Categorie c) throws DALException;
+	public int insertArticle(ArticleVendu a, Utilisateur u, Categorie c) throws DALException;
 
 	
 }

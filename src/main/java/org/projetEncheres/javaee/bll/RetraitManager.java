@@ -40,10 +40,10 @@ public class RetraitManager {
 		}
 	}
 
-	public void insertRetrait(Retrait r, ArticleVendu a) throws DALException, BLLException {
+	public void insertRetrait(Retrait r) throws DALException, BLLException {
 		try {
 			if (verifRetrait(r)) {
-				this.retrait.insertRetrait(r, a);
+				this.retrait.insertRetrait(r);
 			} else {
 				throw new BLLException("Le format de l'adresse est invalide");
 			}
