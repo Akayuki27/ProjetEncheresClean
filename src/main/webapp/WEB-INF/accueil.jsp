@@ -28,10 +28,11 @@
         	</c:forEach>
       	</select>
       	<%if (session.getAttribute ("userCo") != null) { %>
-      	<div class="radio-option">
-        <input type="radio" id="Achat" name="Achat" value="Achat" checked>
+    <div class="radio-option">
+        <input type="radio" id="Achat" name="ChoixAchatVente" value="Achat" checked>
         <label for="radioOption1">Achats</label>
 
+		<!-- checkbox si radio boutton 1 est enclencher -->
         <div class="checkbox-container">
             <input type="checkbox" id="EnchereOuvertes" name="EnchereOuvertes" value="EnchereOuvertes" checked>
             <label for="checkbox1a">Enchères ouvertes</label>
@@ -42,23 +43,25 @@
             <input type="checkbox" id="EnchereRemportes" name="EnchereRemportes" value="EnchereRemportes">
             <label for="checkbox1c">Mes enchères remportées</label>
         </div>
-    </div>
-
-    <div class="radio-option">
-        <input type="radio" id="Ventes" name="Ventes" value="Ventes">
+        <input type="radio" id="Ventes" name="ChoixAchatVente" value="Ventes">
         <label for="radioOption2">Mes ventes</label>
-
-        <div class="checkbox-container">
-            <input type="checkbox" id="VenteEnCours" name="VenteEnCours" value="VenteEnCours">
+        
+        <!-- checkbox si radio boutton 1 est enclencher -->
+         <div class="checkbox-container">
+            <input type="checkbox" id="VenteEnCours" name="VenteEnCours" value="VenteEnCours" disabled>
             <label for="checkbox2a">Mes ventes en cours</label>
 
-            <input type="checkbox" id="VenteNonDebutes" name="VenteNonDebutes" value="VenteNonDebutes">
+            <input type="checkbox" id="VenteNonDebutes" name="VenteNonDebutes" value="VenteNonDebutes" disabled>
             <label for="checkbox2b">Vente non débutées</label>
 
-            <input type="checkbox" id="VentesTermines" name="VentesTermines" value="VentesTermines">
+            <input type="checkbox" id="VentesTermines" name="VentesTermines" value="VentesTermines" disabled>
             <label for="checkbox2c">Ventes terminées</label>
         </div>
+        
     </div>
+
+       
+
       	<% } %>
 		
       <button type="submit" name="rechercher">Rechercher</button>
