@@ -92,17 +92,21 @@ public class ajoutArticleServlet extends HttpServlet {
         String fileName = getSubmittedFileName(filePart);
         System.out.println(fileName);
         // Spécifier l'emplacement de sauvegarde du fichier sur le serveur
-        String uploadDir = getServletContext().getRealPath("/uploads");
-        File uploadDirFile = new File(uploadDir);
+        String uploadDir = request.getServletContext().getRealPath("/");
+        String uploadFolder = "uploads";
+        String savePath = uploadDir + File.separator + uploadFolder;
+        File uploadDirFile = new File(savePath);
         System.out.println(uploadDir);
         if (!uploadDirFile.exists()) {
             uploadDirFile.mkdir();
         }
         
         // Sauvegarder le fichier dans le répertoire spécifié
-        Path filePath = Paths.get(uploadDir, fileName);
+        Path filePath = Paths.get(savePath, fileName);
+        
         try (InputStream fileContent = filePart.getInputStream()) {
             Files.copy(fileContent, filePath, StandardCopyOption.REPLACE_EXISTING);
+           
         }catch(IOException e) {
         	   e.printStackTrace();
         }

@@ -15,7 +15,7 @@ public class ArticleVendu implements Serializable {
 	private LocalDate dateFinEncheres;		
 	private int miseAPrix;			
 	private int prixVente;			
-	private int etatVente;
+	private boolean etatVente;
 	private int no_utilisateur;
 	private int no_categorie;
 	private String image;
@@ -40,7 +40,7 @@ public class ArticleVendu implements Serializable {
 	}
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int miseAPrix, int prixVente, int etatVente, int no_utilisateur, int no_categorie) {
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente, int no_utilisateur, int no_categorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -52,6 +52,22 @@ public class ArticleVendu implements Serializable {
 		this.etatVente = etatVente;
 		this.no_utilisateur = no_utilisateur;
 		this.no_categorie = no_categorie;
+	}
+	
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente, int no_utilisateur, int no_categorie, String image) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+		this.no_utilisateur = no_utilisateur;
+		this.no_categorie = no_categorie;
+		this.image = image;
 	}
 	
 	
@@ -140,11 +156,11 @@ public class ArticleVendu implements Serializable {
 		this.prixVente = prixVente;
 	}
 
-	public int getEtatVente() {
+	public boolean getEtatVente() {
 		return etatVente;
 	}
 
-	public void setEtatVente(int etatVente) {
+	public void setEtatVente(boolean etatVente) {
 		this.etatVente = etatVente;
 	}
 
