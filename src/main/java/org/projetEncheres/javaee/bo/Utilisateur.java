@@ -1,6 +1,12 @@
 package org.projetEncheres.javaee.bo;
 
-public class Utilisateur {
+import java.io.Serializable;
+
+public class Utilisateur implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int noUtilisateur;
 	private String pseudo;			//30char
 	private String nom;				//30char

@@ -1,12 +1,12 @@
 package org.projetEncheres.javaee.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,15 +33,22 @@ public class AfficherEnchereServlet extends HttpServlet {
 		ArticleManager mgr = new ArticleManager();
 		UtilisateurManager umgr = new UtilisateurManager();
 		Utilisateur u2 = null;
+		ArticleVendu article = null;
 		List<ArticleVendu> articles = null;
 		String nomArticle = request.getParameter("nomArticle");
         int categorie = Integer.parseInt(request.getParameter("categories"));
         List<Categorie> cat;
+        Cookie[] cookies = request.getCookies();
 		//recuperer categorie pour la liste de choix		
 		CategorieManager catrg = new CategorieManager();
 			try {
 				cat = catrg.selectAll();
 				request.setAttribute("categories", cat);
+				//encheres auxquelles l'uitlisateur a participé
+				/*for(Cookie c : cookies) {
+				article = mgr.selectByID(Integer.parseInt(c.getName()));
+					articles.add(article);
+				}*/
 			} catch (DALException e) {
 				e.printStackTrace();
 			} catch (BLLException e) {

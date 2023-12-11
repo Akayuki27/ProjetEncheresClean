@@ -1,8 +1,13 @@
 package org.projetEncheres.javaee.bo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ArticleVendu {
+public class ArticleVendu implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int noArticle;
 	private String nomArticle;			 	//30char
 	private String description;				//300char

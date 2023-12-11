@@ -1,8 +1,13 @@
 package org.projetEncheres.javaee.bo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Enchere {
+public class Enchere implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LocalDate dateEnchere;
 	private int montantEnchere;
 	private int no_utilisateur;

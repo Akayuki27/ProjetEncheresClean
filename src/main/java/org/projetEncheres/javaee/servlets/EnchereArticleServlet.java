@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,6 +64,8 @@ public class EnchereArticleServlet extends HttpServlet {
 		int idArt = Integer.parseInt(request.getParameter("idArt"));
 		ArticleManager amgr = new ArticleManager();
 		EncheresManager emgr = new EncheresManager();
+		
+		String cookieName = String.valueOf(idArt);
 		if (request.getParameter("enchere") != null) {
 			try {
 				a = amgr.selectByID(idArt);
@@ -71,6 +74,8 @@ public class EnchereArticleServlet extends HttpServlet {
 				emgr.insertEnchere(e, a, u);
 				a.setPrixVente(enchereNew);
 				amgr.update(a);
+				response.addCookie(new Cookie(cookieName, "1"));
+				
 			} catch (DALException e1) {
 				e1.printStackTrace();
 			} catch (BLLException e1) {

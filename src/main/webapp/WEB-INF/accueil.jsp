@@ -26,6 +26,8 @@
            		<option value="${categorie.noCategorie}">${categorie.libelle}</option>
         	</c:forEach>
       	</select>
+      	<c:if test="${session.getAttribute('userCo')!=null}">
+      	</c:if>
 		
       <button type="submit" name="rechercher">Rechercher</button>
     </form>
@@ -37,12 +39,16 @@
 			</p>
 				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>
 						
-				<%if (session.getAttribute("userCo") !=null) { %>
-				<p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Enchérir</a>
-				<p><a href ="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${u2.pseudo}</a></p>
-				<%} else {%>
-				<p>Vendeur : ${u2.pseudo}</p>
-				<%} %>			
+				
+				<c:choose>
+					<c:when test="${session.getAttribute('userCo')!=null}">
+						<p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Enchérir</a>
+						<p><a href ="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${u2.pseudo}</a></p>
+					</c:when>
+					<c:otherwise>
+						<p>Vendeur : ${u2.pseudo}</p>
+					</c:otherwise>
+				</c:choose>		
 			</div>		
 		</c:forEach>
 </div>
