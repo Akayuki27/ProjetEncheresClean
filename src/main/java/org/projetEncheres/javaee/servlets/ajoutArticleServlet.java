@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,10 @@ import org.projetEncheres.javaee.dal.jdbc.ArticleDAOJdbcImpl;
  * Servlet implementation class ajoutArticleServlet
  */
 @WebServlet("/ajoutArticleServlet")
+@MultipartConfig(
+	    fileSizeThreshold = 1024 * 1024,  // 1 MB
+	    maxFileSize = 1024 * 1024 * 10,   // 10 MB
+	    maxRequestSize = 1024 * 1024 * 50)  // 50 MB
 public class ajoutArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -76,6 +81,7 @@ public class ajoutArticleServlet extends HttpServlet {
 
 	    String nom = request.getParameter("nom");
 	    String description = request.getParameter("description");
+	    System.out.println(description);
 	    LocalDate dateDebut = LocalDate.parse(request.getParameter("dateDebut"), dtf);
 	    LocalDate dateFin = LocalDate.parse(request.getParameter("dateFin"), dtf);
 	    int prixInitial = Integer.parseInt(request.getParameter("prixInitial"));
@@ -97,6 +103,8 @@ public class ajoutArticleServlet extends HttpServlet {
         Path filePath = Paths.get(uploadDir, fileName);
         try (InputStream fileContent = filePart.getInputStream()) {
             Files.copy(fileContent, filePath, StandardCopyOption.REPLACE_EXISTING);
+        }catch(IOException e) {
+        	   e.printStackTrace();
         }
 
 
@@ -120,6 +128,7 @@ public class ajoutArticleServlet extends HttpServlet {
 	    response.sendRedirect("accueilServlet");
 	}
 	
+
 	//transforme le chemin du fichier en nom de fichier
 	private String getSubmittedFileName(Part part) {
         String header = part.getHeader("content-disposition");
@@ -130,4 +139,5 @@ public class ajoutArticleServlet extends HttpServlet {
         }
         return null;
     }
+
 }
