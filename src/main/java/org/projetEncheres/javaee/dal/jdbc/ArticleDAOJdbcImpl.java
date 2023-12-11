@@ -19,7 +19,7 @@ import org.projetEncheres.javaee.dal.DALException;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
-	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?)";
+	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?,?)";
 	private final static String SELECTBYID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article=?";
 	private final static String SELECTALL = "SELECT * FROM ARTICLES_VENDUS";
 	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, "
@@ -162,6 +162,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			rqt.setInt(6, a.getPrixVente());
 			rqt.setInt(7, u.getNoUtilisateur());
 			rqt.setInt(8, c.getNoCategorie());
+			rqt.setBoolean(9,false);
 			
 			int nbRows = rqt.executeUpdate();
 			if (nbRows == 1) {
@@ -242,7 +243,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return articles;
 	}
 
 	@Override
@@ -254,7 +255,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		
 	} catch (SQLException e1) {
 		e1.printStackTrace();
-		throw new DALException("La selection des articles nommés  a échouée");
+		throw new DALException("La mise à jour de l'état de la vente a échoué");
 	}
 	}
 	

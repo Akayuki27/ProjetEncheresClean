@@ -83,4 +83,8 @@ public class ArticleManager {
 		
 	}
 	
+	public void updateEtatVente(int idArt) throws DALException {
+		this.article.updateEtatVente(idArt);
+	}
+	
 }
