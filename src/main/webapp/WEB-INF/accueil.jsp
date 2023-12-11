@@ -70,6 +70,7 @@
 <div>
 		  <c:forEach var="articles" items="${articles}">
 			<div><p>${articles.nomArticle}</p>
+			<p><img src="/uploads/${articles.image}"></p>
 			<p>	Prix : ${articles.prixVente}
 			</p>
 				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>

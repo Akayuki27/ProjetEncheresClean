@@ -110,7 +110,7 @@ public class ajoutArticleServlet extends HttpServlet {
 
 	    try {
 	        c = crg.selectByLibelle(request.getParameter("categories"));
-	        a = new ArticleVendu(nom, description, dateDebut, dateFin, prixInitial, prixVente, u.getNoUtilisateur(), c.getNoCategorie());
+	        a = new ArticleVendu(nom, description, dateDebut, dateFin, prixInitial, prixVente, u.getNoUtilisateur(), c.getNoCategorie(), fileName);
 
 	        // inserer dans "article_vendu" et retourne la clé primaire
 	        ArticleDAOJdbcImpl adji = new ArticleDAOJdbcImpl();

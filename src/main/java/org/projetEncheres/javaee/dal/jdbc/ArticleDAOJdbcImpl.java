@@ -19,11 +19,11 @@ import org.projetEncheres.javaee.dal.DALException;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
-	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?,?)";
+	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?,?,?)";
 	private final static String SELECTBYID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article=?";
 	private final static String SELECTALL = "SELECT * FROM ARTICLES_VENDUS";
 	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, "
-			+ "prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article=?";
+			+ "prix_vente=?, no_utilisateur=?, no_categorie=?, image=? WHERE no_article=?";
 	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";
 	private final static String SELECTBYID_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=?";
 	private final static String SELECTBYNOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
@@ -87,6 +87,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			rqt.setInt(7, a.getNo_utilisateur());
 			rqt.setInt(8, a.getNo_categorie());
 			rqt.setInt(9, a.getNoArticle());
+			rqt.setString(10, a.getImage());
 			rqt.executeUpdate();
 		
 		} catch (SQLException e1) {
@@ -163,6 +164,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			rqt.setInt(7, u.getNoUtilisateur());
 			rqt.setInt(8, c.getNoCategorie());
 			rqt.setBoolean(9,false);
+			rqt.setString(10, a.getImage());
 			
 			int nbRows = rqt.executeUpdate();
 			if (nbRows == 1) {

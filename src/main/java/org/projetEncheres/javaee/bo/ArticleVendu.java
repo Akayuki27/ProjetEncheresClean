@@ -18,8 +18,26 @@ public class ArticleVendu implements Serializable {
 	private int etatVente;
 	private int no_utilisateur;
 	private int no_categorie;
+	private String image;
 	
 	public ArticleVendu () {}
+	
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, int no_utilisateur, int no_categorie, String image ) {
+		super();
+		
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		
+		this.no_utilisateur = no_utilisateur;
+		this.no_categorie = no_categorie;
+		this.image = image;
+		
+	}
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, int etatVente, int no_utilisateur, int no_categorie) {
@@ -35,6 +53,8 @@ public class ArticleVendu implements Serializable {
 		this.no_utilisateur = no_utilisateur;
 		this.no_categorie = no_categorie;
 	}
+	
+	
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, int no_utilisateur, int no_categorie) {
@@ -142,6 +162,14 @@ public class ArticleVendu implements Serializable {
 
 	public void setNo_categorie(int no_categorie) {
 		this.no_categorie = no_categorie;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	
