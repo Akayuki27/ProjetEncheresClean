@@ -29,6 +29,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private final static String SELECTBYNOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
 	private final static String SELECTBYNOM_ARTICLEETCATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ? AND no_categorie =?";
 	private static String SELECTBYCRITERIA = "SELECT * FROM ARTICLES_VENDUS WHERE 1=1";
+	private static final String UPDATEVENTE = "UPDATE ARTICLES_VENDUS SET etat_vente = 1 WHERE no_article=?";
 
 	public ArticleDAOJdbcImpl() {
 
@@ -242,6 +243,19 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public void updateEtatVente(int id) throws DALException {
+		try (Connection con = ConnectionProvider.getConnection();
+				PreparedStatement rqt = con.prepareStatement(UPDATEVENTE);){
+		rqt.setInt(1, id);
+		rqt.executeUpdate();
+		
+	} catch (SQLException e1) {
+		e1.printStackTrace();
+		throw new DALException("La selection des articles nommés  a échouée");
+	}
 	}
 	
 	

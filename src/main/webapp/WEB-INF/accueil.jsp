@@ -77,7 +77,9 @@
 				<c:when test="${articles.dateFinEncheres.isAfter(LocalDate.now()) }"> 
 						<p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Enchérir</a>
 				</c:when>
-				<c:otherwise><p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Détail</a></c:otherwise>
+				<c:otherwise>
+					<p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Détail</a>
+				</c:otherwise>
 				</c:choose>
 						<p><a href ="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${u2.pseudo}</a></p>
 				<%}else { %>
