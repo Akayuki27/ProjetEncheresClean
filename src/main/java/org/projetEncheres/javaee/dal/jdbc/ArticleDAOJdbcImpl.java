@@ -28,6 +28,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private final static String SELECTBYID_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=?";
 	private final static String SELECTBYNOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
 	private final static String SELECTBYNOM_ARTICLEETCATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ? AND no_categorie =?";
+	private static String SELECTBYCRITERIA = "SELECT * FROM ARTICLES_VENDUS WHERE 1=1";
 
 	public ArticleDAOJdbcImpl() {
 
@@ -215,5 +216,34 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}
 		return articles;
 	}
+
+	@Override
+	public List<ArticleVendu> selectByCriteria(String c1, String c2, String c3, String c4, String c5)
+			throws DALException {
+		
+		List<ArticleVendu> articles = new ArrayList<>();
+		try (Connection con = ConnectionProvider.getConnection();
+				PreparedStatement rqt = con.prepareStatement(SELECTBYCRITERIA)) {
+			
+			if (c1 != null) {
+				SELECTBYCRITERIA += "AND date_debut_encheres <=?";
+				rqt.setDate(1, Date.valueOf(LocalDate.now()));
+			}
+			if (c2 != null) {
+				SELECTBYCRITERIA += "AND no_utilisateur =?";
+				int id = 0;
+				rqt.setInt(2, id);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block 
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
 
 }

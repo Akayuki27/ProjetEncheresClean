@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +32,13 @@
         
         <p><a href ="afficherVendeurServlet?id=${a.no_utilisateur}">Vendeur : ${u2.pseudo}</a></p>
         
-        <form method="post" action="EnchereArticleServlet">
+       
+       <c:if test="${a.dateFinEncheres.isAfter(LocalDate.now()) }">        
+       <form method="post" action="EnchereArticleServlet">
         <input type="hidden" id="idArt" name="idArt" value="${a.noArticle}">
         <input type="number" id="enchere" name="enchere" value="${a.prixVente}"><input type="submit" value="Encherir">
         </form>
-        
+        </c:if>
         
     </div>
 

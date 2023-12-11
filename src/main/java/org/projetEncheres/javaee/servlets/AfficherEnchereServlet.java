@@ -41,6 +41,13 @@ public class AfficherEnchereServlet extends HttpServlet {
         Cookie[] cookies = request.getCookies();
 		//recuperer categorie pour la liste de choix		
 		CategorieManager catrg = new CategorieManager();
+		String EnchereOuvertes = request.getParameter("EnchereOuvertes");
+		String EnchereEnCours = request.getParameter("EnchereEnCours");
+		String EnchereRemportes = request.getParameter("EnchereRemportes");
+		String VenteEnCours = request.getParameter("VenteEnCours");
+		String VenteNonDebutes = request.getParameter("VenteNonDebutes");
+		String VentesTermines = request.getParameter("VentesTermines");
+		
 			try {
 				cat = catrg.selectAll();
 				request.setAttribute("categories", cat);
@@ -69,6 +76,9 @@ public class AfficherEnchereServlet extends HttpServlet {
 	            // Aucun filtre, affiche tous les articles par ordre ID descendant
 	          //  articles = mgr.selectAllOrderedByIdDesc();
 	        //}
+			
+			
+			
 			
 			} else {
 				articles = mgr.selectAll();}

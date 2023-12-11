@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -28,33 +29,33 @@
       	</select>
       	<%if (session.getAttribute ("userCo") != null) { %>
       	<div class="radio-option">
-        <input type="radio" id="radioOption1" name="radioOptions" value="option1">
+        <input type="radio" id="Achat" name="Achat" value="Achat" checked>
         <label for="radioOption1">Achats</label>
 
         <div class="checkbox-container">
-            <input type="checkbox" id="checkbox1a" name="checkbox1a" value="checkbox1a">
+            <input type="checkbox" id="EnchereOuvertes" name="EnchereOuvertes" value="EnchereOuvertes" checked>
             <label for="checkbox1a">Enchères ouvertes</label>
 
-            <input type="checkbox" id="checkbox1b" name="checkbox1b" value="checkbox1b">
+            <input type="checkbox" id="EnchereEnCours" name="EnchereEnCours" value="EnchereEnCours">
             <label for="checkbox1b">Mes enchères en cours</label>
 
-            <input type="checkbox" id="checkbox1c" name="checkbox1c" value="checkbox1c">
+            <input type="checkbox" id="EnchereRemportes" name="EnchereRemportes" value="EnchereRemportes">
             <label for="checkbox1c">Mes enchères remportées</label>
         </div>
     </div>
 
     <div class="radio-option">
-        <input type="radio" id="radioOption2" name="radioOptions" value="option2">
+        <input type="radio" id="Ventes" name="Ventes" value="Ventes">
         <label for="radioOption2">Mes ventes</label>
 
         <div class="checkbox-container">
-            <input type="checkbox" id="checkbox2a" name="checkbox2a" value="checkbox2a">
+            <input type="checkbox" id="VenteEnCours" name="VenteEnCours" value="VenteEnCours">
             <label for="checkbox2a">Mes ventes en cours</label>
 
-            <input type="checkbox" id="checkbox2b" name="checkbox2b" value="checkbox2b">
+            <input type="checkbox" id="VenteNonDebutes" name="VenteNonDebutes" value="VenteNonDebutes">
             <label for="checkbox2b">Vente non débutées</label>
 
-            <input type="checkbox" id="checkbox2c" name="checkbox2c" value="checkbox2c">
+            <input type="checkbox" id="VentesTermines" name="VentesTermines" value="VentesTermines">
             <label for="checkbox2c">Ventes terminées</label>
         </div>
     </div>
@@ -72,7 +73,12 @@
 						
 				
 				<%if (session.getAttribute ("userCo") != null) { %>
+				<c:choose>
+				<c:when test="${articles.dateFinEncheres.isAfter(LocalDate.now()) }"> 
 						<p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Enchérir</a>
+				</c:when>
+				<c:otherwise><p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Détail</a></c:otherwise>
+				</c:choose>
 						<p><a href ="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${u2.pseudo}</a></p>
 				<%}else { %>
 						<p>Vendeur : ${u2.pseudo}</p>
