@@ -11,29 +11,34 @@
 <body>
 <h1>Nouvel Article</h1>
 <div>
-    <form id="articleForm" action="ajoutArticleServlet" method="post">
+
+    <form id="articleForm" action="ajoutArticleServlet" method="post" enctype="multipart/form-data"> 
     	
         <label for="nom">Nom de l'article :</label>
         <input type="text" id="nom" name="nom" required>
     
         <label for="Description">Description :</label>
         <input type="text" id="description" name="description" required>
+           
+        <label for="categories">Catégorie :</label>
+      	<select id="categories" name="categories" required>
+  			<c:forEach var="categorie" items="${categories}">
+           		<option value="${categorie.libelle}">${categorie.libelle}</option>
+        	</c:forEach>
+      	</select>     
+        
+    	<label for="fileInput">Sélectionnez une image :</label>
+    	<input type="file" name="fileInput" id="fileInput">
+    	<br>
+		
+		<label for="prix">Prix initial :</label>
+    	<input type="number" id="prixInitial" name="prixInitial" value="100" min="0" step="1" pattern="\d+" required>
     
         <label for="dateDebut">Début des enchères :</label>
         <input type="date" id="dateDebut" name="dateDebut" required>
     
         <label for="dateFin">Fin des enchères :</label>
         <input type="date" id="dateFin" name="dateFin" required>
-        
-        <label for="prix">Prix initial :</label>
-    	<input type="number" id="prixInitial" name="prixInitial" value="100" min="0" step="1" pattern="\d+" required>
-        
-        <label for="categories">Catégorie :</label>
-      	<select id="categories" name="categories" required>
-  			<c:forEach var="categorie" items="${categories}">
-           		<option value="${categorie.libelle}">${categorie.libelle}</option>
-        	</c:forEach>
-      	</select>
       	
       	<h2>Adresse de retrait</h2>
       	
@@ -51,6 +56,7 @@
         <button type="button" onclick="location.href='accueil.jsp'">Annuler</button>
         
       </form>
+
 </div>
 </body>
 </html>
