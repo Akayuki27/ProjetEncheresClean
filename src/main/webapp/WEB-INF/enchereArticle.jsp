@@ -17,6 +17,17 @@
 	
     <div>
         
+         <div class="imgAfficherEnchereBloc">
+		  <c:choose>
+		  <c:when test="${not empty a.image }">
+			<img class="imgAfficherEnchere" src="<c:url value='/uploads/${a.image}' />">
+			</c:when>
+			<c:otherwise>
+			<img class="imgAfficherEnchere" src="<c:url value='/ressources/noImage.jpg' />">
+			</c:otherwise>
+			</c:choose>
+			</div>
+        
         <p>Description : ${a.description}</p>
         
         <p>Catégorie: ${c.libelle} </p>

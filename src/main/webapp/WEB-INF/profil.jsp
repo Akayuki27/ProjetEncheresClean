@@ -5,17 +5,16 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Profil<!-- nom user a inserer ? --></title>
+<title>${requestScope.u.pseudo}</title>
 <link rel="stylesheet" href="/ProjetEncheresClean/static/style.css"> 
 </head>
 <body>
 <jsp:include page="/WEB-INF/Header.jsp">
 <jsp:param value="" name="header"/>
 </jsp:include>
-    <h1><!-- nom user a inserer ? --></h1>
+    <h1><${requestScope.u.pseudo }</h1>
 	
     <div>
-        <p>Pseudo : ${requestScope.u.pseudo}</p><!-- ne pas mettre si dans le titre -->
         <p>Nom : ${u.nom}</p>
         <!-- insérer nom -->
         <p>Prénom : ${u.prenom}</p>
