@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.projetEncheres.javaee.bll.ArticleManager;
 import org.projetEncheres.javaee.bll.BLLException;
@@ -30,7 +31,10 @@ public class accueilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+		Utilisateur u;
+		u = (Utilisateur) session.getAttribute("userCo");
+		request.setAttribute("u", u);
 		List<Categorie> cat;
 		List<ArticleVendu> articles;
 		ArticleManager amgr = new ArticleManager();

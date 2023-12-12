@@ -70,7 +70,7 @@
 		  <div class="afficherEnchereSousBloc">
 		  <div class="imgAfficherEnchereBloc">
 		  <c:choose>
-		  <c:when test="${not empty articles.image }">
+		  <c:when test="${not empty articles.image}">
 			<img class="imgAfficherEnchere" src="<c:url value='/uploads/${articles.image}' />">
 			</c:when>
 			<c:otherwise>
@@ -87,6 +87,9 @@
 				
 				<%if (session.getAttribute ("userCo") != null) { %>
 				<c:choose>
+				<c:when test="${articles.dateDebutEncheres.isAfter(LocalDate.now()) && u.noUtilisateur == articles.no_utilisateur}">
+					<p><a href="modifArticleServlet?noArt=${articles.noArticle}">Modifier</a>
+				</c:when>
 				<c:when test="${articles.dateFinEncheres.isAfter(LocalDate.now()) }"> 
 						<p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Enchérir</a>
 				</c:when>
