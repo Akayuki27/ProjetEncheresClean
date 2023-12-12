@@ -19,7 +19,7 @@ import org.projetEncheres.javaee.dal.DALException;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
-	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?,?,?)";
+	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	private final static String SELECTBYID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article=?";
 	private final static String SELECTALL = "SELECT * FROM ARTICLES_VENDUS";
 	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, "
@@ -165,6 +165,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			rqt.setInt(8, c.getNoCategorie());
 			rqt.setBoolean(9,false);
 			rqt.setString(10, a.getImage());
+			rqt.setInt(11, 0);
 			
 			int nbRows = rqt.executeUpdate();
 			if (nbRows == 1) {

@@ -64,9 +64,9 @@ public class AfficherEnchereServlet extends HttpServlet {
 							compt++;
 						}
 					}
-					where += "GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres AND no_article=?";
+					where += ")";
 				break;
-				case "EnchereRemportes": where += "no_utilisateur=? and no_article=?";
+				case "EnchereRemportes": where += "winner=" + + u.getNoUtilisateur();
 				break;
 				}
 			}

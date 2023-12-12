@@ -19,6 +19,7 @@ public class ArticleVendu implements Serializable {
 	private int no_utilisateur;
 	private int no_categorie;
 	private String image;
+	private int winner;
 	
 	public ArticleVendu () {}
 	
@@ -70,6 +71,22 @@ public class ArticleVendu implements Serializable {
 		this.image = image;
 	}
 	
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente, int no_utilisateur, int no_categorie, String image, int winner) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+		this.no_utilisateur = no_utilisateur;
+		this.no_categorie = no_categorie;
+		this.image = image;
+		this.winner = winner;
+	}
 	
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
@@ -186,6 +203,14 @@ public class ArticleVendu implements Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public int getWinner() {
+		return winner;
+	}
+
+	public void setWinner(int winner) {
+		this.winner = winner;
 	}
 	
 	

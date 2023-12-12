@@ -69,24 +69,27 @@ public class EncheresManager {
 		}
 	}
 	
-	public Utilisateur winner(ArticleVendu a) throws DALException, BLLException {
-		Utilisateur winner = null;
+	public Utilisateur vainqueurEnchere(ArticleVendu a) throws DALException, BLLException {
+		Utilisateur vainqueurEnchere = null;
 		Utilisateur vendeur = null;
 		Enchere e = selectByIdArt(a.getNoArticle());
 		UtilisateurManager umgr = new UtilisateurManager();
 		ArticleManager amgr = new ArticleManager();
 		
 		if (a.getDateFinEncheres() == e.getDateEnchere()) {
-			winner = umgr.selectByID(e.getNo_utilisateur());
+			vainqueurEnchere = umgr.selectByID(e.getNo_utilisateur());
 			vendeur = umgr.selectByID(a.getNo_utilisateur());
-			winner.setCredit(winner.getCredit() - a.getPrixVente());
-			umgr.updateUtilisateur(winner);
+			vainqueurEnchere.setCredit(vainqueurEnchere.getCredit() - a.getPrixVente());
+			umgr.updateUtilisateur(vainqueurEnchere);
 			vendeur.setCredit(vendeur.getCredit() + a.getPrixVente());
 			umgr.updateUtilisateur(vendeur);
+			a.setWinner(vainqueurEnchere.getNoUtilisateur());
+			amgr.update(a);
 			amgr.updateEtatVente(a.getNoArticle());
 			
+			
 		}
-		return winner;
+		return vainqueurEnchere;
 		
 		
 	}
