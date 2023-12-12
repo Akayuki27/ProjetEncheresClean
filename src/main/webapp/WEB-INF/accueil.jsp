@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Accueil</title>
-<link rel="stylesheet" href="/ProjetEncheresClean/static/style.css"> 
+<link rel="stylesheet" href="/ProjetEncheresClean/static/style.css">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
         <input type="radio" id="Achat" name="ChoixAchatVente" value="Achat" checked>
         <label for="radioOption1">Achats</label>
 
-		<!-- checkbox si radio boutton 1 est enclencher -->
+		<!-- checkbox si radioOption 1 est enclenché -->
         <div class="checkbox-container">
             <input type="checkbox" id="EnchereOuvertes" name="EnchereOuvertes" value="EnchereOuvertes" checked>
             <label for="checkbox1a">Enchères ouvertes</label>
@@ -46,22 +46,20 @@
         <input type="radio" id="Ventes" name="ChoixAchatVente" value="Ventes">
         <label for="radioOption2">Mes ventes</label>
         
-        <!-- checkbox si radio boutton 1 est enclencher -->
+        <!-- checkbox si radioOption 2 est enclenché -->
          <div class="checkbox-container">
-            <input type="checkbox" id="VenteEnCours" name="VenteEnCours" value="VenteEnCours" disabled>
+            <input type="checkbox" id="VenteEnCours" name="VenteEnCours" value="VenteEnCours">
             <label for="checkbox2a">Mes ventes en cours</label>
 
-            <input type="checkbox" id="VenteNonDebutes" name="VenteNonDebutes" value="VenteNonDebutes" disabled>
+            <input type="checkbox" id="VenteNonDebutes" name="VenteNonDebutes" value="VenteNonDebutes">
             <label for="checkbox2b">Vente non débutées</label>
 
-            <input type="checkbox" id="VentesTermines" name="VentesTermines" value="VentesTermines" disabled>
+            <input type="checkbox" id="VentesTermines" name="VentesTermines" value="VentesTermines">
             <label for="checkbox2c">Ventes terminées</label>
         </div>
         
     </div>
-
-       
-
+	<script src="/ProjetEncheresClean/static/filtre.js"></script> 
       	<% } %>
 		
       <button type="submit" name="rechercher">Rechercher</button>
