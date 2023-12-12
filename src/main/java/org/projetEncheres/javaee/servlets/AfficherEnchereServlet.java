@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.projetEncheres.javaee.bll.ArticleManager;
 import org.projetEncheres.javaee.bll.BLLException;
 import org.projetEncheres.javaee.bll.CategorieManager;
+import org.projetEncheres.javaee.bll.EncheresManager;
 import org.projetEncheres.javaee.bll.UtilisateurManager;
 import org.projetEncheres.javaee.bo.ArticleVendu;
 import org.projetEncheres.javaee.bo.Categorie;
@@ -30,9 +31,12 @@ public class AfficherEnchereServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//initialisation variables nécéssaires
+		//utilisateur conencté
 		HttpSession session = request.getSession();
 	    Utilisateur u = (Utilisateur) session.getAttribute("userCo");
-
+	    
+	    //différents managers pour manipuler les données + données
 		ArticleManager mgr = new ArticleManager();
 		UtilisateurManager umgr = new UtilisateurManager();
 		Utilisateur u2 = null;
@@ -44,8 +48,12 @@ public class AfficherEnchereServlet extends HttpServlet {
         Cookie[] cookies = request.getCookies();
 		//recuperer categorie pour la liste de choix		
 		CategorieManager catrg = new CategorieManager();
+		EncheresManager emgr = new EncheresManager();
+		//Initialisation filtre sql
 		String where = "WHERE 1+1 AND ";
 		String[] filter = request.getParameterValues("filter[]");
+		//construction filtre sql
+		//premier radio button
 		if (request.getParameter("ChoixAchat") != null) {
 			for( String s : filter) {
 				switch(s) {
@@ -66,10 +74,11 @@ public class AfficherEnchereServlet extends HttpServlet {
 					}
 					where += ")";
 				break;
-				case "EnchereRemportes": where += "winner=" + + u.getNoUtilisateur();
+				case "EnchereRemportes": where += "winner=" + u.getNoUtilisateur();
 				break;
 				}
 			}
+			//deuxieme radio button
 		} else if (request.getParameter("ChoixVente") != null) {
 			where += "no_ulisateur=" + u.getNoUtilisateur();
 			for( String s : filter) {
@@ -115,7 +124,7 @@ public class AfficherEnchereServlet extends HttpServlet {
 			
 			
 			
-			
+			//si pas de filtre, default:
 			} else {
 				articles = mgr.selectAll();}
 				for (ArticleVendu a : articles) {
