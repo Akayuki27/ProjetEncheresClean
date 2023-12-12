@@ -105,12 +105,16 @@ public class modifArticleServlet extends HttpServlet {
 
 		// Sauvegarder le fichier dans le répertoire spécifié
 		Path filePath = Paths.get(savePath, fileName);
+		if(Files.exists(filePath)) {
+			System.out.println("Le fichier existe déjà");
+		} else {
 
 		try (InputStream fileContent = filePart.getInputStream()) {
 			Files.copy(fileContent, filePath, StandardCopyOption.REPLACE_EXISTING);
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
 		}
 
 		try {
