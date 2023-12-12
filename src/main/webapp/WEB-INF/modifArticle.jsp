@@ -8,8 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Modification Article</title>
+<link rel="stylesheet" href="/ProjetEncheresClean/static/style.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/Header.jsp">
+	<jsp:param value="" name="Accueil"/>
+</jsp:include>
+
 <h1>Modification de l'article</h1>
 <div>
 
