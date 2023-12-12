@@ -25,6 +25,20 @@ public class connexionServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		Cookie[] cookies = request.getCookies();
+		
+		
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if("seSouvenirDeMoi".equals(cookie.getName()));
+				String pseudo = cookie.getValue();
+				request.setAttribute("pseudo", pseudo);
+			}
+		}
+		
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 		rd.forward(request, response);
 	}
@@ -40,6 +54,8 @@ public class connexionServlet extends HttpServlet {
 		HttpSession session;
 		String identifiant = request.getParameter("identifiant");
 		String password = request.getParameter("motDePasse");
+		Utilisateur uSouvenir = null;
+
 		try {
 			if (identifiant.contains("@")) {
 				u = mger.loginEmail(identifiant, password);
@@ -51,12 +67,22 @@ public class connexionServlet extends HttpServlet {
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
+
+		if (request.getParameter("seSouvenirDeMoi") != null) {
+			Cookie seSouvenirDeMoiCookie;
+			seSouvenirDeMoiCookie = new Cookie("seSouvenirDeMoi", u.getPseudo());
+			// Cookies qui dure 1 mois
+			seSouvenirDeMoiCookie.setMaxAge(31 * 24 * 60 * 60);
+			response.addCookie(seSouvenirDeMoiCookie);
+		}
+
 		if (u != null) {
 			session = request.getSession();
 			session.setAttribute("userCo", u);
 			Cookie gato;
 			gato = new Cookie("lastLogin", u.getEmail());
-			gato.setMaxAge(31 * 24 * 60 * 60);
+			// Cookies qui dure 1 journée
+			gato.setMaxAge(24 * 60 * 60);
 			response.addCookie(gato);
 			response.sendRedirect("accueilServlet");
 		} else {

@@ -15,7 +15,7 @@
 <div>
   <form id="connexionForm" action="connexionServlet" method="post"><!-- insérer servlet -->
     <label for="identifiant">Identifiant:</label>
-    <input type="text" id="identifiant" name="identifiant" required>
+    <input type="text" id="identifiant" name="identifiant" value="${cookie.seSouvenirDeMoi.value}" required>
 
     <label for="motDePasse">Mot de passe:</label>
     <input type="password" id="motDePasse" name="motDePasse" required>
