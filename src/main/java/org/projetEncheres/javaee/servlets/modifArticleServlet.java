@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,10 @@ import org.projetEncheres.javaee.dal.DALException;
  * Servlet implementation class modifArticleServlet
  */
 @WebServlet("/modifArticleServlet")
+@MultipartConfig(
+	    fileSizeThreshold = 1024 * 1024,  // 1 MB
+	    maxFileSize = 1024 * 1024 * 10,   // 10 MB
+	    maxRequestSize = 1024 * 1024 * 50)  // 50 MB
 public class modifArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
