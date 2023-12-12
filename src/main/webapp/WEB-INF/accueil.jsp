@@ -29,7 +29,7 @@
       	</select>
       	<%if (session.getAttribute ("userCo") != null) { %>
     <div class="radio-option">
-        <input type="radio" id="Achat" name="ChoixAchatVente" value="Achat" checked>
+        <input type="radio" id="Achat" name="ChoixAchatVentes" value="Achat" checked>
         <label for="radioOption1">Achats</label>
 
 		<!-- checkbox si radioOption 1 est enclenché -->
@@ -43,7 +43,7 @@
             <input type="checkbox" id="EnchereRemportes" name="filter[]" value="EnchereRemportes">
             <label for="EnchereRemportes">Mes enchères remportées</label>
         </div>
-        <input type="radio" id="Ventes" name="ChoixAchatVente" value="Ventes">
+        <input type="radio" id="Ventes" name="ChoixAchatVentes" value="Ventes">
         <label for="Ventes">Mes ventes</label>
         
         <!-- checkbox si radioOption 2 est enclenché -->

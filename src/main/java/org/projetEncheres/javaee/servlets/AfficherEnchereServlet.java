@@ -1,6 +1,12 @@
 package org.projetEncheres.javaee.servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -20,6 +26,7 @@ import org.projetEncheres.javaee.bll.UtilisateurManager;
 import org.projetEncheres.javaee.bo.ArticleVendu;
 import org.projetEncheres.javaee.bo.Categorie;
 import org.projetEncheres.javaee.bo.Utilisateur;
+import org.projetEncheres.javaee.dal.ConnectionProvider;
 import org.projetEncheres.javaee.dal.DALException;
 
 /**
@@ -31,38 +38,70 @@ public class AfficherEnchereServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//initialisation variables nécéssaires
-		//utilisateur conencté
+		// initialisation variables nécéssaires
+		// utilisateur conencté
 		HttpSession session = request.getSession();
-	    Utilisateur u = (Utilisateur) session.getAttribute("userCo");
-	    
-	    //différents managers pour manipuler les données + données
+		Utilisateur u = (Utilisateur) session.getAttribute("userCo");
+
+		// différents managers pour manipuler les données + données
 		ArticleManager mgr = new ArticleManager();
 		UtilisateurManager umgr = new UtilisateurManager();
 		Utilisateur u2 = null;
 		ArticleVendu article = null;
-		List<ArticleVendu> articles = null;
+		List<ArticleVendu> articles = new ArrayList<>();
 		String nomArticle = request.getParameter("nomArticle");
-        int categorie = Integer.parseInt(request.getParameter("categories"));
-        List<Categorie> cat;
-        Cookie[] cookies = request.getCookies();
-		//recuperer categorie pour la liste de choix		
+		System.out.println(nomArticle);
+		int categorie = Integer.parseInt(request.getParameter("categories"));
+		List<Categorie> cat;
+		Cookie[] cookies = request.getCookies();
+		// recuperer categorie pour la liste de choix
 		CategorieManager catrg = new CategorieManager();
 		EncheresManager emgr = new EncheresManager();
-		//Initialisation filtre sql
-		String where = "WHERE 1+1 AND ";
+		String where = "WHERE prix_initial != 0 ";
 		String[] filter = request.getParameterValues("filter[]");
-		//construction filtre sql
-		//premier radio button
-		if (request.getParameter("ChoixAchat") != null) {
-			for( String s : filter) {
-				switch(s) {
-				case "EnchereOuvertes" : where += "date_fin_encheres >= GETDATE()";
-				break;
+
+		try {
+			cat = catrg.selectAll();
+			request.setAttribute("categories", cat);
+			// encheres auxquelles l'uitlisateur a participé
+			/*
+			 * for(Cookie c : cookies) { article =
+			 * mgr.selectByID(Integer.parseInt(c.getName())); articles.add(article); }
+			 */
+		} catch (DALException e) {
+			e.printStackTrace();
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+
+		// Initialisation filtre sql
+
+		// construction filtre sql
+		if (nomArticle != null && !nomArticle.isEmpty() && categorie != 0) {
+			// Filtre par nom et catégorie
+			where += "AND nom_article LIKE '%" + nomArticle + "%' AND no_categorie=" + categorie;
+		} else if (nomArticle != null && !nomArticle.isEmpty()) {
+			// Filtre par nom
+			where += "AND nom_article LIKE '%" + nomArticle + "%'";
+
+		} else if (categorie != 0) {
+			// Filtre par catégorie
+			where += "AND no_categorie=" + categorie;
+		}
+
+		// switch sur radiobuttons
+		if (request.getParameter("ChoixAchatVentes") != null) {
+			if (filter != null) {
+				
+			for (String s : filter) {
+				switch (s) {
+				case "EnchereOuvertes":
+					where += "AND date_fin_encheres >= GETDATE()";
+					break;
 				case "EnchereEnCours":
-					where += "GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres AND no_article IN(";
+					where += "AND GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres AND no_article IN(";
 					int compt = 0;
-					for(Cookie c : cookies) {
+					for (Cookie c : cookies) {
 						if (c.getValue() == "1") {
 							int id = Integer.parseInt(c.getName());
 							if (compt >= 1) {
@@ -73,72 +112,61 @@ public class AfficherEnchereServlet extends HttpServlet {
 						}
 					}
 					where += ")";
-				break;
-				case "EnchereRemportes": where += "winner=" + u.getNoUtilisateur();
-				break;
+					break;
+				case "EnchereRemportes":
+					where += "winner=" + u.getNoUtilisateur();
+					break;
+				case "VenteEnCours":
+					where += "AND no_utilisateur=" + u.getNoUtilisateur()
+							+ " AND GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres";
+					break;
+				case "VenteNonDebutes":
+					where += "AND no_utilisateur=" + u.getNoUtilisateur() + " AND date_debut_encheres > GETDATE()";
+					break;
+				case "VentesTermines":
+					where += "AND no_utilisateur=" + u.getNoUtilisateur() + " AND etat_vente=1";
+					break;
+				default:
+					where += "AND date_debut_encheres >= GETDATE()";
 				}
 			}
-			//deuxieme radio button
-		} else if (request.getParameter("ChoixVente") != null) {
-			where += "no_ulisateur=" + u.getNoUtilisateur();
-			for( String s : filter) {
-				switch(s) {
-				case "VenteEnCours" : where += " AND GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres";
-				break;
-				case "VenteNonDebutes": where += " AND date_debut_encheres > GETDATE()";
-				break;
-				case "VentesTermines": where += " AND etat_vente=1";
-				break;
-				}
-			}
+		} else {
+			where += "AND date_fin_encheres >= GETDATE()";
 		}
+		} 
+		System.out.println(where);
+		//Recuperation des articles selon filtre
+		try (Connection con = ConnectionProvider.getConnection();
+				PreparedStatement rqt = con.prepareStatement("SELECT * FROM ARTICLES_VENDUS " + where);) {
+			ResultSet rs = rqt.executeQuery();
+			while (rs.next()) {
+				article = mapping(rs);
+				articles.add(article);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		request.setAttribute("articles", articles);
 		
-			try {
-				cat = catrg.selectAll();
-				request.setAttribute("categories", cat);
-				//encheres auxquelles l'uitlisateur a participé
-				/*for(Cookie c : cookies) {
-				article = mgr.selectByID(Integer.parseInt(c.getName()));
-					articles.add(article);
-				}*/
+		//recuperation pseudo vendeur
+		
+		 for (ArticleVendu a : articles) { 
+			 int id = a.getNo_utilisateur(); 
+			 try {
+				u2 = umgr.selectByID(id);
+				request.setAttribute("u2", u2);
+				emgr.vainqueurEnchere(a);
 			} catch (DALException e) {
 				e.printStackTrace();
 			} catch (BLLException e) {
 				e.printStackTrace();
 			}
+		   }
+		 
 
-		try {
-			if (nomArticle != null && categorie != 0) {
-	            // Filtre par nom et catégorie
-	            articles = mgr.selectByNometCategorie(nomArticle, categorie);
-	        } else if (nomArticle != null) {
-	            // Filtre par nom
-	            articles = mgr.selectByNom(nomArticle);
-	        } else if (categorie != 0) {
-	            // Filtre par catégorie
-	            articles = mgr.selectByCategorie(categorie);
-	       // } else {
-	            // Aucun filtre, affiche tous les articles par ordre ID descendant
-	          //  articles = mgr.selectAllOrderedByIdDesc();
-	        //}
-			
-			
-			
-			//si pas de filtre, default:
-			} else {
-				articles = mgr.selectAll();}
-				for (ArticleVendu a : articles) {
-					int id = a.getNo_utilisateur();
-					u2 = umgr.selectByID(id);
-					request.setAttribute("u2", u2);
-				}
-			
-			
-			request.setAttribute("articles", articles);
+		
 
-		} catch (DALException | BLLException e) {
-			e.printStackTrace();
-		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		rd.forward(request, response);
 	}
@@ -149,8 +177,31 @@ public class AfficherEnchereServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		doGet(request, response);
+	}
+
+	private ArticleVendu mapping(ResultSet rs) throws SQLException {
+		ArticleVendu a = null;
+		int noArt = rs.getInt("no_article");
+		String nom = rs.getString("nom_article");
+		String description = rs.getString("description");
+		LocalDate dateDebut = rs.getDate("date_debut_encheres").toLocalDate();
+		LocalDate dateFin = rs.getDate("date_fin_encheres").toLocalDate();
+
+		int prixInitial = rs.getInt("prix_initial");
+		int prixVente = rs.getInt("prix_vente");
+		boolean etatVente = rs.getBoolean("etat_vente");
+		int no_utilisateur = rs.getInt("no_utilisateur");
+		int no_categorie = rs.getInt("no_categorie");
+
+		String image = rs.getString("image");
+		int winner = rs.getInt("winner");
+
+		a = new ArticleVendu(noArt, nom, description, dateDebut, dateFin, prixInitial, prixVente, etatVente,
+				no_utilisateur, no_categorie, image, winner);
+
+		return a;
 	}
 
 }

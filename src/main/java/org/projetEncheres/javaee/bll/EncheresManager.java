@@ -75,7 +75,10 @@ public class EncheresManager {
 		Enchere e = selectByIdArt(a.getNoArticle());
 		UtilisateurManager umgr = new UtilisateurManager();
 		ArticleManager amgr = new ArticleManager();
-		
+		if (e == null) {
+			vendeur = umgr.selectByID(a.getNo_utilisateur());
+			return vendeur;
+		}
 		if (a.getDateFinEncheres() == e.getDateEnchere()) {
 			vainqueurEnchere = umgr.selectByID(e.getNo_utilisateur());
 			vendeur = umgr.selectByID(a.getNo_utilisateur());
@@ -86,7 +89,6 @@ public class EncheresManager {
 			a.setWinner(vainqueurEnchere.getNoUtilisateur());
 			amgr.update(a);
 			amgr.updateEtatVente(a.getNoArticle());
-			
 			
 		}
 		return vainqueurEnchere;

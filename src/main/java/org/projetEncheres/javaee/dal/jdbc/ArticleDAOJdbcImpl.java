@@ -199,9 +199,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		int no_categorie = rs.getInt("no_categorie");
 		
 		String image = rs.getString("image");
+		int winner = rs.getInt("winner");
 
 		a = new ArticleVendu(noArt, nom, description, dateDebut, dateFin, prixInitial, prixVente, etatVente, no_utilisateur,
-				no_categorie, image);
+				no_categorie, image, winner);
 
 		return a;
 	}
