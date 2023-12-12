@@ -65,10 +65,21 @@
       <button type="submit" name="rechercher">Rechercher</button>
     </form>
 </div>
-<div>
+<div class="afficherEnchereBloc">
 		  <c:forEach var="articles" items="${articles}">
-			<div><p>${articles.nomArticle}</p>
-			<p><img src="<c:url value='/uploads/${articles.image}' />"></p>
+		  <div class="afficherEnchereSousBloc">
+		  <div class="imgAfficherEnchereBloc">
+		  <c:choose>
+		  <c:when test="${not empty articles.image }">
+			<img class="imgAfficherEnchere" src="<c:url value='/uploads/${articles.image}' />">
+			</c:when>
+			<c:otherwise>
+			<img class="imgAfficherEnchere" src="<c:url value='/ressources/noImage.jpg' />">
+			</c:otherwise>
+			</c:choose>
+			</div>
+			<div class="texteAfficherEnchere">
+			<h3>${articles.nomArticle}</h3>
 			<p>	Prix : ${articles.prixVente}
 			</p>
 				<p>Fin de l'enchère : ${articles.dateFinEncheres} </p>
@@ -87,6 +98,7 @@
 				<%}else { %>
 						<p>Vendeur : ${u2.pseudo}</p>
 				<%} %>
+			</div>
 			</div>		
 		</c:forEach>
 </div>

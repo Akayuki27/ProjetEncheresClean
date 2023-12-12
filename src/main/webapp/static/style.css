@@ -5,9 +5,13 @@
 #2f5a1a vert sombre
 #f96852 orange logo
 #b3311d orange sombre
+#251f12 anthracite police
+#cdc1a7 fond image vide (beige foncé ?)
 */
 
 body{
+	margin: 0px;
+	padding: 0px;	
 	background-color: rgb(240, 235, 213);
 	color: #251f12;
 	font-family: verdana;
@@ -29,4 +33,41 @@ ul {
     list-style-type: none;
     padding: 0; 
     margin: 0;
+}
+
+.afficherEnchereBloc {
+	margin: 0px;
+	padding: 10px;	
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.afficherEnchereSousBloc {
+	border: 1px solid black;
+	width: 420px;
+	height: 200px;
+	background-color: white; 
+	margin: 5px;
+	padding: 10px;
+	display: flex;
+}
+
+.imgAfficherEnchereBloc {
+	width: 200px;
+	height: 200px;
+	background-color: #cdc1a7; 
+}
+
+.imgAfficherEnchere {
+	max-width: 200px;
+	max-height: 200px;
+	margin-right: 5px;
+}
+
+.texteAfficherEnchere{
+	margin-left: 5px;
+	background-color:  white; 
+	
 }
