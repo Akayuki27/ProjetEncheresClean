@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.projetEncheres.javaee.bll.ArticleManager;
 import org.projetEncheres.javaee.bll.BLLException;
@@ -29,6 +30,8 @@ public class AfficherEnchereServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+	    Utilisateur u = (Utilisateur) session.getAttribute("userCo");
 
 		ArticleManager mgr = new ArticleManager();
 		UtilisateurManager umgr = new UtilisateurManager();
@@ -41,12 +44,45 @@ public class AfficherEnchereServlet extends HttpServlet {
         Cookie[] cookies = request.getCookies();
 		//recuperer categorie pour la liste de choix		
 		CategorieManager catrg = new CategorieManager();
-		String EnchereOuvertes = request.getParameter("EnchereOuvertes");
-		String EnchereEnCours = request.getParameter("EnchereEnCours");
-		String EnchereRemportes = request.getParameter("EnchereRemportes");
-		String VenteEnCours = request.getParameter("VenteEnCours");
-		String VenteNonDebutes = request.getParameter("VenteNonDebutes");
-		String VentesTermines = request.getParameter("VentesTermines");
+		String where = "WHERE 1+1 AND ";
+		String[] filter = request.getParameterValues("filter[]");
+		if (request.getParameter("ChoixAchat") != null) {
+			for( String s : filter) {
+				switch(s) {
+				case "EnchereOuvertes" : where += "date_fin_encheres >= GETDATE()";
+				break;
+				case "EnchereEnCours":
+					where += "GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres AND no_article IN(";
+					int compt = 0;
+					for(Cookie c : cookies) {
+						if (c.getValue() == "1") {
+							int id = Integer.parseInt(c.getName());
+							if (compt >= 1) {
+								where += ",";
+							}
+							where += id;
+							compt++;
+						}
+					}
+					where += "GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres AND no_article=?";
+				break;
+				case "EnchereRemportes": where += "no_utilisateur=? and no_article=?";
+				break;
+				}
+			}
+		} else if (request.getParameter("ChoixVente") != null) {
+			where += "no_ulisateur=" + u.getNoUtilisateur();
+			for( String s : filter) {
+				switch(s) {
+				case "VenteEnCours" : where += " AND GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres";
+				break;
+				case "VenteNonDebutes": where += " AND date_debut_encheres > GETDATE()";
+				break;
+				case "VentesTermines": where += " AND etat_vente=1";
+				break;
+				}
+			}
+		}
 		
 			try {
 				cat = catrg.selectAll();

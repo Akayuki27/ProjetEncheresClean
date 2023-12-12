@@ -34,28 +34,28 @@
 
 		<!-- checkbox si radioOption 1 est enclenché -->
         <div class="checkbox-container">
-            <input type="checkbox" id="EnchereOuvertes" name="EnchereOuvertes" value="EnchereOuvertes" checked>
-            <label for="checkbox1a">Enchères ouvertes</label>
+            <input type="checkbox" id="EnchereOuvertes" name="filter[]" value="EnchereOuvertes" checked>
+            <label for="EnchereOuvertes">Enchères ouvertes</label>
 
-            <input type="checkbox" id="EnchereEnCours" name="EnchereEnCours" value="EnchereEnCours">
-            <label for="checkbox1b">Mes enchères en cours</label>
+            <input type="checkbox" id="EnchereEnCours" name="filter[]" value="EnchereEnCours">
+            <label for="EnchereEnCours">Mes enchères en cours</label>
 
-            <input type="checkbox" id="EnchereRemportes" name="EnchereRemportes" value="EnchereRemportes">
-            <label for="checkbox1c">Mes enchères remportées</label>
+            <input type="checkbox" id="EnchereRemportes" name="filter[]" value="EnchereRemportes">
+            <label for="EnchereRemportes">Mes enchères remportées</label>
         </div>
         <input type="radio" id="Ventes" name="ChoixAchatVente" value="Ventes">
-        <label for="radioOption2">Mes ventes</label>
+        <label for="Ventes">Mes ventes</label>
         
         <!-- checkbox si radioOption 2 est enclenché -->
          <div class="checkbox-container">
-            <input type="checkbox" id="VenteEnCours" name="VenteEnCours" value="VenteEnCours">
-            <label for="checkbox2a">Mes ventes en cours</label>
+            <input type="checkbox" id="VenteEnCours" name="filter[]" value="VenteEnCours" disabled>
+            <label for="VenteEnCours">Mes ventes en cours</label>
 
-            <input type="checkbox" id="VenteNonDebutes" name="VenteNonDebutes" value="VenteNonDebutes">
-            <label for="checkbox2b">Vente non débutées</label>
+            <input type="checkbox" id="VenteNonDebutes" name="filter[]" value="VenteNonDebutes" disabled>
+            <label for="VenteNonDebutes">Ventes non débutées</label>
 
-            <input type="checkbox" id="VentesTermines" name="VentesTermines" value="VentesTermines">
-            <label for="checkbox2c">Ventes terminées</label>
+            <input type="checkbox" id="VentesTermines" name="filter[]" value="VentesTermines" disabled>
+            <label for="VentesTermines">Ventes terminées</label>
         </div>
         
     </div>
