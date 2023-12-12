@@ -65,9 +65,9 @@
       <button type="submit" name="rechercher">Rechercher</button>
     </form>
 </div>
-<div class="afficherEnchereBloc">
+<div class="afficherEnchereContainer">
 		  <c:forEach var="articles" items="${articles}">
-		  <div class="afficherEnchereSousBloc">
+		  <div class="afficherEnchereItem">
 		  <div class="imgAfficherEnchereBloc">
 		  <c:choose>
 		  <c:when test="${not empty articles.image}">
