@@ -66,6 +66,7 @@ public class EnchereArticleServlet extends HttpServlet {
 		EncheresManager emgr = new EncheresManager();
 		
 		String cookieName = String.valueOf(idArt);
+		Cookie[] cookies = request.getCookies();
 		if (request.getParameter("enchere") != null) {
 			try {
 				a = amgr.selectByID(idArt);
@@ -75,6 +76,11 @@ public class EnchereArticleServlet extends HttpServlet {
 				a.setPrixVente(enchereNew);
 				amgr.update(a);
 				response.addCookie(new Cookie(cookieName, "1"));
+				for (Cookie c : cookies) {
+					if (c.getValue()== "1") {
+						c.setMaxAge(31*24*60*60);
+					}
+				}
 				
 			} catch (DALException e1) {
 				e1.printStackTrace();
