@@ -38,12 +38,6 @@ public class Utilisateur implements Serializable {
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return super.toString();
-	}
 
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, Boolean administrateur) {
@@ -182,8 +176,24 @@ public class Utilisateur implements Serializable {
 		this.administrateur = administrateur;
 	}
 	
-	
-	
-	
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Utilisateur{")
+          .append("noUtilisateur=").append(noUtilisateur)
+          .append(", pseudo='").append(pseudo).append('\'')
+          .append(", nom='").append(nom).append('\'')
+          .append(", prenom='").append(prenom).append('\'')
+          .append(", email='").append(email).append('\'')
+          .append(", telephone='").append(telephone).append('\'')
+          .append(", rue='").append(rue).append('\'')
+          .append(", codePostal='").append(codePostal).append('\'')
+          .append(", ville='").append(ville).append('\'')
+          .append(", motDePasse='").append(motDePasse).append('\'')
+          .append(", credit=").append(credit)
+          .append(", administrateur=").append(administrateur)
+          .append('}');
+        return sb.toString();
+    }
 	
 }

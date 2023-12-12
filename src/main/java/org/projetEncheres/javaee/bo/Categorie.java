@@ -39,5 +39,15 @@ public class Categorie implements Serializable{
 		this.libelle = libelle;
 	}
 	
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Categorie{")
+          .append("noCategorie=").append(noCategorie)
+          .append(", libelle='").append(libelle).append('\'')
+          .append('}');
+        return sb.toString();
+    }
+	
 	
 }

@@ -72,7 +72,17 @@ public class Retrait implements Serializable {
 		this.no_article = no_article;
 	}
 	
-	
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Retrait{")
+          .append("rue='").append(rue).append('\'')
+          .append(", codePostal='").append(codePostal).append('\'')
+          .append(", ville='").append(ville).append('\'')
+          .append(", no_article=").append(no_article)
+          .append('}');
+        return sb.toString();
+    }
 	
 	
 }

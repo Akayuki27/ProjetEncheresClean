@@ -213,5 +213,25 @@ public class ArticleVendu implements Serializable {
 		this.winner = winner;
 	}
 	
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("ArticleVendu{")
+          .append("noArticle=").append(noArticle)
+          .append(", nomArticle='").append(nomArticle).append('\'')
+          .append(", description='").append(description).append('\'')
+          .append(", dateDebutEncheres=").append(dateDebutEncheres)
+          .append(", dateFinEncheres=").append(dateFinEncheres)
+          .append(", miseAPrix=").append(miseAPrix)
+          .append(", prixVente=").append(prixVente)
+          .append(", etatVente=").append(etatVente)
+          .append(", no_utilisateur=").append(no_utilisateur)
+          .append(", no_categorie=").append(no_categorie)
+          .append(", image='").append(image).append('\'')
+          .append(", winner=").append(winner)
+          .append('}');
+        return sb.toString();
+    }
+	
 	
 }

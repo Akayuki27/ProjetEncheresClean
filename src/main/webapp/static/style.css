@@ -39,9 +39,9 @@ ul {
 	margin: 0px;
 	padding: 10px;	
 	display: flex;
-	flex-direction: row;
+	flex-direction: row-reverse;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: center;
 }
 
 .afficherEnchereSousBloc {
@@ -52,6 +52,7 @@ ul {
 	margin: 5px;
 	padding: 10px;
 	display: flex;
+
 }
 
 .imgAfficherEnchereBloc {

@@ -61,5 +61,17 @@ public class Enchere implements Serializable {
 		this.no_utilisateur = no_utilisateur;
 	}
 	
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Enchere{")
+          .append("dateEnchere=").append(dateEnchere)
+          .append(", montantEnchere=").append(montantEnchere)
+          .append(", no_utilisateur=").append(no_utilisateur)
+          .append(", no_article=").append(no_article)
+          .append('}');
+        return sb.toString();
+    }
+	
 	
 }
