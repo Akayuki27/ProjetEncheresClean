@@ -1,6 +1,7 @@
 package org.projetEncheres.javaee.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
@@ -66,14 +67,15 @@ public class EnchereArticleServlet extends HttpServlet {
 		int idArt = Integer.parseInt(request.getParameter("idArt"));
 		ArticleManager amgr = new ArticleManager();
 		EncheresManager emgr = new EncheresManager();
-		
 		String cookieName = String.valueOf(idArt);
 		Cookie[] cookies = request.getCookies();
+		PrintWriter out = response.getWriter();
 		if (request.getParameter("enchere") != null) {
 			try {
 				a = amgr.selectByID(idArt);
 				int enchereNew = Integer.parseInt(request.getParameter("enchere"));
 				e = new Enchere(u.getNoUtilisateur(), a.getNoArticle(), LocalDate.now(),enchereNew);
+				if(emgr.enchereValide(e)) {
 				emgr.insertEnchere(e, a, u);
 				a.setPrixVente(enchereNew);
 				amgr.update(a);
@@ -83,6 +85,11 @@ public class EnchereArticleServlet extends HttpServlet {
 						c.setMaxAge(31*24*60*60);
 					}
 				}
+				RequestDispatcher rd = request.getRequestDispatcher("accueilServlet");
+				rd.forward(request, response);
+				} else {
+					out.println("<b><font color='red'>Le montant de l'enchère ne peut pas être inférieur au prix de l'article</font></b>");
+				}
 				
 			} catch (DALException e1) {
 				e1.printStackTrace();
@@ -91,8 +98,7 @@ public class EnchereArticleServlet extends HttpServlet {
 			}
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("accueilServlet");
-		rd.forward(request, response);
+		
 		
 	}
 	

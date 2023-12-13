@@ -14,7 +14,9 @@
 <jsp:param value="" name="header"/>
 </jsp:include>
     <h1>Article : ${a.nomArticle}</h1>
-	
+	<c:if test="${enchereInvalide}">
+    	<b><font color='red'>Le montant de l'enchère ne doit pas être inférieur au prix de l'article</font></b>
+    </c:if>
     <div>
         
          <div class="imgAfficherEnchereBloc">
