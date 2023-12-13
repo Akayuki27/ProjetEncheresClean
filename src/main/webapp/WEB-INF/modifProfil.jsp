@@ -14,6 +14,7 @@
 <jsp:param value="" name="header"/>
 </jsp:include>
     <p>Modification de mon profil</p>
+    
 <div>
     <form id="inscriptionForm" action="modifProfilServlet" method="post"><!-- insérer servlet -->
     	<input type="hidden" id="id" name="id" value="${u.noUtilisateur}">
@@ -41,7 +42,7 @@
         <label for="ville">Ville:</label>
         <input type="text" id="ville" name="ville" value="${u.ville}"required>
 
-        <p>mot de passe actuel : ${u.motDePasse}</p>
+        <p>Mot de passe actuel : ${u.motDePasse}</p>
         <!-- insérer mdp actuel -->
     
         <label for="motDePasse">Nouveau mot de passe:</label>

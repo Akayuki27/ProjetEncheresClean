@@ -39,8 +39,10 @@
     	<input type="file" name="fileInput" id="fileInput" value="${a.image}">
     	<br>
 		
-		<label for="prix">Prix initial :</label>
-    	<input type="number" id="prixInitial" name="prixInitial" value="100" min="0" step="1" pattern="\d+" value="${a.miseAPrix}"required>
+		<label for="prix">Prix initial (supérieur à 0) :</label>
+    	<input type="number" id="prixInitial" name="prixInitial" value="100" min="1" step="1" pattern="\d+" value="${a.miseAPrix}"required>
+    
+    	<p>La date de début des enchère doit être inférieure à celle de fin des enchères</p>
     
         <label for="dateDebut">Début des enchères :</label>
         <input type="date" id="dateDebut" name="dateDebut" value="${Date.valueOf(a.dateDebutEncheres)}" required>

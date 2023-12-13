@@ -1,6 +1,7 @@
 package org.projetEncheres.javaee.servlets;
 
 import java.io.IOException;
+import java.lang.reflect.Parameter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.projetEncheres.javaee.bll.UtilisateurManager;
 import org.projetEncheres.javaee.bo.Utilisateur;
@@ -43,7 +45,11 @@ public class modifProfilServlet extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-
+		String erreurModifProfil = null;
+		HttpSession session = request.getSession();
+		
+		
+		
 		if (request.getParameter("motDePasse") != null) {
 			String motdePasse = request.getParameter("motDePasse");
 			String confirmation = request.getParameter("confirmation");
@@ -65,11 +71,18 @@ public class modifProfilServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-		}
-		HttpSession session = request.getSession();
-		session.setAttribute("userCo", u);
+			
+			
+			session.setAttribute("userCo", u);
 
-		response.sendRedirect("afficherProfilServlet");
+			response.sendRedirect("afficherProfilServlet");
+			
+		} else {
+			erreurModifProfil = "<b><font color='red'>La modification du profil à échouer, veuillez saisir des informations valides</font></b>";
+			session .setAttribute("erreurModifProfil", erreurModifProfil);
+			response.sendRedirect("modifProfilServlet");
+		}
+
 
 	}
 

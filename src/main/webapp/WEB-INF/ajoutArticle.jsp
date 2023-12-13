@@ -31,8 +31,10 @@
     	<input type="file" name="fileInput" id="fileInput">
     	<br>
 		
-		<label for="prix">Prix initial :</label>
-    	<input type="number" id="prixInitial" name="prixInitial" value="100" min="0" step="1" pattern="\d+" required>
+		<label for="prix">Prix initial (supérieur à 0) :</label>
+    	<input type="number" id="prixInitial" name="prixInitial" value="100" min="1" step="1" pattern="\d+" required>
+    	
+    	<p>La Date de début des enchères doit être inférieur a celle de fin</p>S
     
         <label for="dateDebut">Début des enchères :</label>
         <input type="date" id="dateDebut" name="dateDebut" required>
