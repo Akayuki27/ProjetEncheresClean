@@ -19,6 +19,9 @@
     </jsp:include>
     <h1>Liste des enchères</h1>
 
+	<c:if test="${not empty erreurSuppression && erreurSuppression != null}">
+		${erreurSuppression}
+	</c:if>
 
     <div class="divEnchereFormContainer">
         <form id="enchereForm" action="AfficherEnchereServlet" method="get">

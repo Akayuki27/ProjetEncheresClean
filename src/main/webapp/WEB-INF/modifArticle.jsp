@@ -66,6 +66,11 @@
         <button type="button" onclick="location.href='accueil.jsp'">Annuler</button>
         
       </form>
+      
+      <form id="boutonAnnulerVente" action="AnnulerVente" method="post">
+      <input type="hidden" name="noArticle" value="${a.noArticle}">
+      <button type="submit" >Annuler la vente</button>
+      </form>
 
 </div>
 
