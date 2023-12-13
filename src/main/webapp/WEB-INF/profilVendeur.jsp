@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Profil du Vendeur</title>
 <link rel="stylesheet" href="/ProjetEncheresClean/static/style.css"> 
 </head>
 <body>
@@ -26,6 +26,12 @@
         <p>Téléphone: ${u2.telephone}</p><!-- pas ouf d'avoir le tel ??? : n'apparait que si c'est mon profil ?-->
         
     </div>
+    <c:if test="${userCo.administrateur = true}">
+    <form action="afficherVendeurServlet" method="post">
+    <input type="hidden" name="supprimerUtilisateur" value="${u2.noUtilisateur}">
+    <button type="submit" >Supprimer utilisateur</button>
+    </form>
+    </c:if>
 
     
 </body>

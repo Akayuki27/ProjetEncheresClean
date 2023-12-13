@@ -93,5 +93,13 @@ public class ArticleManager {
 	public void updateEtatVente(int idArt) throws DALException {
 		this.article.updateEtatVente(idArt);
 	}
+	
+	public List<ArticleVendu> selectByIdUtilisateur(int id) throws DALException, BLLException {
+		try {
+		return this.article.selectByIdUtilisateur(id);
+		} catch (DALException e) {
+			throw new BLLException("La sélection par id utilisateur a échoué");
+		}
+	}
 
 }

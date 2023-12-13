@@ -129,7 +129,8 @@ public class ajoutArticleServlet extends HttpServlet {
 	        e.printStackTrace();
 	    }
 
-	    response.sendRedirect("accueilServlet");
+	    //response.sendRedirect("accueilServlet");
+	    request.getRequestDispatcher("accueilServlet").forward(request, response);
 	}
 	
 

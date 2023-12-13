@@ -133,9 +133,9 @@
                                 <p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Détail</a>
                             </c:otherwise>
                         </c:choose>
-                        <p><a href="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${u2.pseudo}</a></p>
+                        <p><a href="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${articles.u2.pseudo}</a></p>
                         <%}else { %>
-                            <p>Vendeur : ${u2.pseudo}</p>
+                            <p>Vendeur : ${articles.u2.pseudo}</p>
                             <%} %>
                 </div>
             </div>

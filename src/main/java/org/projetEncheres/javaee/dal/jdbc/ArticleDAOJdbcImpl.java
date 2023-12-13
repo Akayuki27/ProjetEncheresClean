@@ -30,6 +30,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private final static String SELECTBYNOM_ARTICLEETCATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ? AND no_categorie =?";
 	private static String SELECTBYCRITERIA = "SELECT * FROM ARTICLES_VENDUS WHERE 1=1";
 	private static final String UPDATEVENTE = "UPDATE ARTICLES_VENDUS SET etat_vente = 1 WHERE no_article=?";
+	private final static String SELECTBYID_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur=?";
 
 	public ArticleDAOJdbcImpl() {
 
@@ -265,6 +266,24 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		e1.printStackTrace();
 		throw new DALException("La mise à jour de l'état de la vente a échoué");
 	}
+	}
+
+	@Override
+	public List<ArticleVendu> selectByIdUtilisateur(int id) throws DALException {
+		List<ArticleVendu> articles = new ArrayList<>();
+		try (Connection con = ConnectionProvider.getConnection(); PreparedStatement rqt = con.prepareStatement(SELECTBYID_UTILISATEUR);) {
+			rqt.setInt(1, id);
+			ResultSet rs = rqt.executeQuery();
+			while (rs.next()) {
+				ArticleVendu a = mapping(rs);
+				articles.add(a);
+			}
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException("La selection des articles par utilisateur a échouée");
+		}
+		return articles;
 	}
 	
 	

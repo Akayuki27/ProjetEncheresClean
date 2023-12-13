@@ -152,6 +152,7 @@ public class AfficherEnchereServlet extends HttpServlet {
 			 int id = a.getNo_utilisateur(); 
 			 try {
 				u2 = umgr.selectByID(id);
+				a.setU2(u2);
 				request.setAttribute("u2", u2);
 				emgr.vainqueurEnchere(a);
 			} catch (DALException e) {

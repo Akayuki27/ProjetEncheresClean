@@ -17,11 +17,14 @@ public class ArticleVendu implements Serializable {
 	private int prixVente;			
 	private boolean etatVente;
 	private int no_utilisateur;
+	private Utilisateur u2;
 	private int no_categorie;
 	private String image;
 	private int winner;
 	
-	public ArticleVendu () {}
+	public ArticleVendu () {
+		
+	}
 	
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, int no_utilisateur, int no_categorie, String image ) {
@@ -39,6 +42,8 @@ public class ArticleVendu implements Serializable {
 		this.image = image;
 		
 	}
+	
+	
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente, int no_utilisateur, int no_categorie) {
@@ -115,6 +120,24 @@ public class ArticleVendu implements Serializable {
 		this.prixVente = prixVente;
 		this.no_utilisateur = no_utilisateur;
 		this.no_categorie = no_categorie;
+	}
+	
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente, int no_utilisateur, int no_categorie, String image, int winner, Utilisateur u2) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+		this.no_utilisateur = no_utilisateur;
+		this.no_categorie = no_categorie;
+		this.image = image;
+		this.winner = winner;
+		this.u2 = u2;
 	}
 
 	public int getNoArticle() {
@@ -232,6 +255,16 @@ public class ArticleVendu implements Serializable {
           .append('}');
         return sb.toString();
     }
+
+	public Utilisateur getU2() {
+		return u2;
+	}
+
+	public void setU2(Utilisateur u2) {
+		this.u2 = u2;
+	}
+
+	
 	
 	
 }

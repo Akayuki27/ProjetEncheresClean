@@ -48,6 +48,7 @@ public class accueilServlet extends HttpServlet {
 				for (ArticleVendu a : articles) {
 					int id = a.getNo_utilisateur();
 					u2 = umgr.selectByID(id);
+					a.setU2(u2);
 					request.setAttribute("u2", u2);
 				}
 				request.setAttribute("categories", cat);

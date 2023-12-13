@@ -14,5 +14,6 @@ public interface ArticleDAO extends DAO<ArticleVendu>{
 	List<ArticleVendu> selectByNometCategorie(String nom, int id) throws DALException;
 	List<ArticleVendu> selectByCriteria (String c1, String c2, String c3, String c4,String c5) throws DALException;
 	void updateEtatVente(int id) throws DALException;
+	List<ArticleVendu> selectByIdUtilisateur(int id) throws DALException;
 	
 }
