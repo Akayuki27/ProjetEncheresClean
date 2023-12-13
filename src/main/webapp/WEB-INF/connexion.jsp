@@ -13,7 +13,7 @@
 <jsp:param value="" name="header"/>
 </jsp:include>
     <h1>Connexion</h1>
-<div>
+<div class="FormContainer">
   <form id="connexionForm" action="connexionServlet" method="post"><!-- insérer servlet -->
     <label for="identifiant">Identifiant:</label>
     <input type="text" id="identifiant" name="identifiant" value="${cookie.seSouvenirDeMoi.value}" required>

@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Nouvel Article</title>
 <link rel="stylesheet" href="/ProjetEncheresClean/static/style.css">
 </head>
 <body>
 <h1>Nouvel Article</h1>
-<div>
+<div class="FormContainer">
 
     <form id="articleForm" action="ajoutArticleServlet" method="post" enctype="multipart/form-data"> 
     	
@@ -51,10 +51,10 @@
     	<label for="ville">Ville :</label>
     	<input type="text" id="ville" name="ville" value="${u.ville}">
         
-    
+    <div class="bouttonContainer">
         <button type="submit">Créer</button>
         <button class="bouttonAnnuler" type="button" onclick="location.href='accueilServlet'">Annuler</button>
-        
+    </div>    
       </form>
 
 </div>
