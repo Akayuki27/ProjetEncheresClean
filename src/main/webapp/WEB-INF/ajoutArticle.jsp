@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="/ProjetEncheresClean/static/style.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/Header.jsp">
+        <jsp:param value="" name="Accueil" />
+</jsp:include>
 <h1>Nouvel Article</h1>
 <div class="FormContainer">
 
@@ -34,7 +37,7 @@
 		<label for="prix">Prix initial (supérieur à 0) :</label>
     	<input type="number" id="prixInitial" name="prixInitial" value="100" min="1" step="1" pattern="\d+" required>
     	
-    	<p>La Date de début des enchères doit être inférieur a celle de fin</p>S
+    	<p id="dateEnchere">La Date de début des enchères doit être inférieur a celle de fin</p>
     
         <label for="dateDebut">Début des enchères :</label>
         <input type="date" id="dateDebut" name="dateDebut" required>

@@ -48,12 +48,18 @@ h1 {
 	margin-bottom: 1.4em;
 }
 
+h2 {
+	font-size: 1.2em;
+	text-align: center;
+}
+
 a {
-	color: #f96852; 
+	color: #ee7214;
+
 }
 
 a:hover {
-	color: #b3311d;
+	color: #994f16;
 }
 
 ul {
@@ -75,9 +81,9 @@ button {
 	padding-bottom : 0.4em;
 	padding-left: 0.6em;
 	padding-right: 0.6em;
-	max-width: 100px;
+	max-width: 160px;
 	margin : 5px;
-	font-size: 1em;
+	font-size: 1.2em;
 }
 
 button:hover {
@@ -85,27 +91,46 @@ button:hover {
 }
 
 input {
-	background-color: #fff;	
+	background-color: #ebe4d5;	
 	color: #251f12;
-	border: 2px solid #251f12;
+	border: 2px solid #404336;
 	border-radius: 5px;
+	margin: 0.4em;
 	
 }
 
 input:focus {
-	outline: 2px solid #f96852;
+	outline: 2px solid #ee7214;
 }
 
 select {
-	background-color: #fff;	
+	background-color: #ebe4d5;	
 	color: #251f12;
-	border: 2px solid #251f12;
+	border: 2px solid #404336;
 	border-radius: 5px;
+	margin: 0.4em;
+	min-height: 1.8em;
+}
+
+select:focus {
+	outline: 2px solid #ee7214;
+}
+
+select option:hover {
+    background-color: #dacdba;
 }
 
 form {
 	display: flex;
 	flex-direction : column;	
+}
+
+input[type="checkbox"]:checked, input[type="radio"]:checked{
+	outline: none;
+}
+
+input[type="checkbox"]:focus, input[type="radio"]:focus{
+	outline: none;
 }
 
 .bouttonContainer {
@@ -127,11 +152,11 @@ form {
 
 
 .bouttonAnnuler {
-	background-color: #f96852;
+	background-color: #ee7214;
 }
 
 .bouttonAnnuler:hover {
-	background-color: #b3311d;
+	background-color: #994f16;
 }
 
 
@@ -159,7 +184,7 @@ form {
 .afficherEnchereItem {
 	border: none;
 	border-radius: 5px;
-	width: 420px;
+	width: 360px;
 	height: 200px;
 	background-color: #dacdba; 
 	margin: 5px;
@@ -171,26 +196,22 @@ form {
 .imgAfficherEnchereBloc {
 	width: 200px;
 	height: 200px;
-	background-color: #cdc1a7; 
+	background-color: #d0b998; 
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
 }
 
 .imgAfficherEnchere {
 	max-width: 200px;
 	max-height: 200px;
 	margin-right: 5px;
+	border-radius: 5px;
 }
 
 .texteAfficherEnchere{
 	margin-left: 10px;
 	
-}
-
-.ulItem li {
-	margin:5px;
-}
-
-.headerContainer img {
-	max-width: 20vw;
 }
 
 .FormContainer {
@@ -202,6 +223,57 @@ form {
 	display: flex;
 	flex-direction : row;
 	justify-content: center;
+	margin-bottom: 10px;
+}
+
+.radio-option{
+	display: flex;
+	flex-direction: row;
+}
+
+.filtreContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.filtreRadio {
+	display: flex;
+	flex-direction: row;
+}
+
+.ulItem li {
+	margin:5px;
+}
+
+.headerContainer img {
+	max-width: 20vw;
+	min-width: 160px;
+}
+
+
+#connexionForm {
+	padding: 20px;
+	background-color: #dacdba;
+	border-radius: 5px;
+}
+
+#connexionLink {
+	padding: 10px;
+	text-align: center;
+	display: flex;
+	flex-direction : column;
+}
+
+#articleForm {
+	padding: 20px;
+	background-color: #dacdba;
+	border-radius: 5px;
+}
+
+#dateEnchere {
+	font-size: 0.6em;
+	margin: 0.4em;
+	color: #ee7214;
 }
 
 #enchereForm {
@@ -209,7 +281,6 @@ form {
 	flex-direction : row;
 	justify-content: space-between;
 	width: 94%;
-
 }
 
 #inputEnchere {
@@ -224,35 +295,133 @@ form {
 	margin-bottom: 10px;
 }
 
-#inputNomEnchere {
-	
+#connexionLink a{
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
-#inputCategorieEnchere {
-	
+#articleForm h2 {
+	margin-top: 20px;
 }
 
-#inputFiltreEnchere {
-	
-}
 
-.radio-option{
+
+@media screen and (max-width: 1000px) {
+	
+	body {
+        font-size: 14px;
+    }
+    
+    nav {
+    font-size: 1.2em;
+    }
+    
+	.header {	
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+	}
+
+	.headerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+	}
+
+	.ulItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+	}
+	
+	.checkbox-container {
+	flex-direction : column;
+	justify-content: center;
+	}
+	
+	.hidden-text {
+    display: none;
+    }
+	
+	.inputChercher {
 	display: flex;
 	flex-direction: row;
-}
-
-
-#inputChercher {
-	background-color: yellow;
-}
-
-.filtreContainer {
+	justify-content: center;
+	}
+	
+	.radio-option {
 	display: flex;
-	flex-direction: column;
-}
-
-.filtreRadio {
+	flex-direction : row;
+	justify-content: center;
+	}
+	
+	.filtreContainer {
 	display: flex;
-	flex-direction: row;
+	flex-direction : column;
+	justify-content: center;
+	margin-right: 10px;
+	margin-left: 10px;
+	}
+	
+	.checkbox-Container {
+	display: flex;
+	flex-direction : row;
+	justify-content: center;
+	}
+	
+	.filtreRadio {
+	display: flex;
+	flex-direction : row;
+	justify-content: center;
+	align-items: center;
+	}
+	
+	.checkbox-container input, label{
+	margin: 0px;
+	}
+	
+	
+	#inputEnchere {
+	display: flex;
+	flex-direction : column;
+	justify-content: center;
+	}
+	
+	#enchereForm {
+	display: flex;
+	flex-direction : column;
+	justify-content: center;
+	}
+	
+	#inputEnchereBase {
+	display: flex;
+	flex-direction : row;
+	justify-content: space-around;
+	text-align: center;
+	margin-top: 0px;
+    margin-bottom: 0px;
+	}
+	
+	#inputNomEnchere {
+	display: flex;
+	flex-direction : column;
+	justify-content: center;
+	}
+	
+	#inputCategorieEnchere {
+	display: flex;
+	flex-direction : column;
+	justify-content: center;
+	}
+    
+    #dateEnchere {
+    font-size: 0.8em;
+    }
+
 }
 
+@media screen and (max-width: 500px) {
+	.filtreContainer label {
+	font-size: 0.8em;
+	}
+}

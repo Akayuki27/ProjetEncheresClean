@@ -27,13 +27,13 @@
     <label>
       <input type="checkbox" name="seSouvenirDeMoi"> Se souvenir de moi
     </label>
-
-    <button type="submit">Se connecter</button>
-    <br/>
+	<div class="bouttonContainer">
+	    <button type="submit">Se connecter</button>
+	</div>
+	<div id="connexionLink">
     <a href="inscriptionServlet">S'inscrire</a>
-
-    <p><a href="modifierProfilServlet">Mot de passe oublié</a></p><!-- insérer un truc -->
-    <!-- insérer boutton créer un compte -->
+    <a href="modifierProfilServlet">Mot de passe oublié</a><!-- insérer un truc -->
+    </div>
   </form>
 </div>
 </body>

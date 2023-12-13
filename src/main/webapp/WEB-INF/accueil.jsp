@@ -28,7 +28,7 @@
             <div id="inputEnchere">
                 <div id="inputEnchereBase">
                     <div id="inputNomEnchere">
-                        <label for="nomArticle">Le nom de l'article contient:</label>
+                        <label for="nomArticle">Nom<span class="hidden-text"> de l'article</span> :</label>
                         <input type="text" id="nomArticle" name="nomArticle">
                     </div>
 
@@ -53,15 +53,19 @@
 	
 	                            <!-- checkbox si radioOption 1 est enclenché -->
 	                            <div class="checkbox-container">
-	                                <input type="checkbox" id="EnchereOuvertes" name="filter[]" value="EnchereOuvertes"
-	                                    checked>
-	                                <label for="EnchereOuvertes">Enchères ouvertes</label>
-	
-	                                <input type="checkbox" id="EnchereEnCours" name="filter[]" value="EnchereEnCours">
-	                                <label for="EnchereEnCours">Mes enchères en cours</label>
-	
-	                                <input type="checkbox" id="EnchereRemportes" name="filter[]" value="EnchereRemportes">
-	                                <label for="EnchereRemportes">Mes enchères remportées</label>
+		                            <div class="checkbox-Item">
+		                                <input type="checkbox" id="EnchereOuvertes" name="filter[]" value="EnchereOuvertes"
+		                                    checked>
+		                                <label for="EnchereOuvertes">Enchères ouvertes</label>
+									</div>
+									<div class="checkbox-Item">
+		                                <input type="checkbox" id="EnchereEnCours" name="filter[]" value="EnchereEnCours">
+		                                <label for="EnchereEnCours">Mes enchères en cours</label>
+									</div>
+									<div class="checkbox-Item">
+		                                <input type="checkbox" id="EnchereRemportes" name="filter[]" value="EnchereRemportes">
+		                                <label for="EnchereRemportes">Mes enchères remportées</label>
+		                            </div>
 	                            </div>
 	                          </div>  
                             
@@ -73,16 +77,20 @@
 							
 	                            <!-- checkbox si radioOption 2 est enclenché -->
 	                            <div class="checkbox-container">
-	                                <input type="checkbox" id="VenteEnCours" name="filter[]" value="VenteEnCours" disabled>
-	                                <label for="VenteEnCours">Mes ventes en cours</label>
-	
-	                                <input type="checkbox" id="VenteNonDebutes" name="filter[]" value="VenteNonDebutes"
+	                            	<div class="checkbox-Item">
+	                                	<input type="checkbox" id="VenteEnCours" name="filter[]" value="VenteEnCours" disabled>
+	                                	<label for="VenteEnCours">Mes ventes en cours</label>
+	                                </div>
+									<div class="checkbox-Item">
+	                                	<input type="checkbox" id="VenteNonDebutes" name="filter[]" value="VenteNonDebutes"
 	                                    disabled>
-	                                <label for="VenteNonDebutes">Ventes non débutées</label>
-	
-	                                <input type="checkbox" id="VentesTermines" name="filter[]" value="VentesTermines"
+	                                	<label for="VenteNonDebutes">Ventes non débutées</label>
+	                                </div>
+									<div class="checkbox-Item">
+	                               		<input type="checkbox" id="VentesTermines" name="filter[]" value="VentesTermines"
 	                                    disabled>
-	                                <label for="VentesTermines">Ventes terminées</label>
+	                                	<label for="VentesTermines">Ventes terminées</label>
+	                                </div>
 	                            </div>
                             </div>
 
