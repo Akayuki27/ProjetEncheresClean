@@ -12,20 +12,20 @@
 <jsp:include page="/WEB-INF/Header.jsp">
 <jsp:param value="" name="header"/>
 </jsp:include>
-    <h1><${requestScope.u.pseudo }</h1>
+    <h1>${u.pseudo }</h1>
 	
     <div>
         <p>Nom : ${u.nom}</p>
-        <!-- insérer nom -->
+
         <p>Prénom : ${u.prenom}</p>
-        <!-- insérer prénom -->
+
         <p>Email : ${u.email}</p>
-        <!-- insérer mail -->
-        <p>Téléphone: ${u.telephone}</p><!-- pas ouf d'avoir le tel ??? : n'apparait que si c'est mon profil ?-->
-        <!-- insérer tel -->
-        <p>Rue : ${u.rue}</p><!-- pas ouf d'avoir l'adresse en publique : n'apparait que si c'est mon profil ?-->
-        <!-- insérer rue -->
-        <p>Code Postal : ${u.codePostal}</p><!-- pas ouf d'avoir l'adresse en publique : n'apparait que si c'est mon profil ?-->
+
+        <p>Téléphone: ${u.telephone}</p>
+
+        <p>Rue : ${u.rue}</p>
+
+        <p>Code Postal : ${u.codePostal}</p>
         <!-- insérer CP -->
         <p>Ville : ${u.ville}</p><!-- pas ouf d'avoir l'adresse en publique : n'apparait que si c'est mon profil ?-->
         <!-- insérer ville -->
