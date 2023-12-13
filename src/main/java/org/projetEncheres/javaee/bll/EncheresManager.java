@@ -110,6 +110,8 @@ public class EncheresManager {
 			}
 		} catch (DALException e1) {
 			e1.printStackTrace();
+		} catch (BLLException e1) {
+			e1.printStackTrace();
 		}
 		return enchereOK;
 	}

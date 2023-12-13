@@ -48,6 +48,8 @@ public class EnchereArticleServlet extends HttpServlet {
 			request.setAttribute("c", c);
 		} catch (DALException e1) {
 			e1.printStackTrace();
+		} catch (BLLException e) {
+			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/enchereArticle.jsp");
 		rd.forward(request, response);

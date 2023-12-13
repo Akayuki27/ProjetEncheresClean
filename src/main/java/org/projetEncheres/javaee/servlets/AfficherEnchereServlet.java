@@ -64,10 +64,7 @@ public class AfficherEnchereServlet extends HttpServlet {
 			cat = catrg.selectAll();
 			request.setAttribute("categories", cat);
 			// encheres auxquelles l'uitlisateur a participé
-			/*
-			 * for(Cookie c : cookies) { article =
-			 * mgr.selectByID(Integer.parseInt(c.getName())); articles.add(article); }
-			 */
+			
 		} catch (DALException e) {
 			e.printStackTrace();
 		} catch (BLLException e) {
