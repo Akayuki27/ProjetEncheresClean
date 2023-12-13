@@ -42,36 +42,45 @@
                 <div id="inputFiltreEnchere">
                     <%if (session.getAttribute ("userCo") !=null) { %>
                         <div class="radio-option">
-                            <input type="radio" id="Achat" name="ChoixAchatVentes" value="Achat" checked>
-                            <label for="radioOption1">Achats</label>
-
-                            <!-- checkbox si radioOption 1 est enclenché -->
-                            <div class="checkbox-container">
-                                <input type="checkbox" id="EnchereOuvertes" name="filter[]" value="EnchereOuvertes"
-                                    checked>
-                                <label for="EnchereOuvertes">Enchères ouvertes</label>
-
-                                <input type="checkbox" id="EnchereEnCours" name="filter[]" value="EnchereEnCours">
-                                <label for="EnchereEnCours">Mes enchères en cours</label>
-
-                                <input type="checkbox" id="EnchereRemportes" name="filter[]" value="EnchereRemportes">
-                                <label for="EnchereRemportes">Mes enchères remportées</label>
-                            </div>
-                            <input type="radio" id="Ventes" name="ChoixAchatVentes" value="Ventes">
-                            <label for="Ventes">Mes ventes</label>
-
-                            <!-- checkbox si radioOption 2 est enclenché -->
-                            <div class="checkbox-container">
-                                <input type="checkbox" id="VenteEnCours" name="filter[]" value="VenteEnCours" disabled>
-                                <label for="VenteEnCours">Mes ventes en cours</label>
-
-                                <input type="checkbox" id="VenteNonDebutes" name="filter[]" value="VenteNonDebutes"
-                                    disabled>
-                                <label for="VenteNonDebutes">Ventes non débutées</label>
-
-                                <input type="checkbox" id="VentesTermines" name="filter[]" value="VentesTermines"
-                                    disabled>
-                                <label for="VentesTermines">Ventes terminées</label>
+	                        <div class="filtreContainer">
+	                        	<div class="filtreRadio">
+	                            	<input type="radio" id="Achat" name="ChoixAchatVentes" value="Achat" checked>
+	                            	<label for="radioOption1">Achats</label>
+	                            </div>
+	
+	                            <!-- checkbox si radioOption 1 est enclenché -->
+	                            <div class="checkbox-container">
+	                                <input type="checkbox" id="EnchereOuvertes" name="filter[]" value="EnchereOuvertes"
+	                                    checked>
+	                                <label for="EnchereOuvertes">Enchères ouvertes</label>
+	
+	                                <input type="checkbox" id="EnchereEnCours" name="filter[]" value="EnchereEnCours">
+	                                <label for="EnchereEnCours">Mes enchères en cours</label>
+	
+	                                <input type="checkbox" id="EnchereRemportes" name="filter[]" value="EnchereRemportes">
+	                                <label for="EnchereRemportes">Mes enchères remportées</label>
+	                            </div>
+	                          </div>  
+                            
+                            <div class="filtreContainer">
+	                            <div class="filtreRadio">
+		                            <input type="radio" id="Ventes" name="ChoixAchatVentes" value="Ventes">
+		                            <label for="Ventes">Mes ventes</label>
+	                            </div>
+							
+	                            <!-- checkbox si radioOption 2 est enclenché -->
+	                            <div class="checkbox-container">
+	                                <input type="checkbox" id="VenteEnCours" name="filter[]" value="VenteEnCours" disabled>
+	                                <label for="VenteEnCours">Mes ventes en cours</label>
+	
+	                                <input type="checkbox" id="VenteNonDebutes" name="filter[]" value="VenteNonDebutes"
+	                                    disabled>
+	                                <label for="VenteNonDebutes">Ventes non débutées</label>
+	
+	                                <input type="checkbox" id="VentesTermines" name="filter[]" value="VentesTermines"
+	                                    disabled>
+	                                <label for="VentesTermines">Ventes terminées</label>
+	                            </div>
                             </div>
 
                         </div>
@@ -97,7 +106,7 @@
                             <img class="imgAfficherEnchere" src="<c:url value='/uploads/${articles.image}' />">
                         </c:when>
                         <c:otherwise>
-                            <img class="imgAfficherEnchere" src="<c:url value='/ressources/noImage.jpg' />">
+                            <img class="imgAfficherEnchere" src="<c:url value='/ressources/noImage2.jpg' />">
                         </c:otherwise>
                     </c:choose>
                 </div>

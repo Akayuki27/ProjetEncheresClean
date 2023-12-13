@@ -10,14 +10,27 @@
 rgb(240, 235, 213);
 */
 
+/*
+test nouveau nuancier
+#577843 vert logo
+#424f2f vert sombre
+#ee7214 orange logo
+#994f16 orange sombre
+#404336 anthracite police
+#ebe4d5 beige clair
+#dacdba beige moyen
+#d0b998 beige foncé
+*/
+
+
 *{
 	margin: 0px;
 }
 
 body{
 	margin: auto;	
-	background-color: rgb(240, 235, 213);	
-	color: #251f12;
+	background-color: #ebe4d5;	
+	color: #404336;
 	font-family: verdana;
 	width: 94%;
 }
@@ -28,7 +41,7 @@ nav {
 }
 
 h1 {
-	color: #4c7c48;
+	color: #404336;
 	text-align: center;
 	font-size: 1.6em;
 	margin-top: 0px;
@@ -56,8 +69,8 @@ label {
 button {
 	border-radius: 5px;
 	border: none;
-	background-color: #4c7c48;
-	color: rgb(240, 235, 213);
+	background-color: #577843;
+	color: #ebe4d5;
 	padding-top : 0.4em;
 	padding-bottom : 0.4em;
 	padding-left: 0.6em;
@@ -68,7 +81,7 @@ button {
 }
 
 button:hover {
-	background-color: #2f5a1a;
+	background-color: #424f2f;
 }
 
 input {
@@ -108,7 +121,8 @@ form {
 	justify-content: center;
 	width: 94%;
 	margin: auto;
-	background-color: #f96852;
+	background-color: #dacdba;
+	border-radius: 5px;
 }
 
 
@@ -143,10 +157,11 @@ form {
 }
 
 .afficherEnchereItem {
-	border: 1px solid black;
+	border: none;
+	border-radius: 5px;
 	width: 420px;
 	height: 200px;
-	background-color: white; 
+	background-color: #dacdba; 
 	margin: 5px;
 	padding: 10px;
 	display: flex;
@@ -166,8 +181,7 @@ form {
 }
 
 .texteAfficherEnchere{
-	margin-left: 5px;
-	background-color:  white; 
+	margin-left: 10px;
 	
 }
 
@@ -184,22 +198,30 @@ form {
 	justify-content: center;
 }
 
+.checkbox-container {
+	display: flex;
+	flex-direction : row;
+	justify-content: center;
+}
+
 #enchereForm {
-	background-color: turquoise;
 	display: flex;
 	flex-direction : row;
 	justify-content: space-between;
-	width: 98%;
+	width: 94%;
 
 }
 
 #inputEnchere {
-	
+	display: flex;
+	flex-direction : column;
 }
 
 #inputEnchereBase {
 	display: flex;
 	flex-direction: row;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #inputNomEnchere {
@@ -211,7 +233,7 @@ form {
 }
 
 #inputFiltreEnchere {
-
+	
 }
 
 .radio-option{
@@ -222,5 +244,15 @@ form {
 
 #inputChercher {
 	background-color: yellow;
+}
+
+.filtreContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.filtreRadio {
+	display: flex;
+	flex-direction: row;
 }
 

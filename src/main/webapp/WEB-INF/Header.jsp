@@ -1,7 +1,7 @@
   <!-- Logo renvoyant à l'accueil -->
 
 <div class="headerContainer"> 
-	<a href="accueilServlet"><img src="<%=request.getContextPath() %>/ressources/LOSNA_lowres.png" alt="Logo"></a> <!-- Logo renvoyant à l'accueil -->
+	<a href="accueilServlet"><img src="<%=request.getContextPath() %>/ressources/LOSNA3.png" alt="Logo"></a> <!-- Logo renvoyant à l'accueil -->
     <!-- menu -->
     <nav>           
 	<ul class="ulItem">
