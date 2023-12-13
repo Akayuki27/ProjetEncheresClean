@@ -26,9 +26,8 @@
         <p>Rue : ${u.rue}</p>
 
         <p>Code Postal : ${u.codePostal}</p>
-        <!-- insérer CP -->
-        <p>Ville : ${u.ville}</p><!-- pas ouf d'avoir l'adresse en publique : n'apparait que si c'est mon profil ?-->
-        <!-- insérer ville -->
+
+        <p>Ville : ${u.ville}</p>
     </div>
 
     <!-- le boutton n'apparait que si c'est mon profil -->
