@@ -23,8 +23,10 @@ test nouveau nuancier
 */
 
 
-*{
-	margin: 0px;
+*, ::before, ::after {
+
+	margin: 0;
+	padding: 0;
 }
 
 body{
@@ -148,6 +150,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	margin: auto;
 	background-color: #dacdba;
 	border-radius: 5px;
+	margin-bottom: 10px;
 }
 
 
@@ -174,10 +177,10 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 
 .afficherEnchereContainer {
 	margin: 0px;
-	padding: 10px;	
+	gap: 10px;	
 	display: flex;
-	flex-direction: row-reverse;
-	flex-wrap: wrap-reverse;
+	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: center;
 }
 

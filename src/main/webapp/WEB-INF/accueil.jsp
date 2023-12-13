@@ -108,7 +108,7 @@
     </div>
 
 
-    <div class="afficherEnchereContainer">
+    <div class="afficherEnchereContainer" id="enchereContainer">
         <c:forEach var="articles" items="${articles}">
             <div class="afficherEnchereItem">
                 <div class="imgAfficherEnchereBloc">
@@ -149,6 +149,7 @@
             </div>
         </c:forEach>
     </div>
+	<script src="/ProjetEncheresClean/static/enchereReverse.js"></script>
 </body>
 
 </html>
