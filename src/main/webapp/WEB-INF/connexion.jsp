@@ -13,6 +13,9 @@
 <jsp:param value="" name="header"/>
 </jsp:include>
     <h1>Connexion</h1>
+    <c:if test="${not empty error && error != null}">
+    	${error}
+    </c:if>
 <div class="FormContainer">
   <form id="connexionForm" action="connexionServlet" method="post"><!-- insérer servlet -->
     <label for="identifiant">Identifiant:</label>

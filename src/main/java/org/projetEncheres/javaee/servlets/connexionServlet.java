@@ -1,7 +1,6 @@
 package org.projetEncheres.javaee.servlets;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,10 +50,12 @@ public class connexionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Utilisateur u = null;
 		UtilisateurManager mger = new UtilisateurManager();
-		HttpSession session;
+		HttpSession session =  request.getSession();
 		String identifiant = request.getParameter("identifiant");
 		String password = request.getParameter("motDePasse");
-		Utilisateur uSouvenir = null;
+		//PrintWriter out = response.getWriter();
+		String error = null;
+		
 
 		try {
 			if (identifiant.contains("@")) {
@@ -77,7 +78,6 @@ public class connexionServlet extends HttpServlet {
 		}
 
 		if (u != null) {
-			session = request.getSession();
 			session.setAttribute("userCo", u);
 			Cookie gato;
 			gato = new Cookie("lastLogin", u.getEmail());
@@ -86,6 +86,8 @@ public class connexionServlet extends HttpServlet {
 			response.addCookie(gato);
 			response.sendRedirect("accueilServlet");
 		} else {
+			error = "<b><font color='red'>Le mot de passe ou l'identifiant est incorrect</font></b>";
+			session.setAttribute("error", error);
 			response.sendRedirect("connexionServlet");
 		}
 	}
