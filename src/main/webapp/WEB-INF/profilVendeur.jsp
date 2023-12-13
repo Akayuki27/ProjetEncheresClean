@@ -26,7 +26,7 @@
         <p>Téléphone: ${u2.telephone}</p><!-- pas ouf d'avoir le tel ??? : n'apparait que si c'est mon profil ?-->
         
     </div>
-    <c:if test="${userCo.administrateur = true}">
+    <c:if test="${userCo.administrateur}">
     <form action="afficherVendeurServlet" method="post">
     <input type="hidden" name="supprimerUtilisateur" value="${u2.noUtilisateur}">
     <button type="submit" >Supprimer utilisateur</button>
