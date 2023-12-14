@@ -22,7 +22,7 @@
 	
 	 <c:forEach var="categorie" items="${categories}">
         <p>${categorie.libelle}</p>
-        <a href="modificationCategorieServlet?id=${categorie.noCategorie}">Modifier</a>
+        <a href="modificationCategorieServlet?id=${categorie.noCategorie}&libelle=${categorie.libelle}">Modifier</a>
         <a href="suppressionCategorieServlet?id=${categorie.noCategorie}">Supprimer</a>
     </c:forEach>
 	

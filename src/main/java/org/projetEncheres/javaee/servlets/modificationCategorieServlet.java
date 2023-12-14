@@ -25,10 +25,12 @@ public class modificationCategorieServlet extends HttpServlet {
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-		HttpSession session = null;
+		HttpSession session = request.getSession();
 		int id = Integer.parseInt(request.getParameter("id"));
+		String libelle= request.getParameter("libelle");
+		Categorie c = new Categorie(id, libelle);
 		
-		session.setAttribute("id", id);
+		session.setAttribute("categorie", c);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ModificationArticle.jsp");
 		rd.forward(request, response);
@@ -43,7 +45,7 @@ public class modificationCategorieServlet extends HttpServlet {
 		
 		CategorieManager cmgr = new CategorieManager();
 		String libelle = request.getParameter("nomCategorie");
-		int id =  Integer.parseInt(request.getParameter("id")) ;
+		int id =  Integer.parseInt(request.getParameter("id"));
 		Categorie c = new Categorie(id, libelle);
 		
 		try {
@@ -56,7 +58,7 @@ public class modificationCategorieServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	
-		RequestDispatcher rd = request.getRequestDispatcher("GestionCategorieAdmin");
+		RequestDispatcher rd = request.getRequestDispatcher("accueilServlet");
 		rd.forward(request, response);
 	}
 

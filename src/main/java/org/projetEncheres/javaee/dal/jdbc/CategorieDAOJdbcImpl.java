@@ -18,7 +18,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	private static final String INSERT = "INSERT INTO CATEGORIES VALUES(?)";
 	private static final String SELECT_BY_LIBELLE = "SELECT * FROM CATEGORIES WHERE libelle=?";
 	private static final String SELECTALL = "SELECT * FROM CATEGORIES";
-	private static final String UPDATE = "UPDATE CATEGORIES SET libelle=?";
+	private static final String UPDATE = "UPDATE CATEGORIES SET libelle=? WHERE no_categorie=?";
 	private static final String DELETE = "DELETE FROM CATEGORIES WHERE no_categorie=?";
 	private static final String SELECTBYID = "SELECT * FROM CATEGORIES WHERE no_categorie=?";
 
@@ -92,6 +92,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement rqt = con.prepareStatement(UPDATE);) {
 			rqt.setString(1, c.getLibelle());
+			rqt.setInt(2, c.getNoCategorie());
 			rqt.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
