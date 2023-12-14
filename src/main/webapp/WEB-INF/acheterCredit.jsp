@@ -26,11 +26,11 @@
 		<div class="creditContainer">			
 			<form id="achatCredit" action="achatCreditServlet" method="post">
 				<div class="creditEntry">
-				<label for="creditAchat">Veuillez insérer le nombre de crédits que vous souhaitez acheter</label>
-				<input type="number" id="creditAchat" name="creditAchat" value="10" min="1" step="1">
+					<label for="creditAchat">Veuillez insérer le nombre de crédits que vous souhaitez acheter</label>
+					<input type="number" id="creditAchat" name="creditAchat" value="10" min="1" step="1">
 				</div>
 				<div class="creditBoutton">
-				<button type="submit">Acheter</button>
+					<button type="submit">Acheter</button>
 				</div>
 			</form>	
 		</div>

@@ -17,11 +17,27 @@
 <jsp:param value="" name="header"/>
 </jsp:include>
 
+<!--
 <form method="post" action="transitionMotDePasseServlet">
 <label for="email">Veuillez rentrer votre adresse email pour pouvoir reset votre mot de passe: </label>
     <input type="text" id="email" name="email"  required>
     <button type="submit">Reset mon mot de passe</button>
 </form>
+-->
+
+<div class="FormContainer">
+	<div class="creditContainer">		
+	<form id="resetMotDePasse" method="post" action="transitionMotDePasseServlet">
+		<div class="creditEntry">
+			<label for="email">Veuillez rentrer votre adresse email pour pouvoir modifier votre mot de passe : </label>
+	    	<input type="text" id="email" name="email"  required>
+	    </div>
+	    <div class="creditBoutton">
+	    	<button type="submit">Confirmer</button>
+	    </div>
+	</form>
+	</div>
+</div>
 
 </body>
 </html>

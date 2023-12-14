@@ -383,6 +383,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	background-color: #dacdba;
 	border-radius: 5px;
 	margin-bottom: 10px;
+	margin-top: 20px;
 	padding: 20px;		
 }
 
@@ -497,7 +498,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	margin-top: 20px;
 }
 
-#achatCredit {
+#achatCredit, #resetMotDePasse {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
