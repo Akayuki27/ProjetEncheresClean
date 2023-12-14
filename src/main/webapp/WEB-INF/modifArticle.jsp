@@ -66,7 +66,7 @@
         
     	<div class="bouttonContainer">
         	<button type="submit">Modifier</button>
-        	<button class="bouttonAnnuler" type="button" onclick="location.href='accueil.jsp'">Annuler</button>
+        	<button class="bouttonAnnuler" type="button" onclick="location.href='accueilServlet'">Annuler</button>
         </div>
         
       </form>
