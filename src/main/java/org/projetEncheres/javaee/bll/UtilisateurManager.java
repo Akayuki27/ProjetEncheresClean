@@ -149,5 +149,12 @@ public class UtilisateurManager {
 			return false;
 		}
 	}
-
+	
+	public void ajouterCredits (Utilisateur u, int credits) throws DALException {
+		
+		this.utilisateur.ajouterCredits(u, credits);
+	}
+		
+	
+	
 }

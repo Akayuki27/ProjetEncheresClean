@@ -24,6 +24,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String LOGIN = "SELECT * FROM UTILISATEURS WHERE pseudo=? and mot_de_passe=?";
 	private static final String LOGIN_MAIL = "SELECT * FROM UTILISATEURS WHERE email=? and mot_de_passe=?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email=?";
+	private static final String AJOUTER_CREDIT = "UPDATE UTILISATEURS SET credit=? WHERE no_utilisateur=?";
 	
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
@@ -222,6 +223,20 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return u;
 	}
+	
+	public void ajouterCredits (Utilisateur u, int credits) throws DALException {
+			try (Connection con = ConnectionProvider.getConnection();
+					PreparedStatement rqt = con.prepareStatement(AJOUTER_CREDIT);) {
+	
+				rqt.setInt(1, u.getCredit() + credits);
+				rqt.setInt(2, u.getNoUtilisateur());
+				rqt.executeUpdate();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				throw new DALException("La modification des credits de l'utilisateur a échoué");
+			}
+			
+		}
 
 	
 }

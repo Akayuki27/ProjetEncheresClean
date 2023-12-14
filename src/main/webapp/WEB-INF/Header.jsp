@@ -15,6 +15,8 @@
 
 			<li><a href="ajoutArticleServlet">Vendre un Article</a></li>
 			<li><a href="afficherProfilServlet">Mon Profil</a></li>
+			<li><a href="achatCreditServlet">Acheter des crédis</a></li>
+			<li>Vous avez ${userCo.credit} crédits</li>
 			<li>
 				<!-- 
 				<form id="deconnexionForm" action="deconnexionServlet" method="post">
