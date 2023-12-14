@@ -137,11 +137,11 @@
                                 test="${articles.dateDebutEncheres.isAfter(LocalDate.now()) && u.noUtilisateur == articles.no_utilisateur}">
                                 <p><a href="modifArticleServlet?noArt=${articles.noArticle}">Modifier</a>
                             </c:when>
-                            <c:when test="${articles.dateFinEncheres.isAfter(LocalDate.now()) }">
+                            <c:when test="${articles.dateFinEncheres.isAfter(LocalDate.now()) || articles.dateFinEncheres.isEqual(LocalDate.now())}">
                                 <p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Enchérir</a>
                             </c:when>
                             <c:otherwise>
-                                <p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Détail</a>
+                                <p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Détails</a>
                             </c:otherwise>
                         </c:choose>
                         <p><a href="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${articles.u2.pseudo}</a></p>
