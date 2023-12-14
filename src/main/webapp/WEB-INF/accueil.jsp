@@ -126,10 +126,8 @@
                 </div>
                 <div class="texteAfficherEnchere">
                     <h3>${articles.nomArticle}</h3>
-                    <p> Prix : ${articles.prixVente}
-                    </p>
+                    <p> Prix : ${articles.prixVente}</p>
                     <p>Fin de l'enchère : ${articles.dateFinEncheres} </p>
-
 
                     <%if (session.getAttribute ("userCo") !=null) { %>
                         <c:choose>
@@ -144,7 +142,7 @@
                                 <p><a href="EnchereArticleServlet?noArt=${articles.noArticle}">Détails</a>
                             </c:otherwise>
                         </c:choose>
-                        <p><a href="afficherVendeurServlet?id=${articles.no_utilisateur}">Vendeur : ${articles.u2.pseudo}</a></p>
+                        <p>Vendeur : <a href="afficherVendeurServlet?id=${articles.no_utilisateur}">${articles.u2.pseudo}</a></p>
                         <%}else { %>
                             <p>Vendeur : ${articles.u2.pseudo}</p>
                             <%} %>

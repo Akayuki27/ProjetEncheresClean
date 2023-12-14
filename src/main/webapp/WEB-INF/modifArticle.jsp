@@ -19,7 +19,7 @@
 </jsp:include>
 
 <h1>Modification de l'article</h1>
-<div>
+<div class="FormContainer">
 
     <form id="articleForm" action="modifArticleServlet" method="post" enctype="multipart/form-data"> 
     	
@@ -64,18 +64,18 @@
     	<label for="ville">Ville :</label>
     	<input type="text" id="ville" name="ville" value="${u.ville}">
         
-    
-        <button type="submit">Modifier</button>
-        <button type="button" onclick="location.href='accueil.jsp'">Annuler</button>
+    	<div class="bouttonContainer">
+        	<button type="submit">Modifier</button>
+        	<button class="bouttonAnnuler" type="button" onclick="location.href='accueil.jsp'">Annuler</button>
+        </div>
         
       </form>
-      
-      <form id="boutonAnnulerVente" action="AnnulerVente" method="post">
-      <input type="hidden" name="noArticle" value="${a.noArticle}">
-      <button type="submit" >Annuler la vente</button>
-      </form>
-
 </div>
-
+<div class="FormContainer">
+      <form id="boutonAnnulerVente" action="AnnulerVente" method="post">
+      	<input type="hidden" name="noArticle" value="${a.noArticle}">
+      	<button class="bouttonAnnuler" type="submit" >Annuler la vente</button>
+      </form>
+</div>
 </body>
 </html>
