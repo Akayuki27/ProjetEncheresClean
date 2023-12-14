@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Connexion</title>
 <link rel="stylesheet" href="/ProjetEncheresClean/static/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"> 
 </head>
 <body>
 <jsp:include page="/WEB-INF/Header.jsp">

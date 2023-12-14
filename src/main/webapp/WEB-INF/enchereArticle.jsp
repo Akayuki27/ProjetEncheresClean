@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>${a.nomArticle}</title>
 <link rel="stylesheet" href="/ProjetEncheresClean/static/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"> 
 </head>
 <body>
 <jsp:include page="/WEB-INF/Header.jsp">
@@ -15,37 +18,34 @@
 </jsp:include>
     <h1>Article : ${a.nomArticle}</h1>
 	
-    <div>
-        
-         <div class="imgAfficherEnchereBloc">
-		  <c:choose>
-		  <c:when test="${not empty a.image }">
-			<img class="imgAfficherEnchere" src="<c:url value='/uploads/${a.image}' />">
-			</c:when>
-			<c:otherwise>
-			<img class="imgAfficherEnchere" src="<c:url value='/ressources/noImage.jpg' />">
-			</c:otherwise>
+    <div class="detailArticleContainer">    
+        <div class="imgAfficherEnchereBloc">
+			<c:choose>
+				<c:when test="${not empty a.image }">
+					<img class="imgAfficherEnchere" src="<c:url value='/uploads/${a.image}' />">
+				</c:when>
+				<c:otherwise>
+					<img class="imgAfficherEnchere" src="<c:url value='/ressources/noImage.jpg' />">
+				</c:otherwise>
 			</c:choose>
-			</div>
-        
-        <p>Description : ${a.description}</p>
-        
-        <p>Catégorie: ${c.libelle} </p>
-        
-        <p>Début des enchères: ${a.dateDebutEncheres}</p>
-       
-        <p>Fin des enchères : ${a.dateFinEncheres}</p>
-        
-        <p>Prix de vente: <c:choose>
-					<c:when test="${a.prixVente !=null}">${a.prixVente}</c:when>
-					<c:otherwise>${a.miseAPrix}</c:otherwise>
-				</c:choose></p>
-        
+		</div>
+	    <div class="detailArticleText">
+	        <p>Description : ${a.description}</p>        
+	        <p>Catégorie: ${c.libelle} </p>      
+	        <p>Début des enchères: ${a.dateDebutEncheres}</p>      
+	        <p>Fin des enchères : ${a.dateFinEncheres}</p>     
+	        <p>Prix de vente: 
+	        <c:choose>
+				<c:when test="${a.prixVente !=null}">${a.prixVente}</c:when>
+				<c:otherwise>${a.miseAPrix}</c:otherwise>
+			</c:choose>
+			</p>
+	    </div>
+    
         <p><a href ="afficherVendeurServlet?id=${a.no_utilisateur}">Vendeur : ${u2.pseudo}</a></p>
-        
-       
-       <c:if test="${a.dateFinEncheres.isAfter(LocalDate.now()) }">        
-       <form method="post" action="EnchereArticleServlet">
+
+        <c:if test="${a.dateFinEncheres.isAfter(LocalDate.now()) }">        
+        <form method="post" action="EnchereArticleServlet">
         <input type="hidden" id="idArt" name="idArt" value="${a.noArticle}">
         <input type="number" id="enchere" name="enchere" value="${a.prixVente}"><input type="submit" value="Encherir">
         </form>

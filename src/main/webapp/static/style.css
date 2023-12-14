@@ -1,16 +1,6 @@
 @charset "UTF-8";
 
 /*
-#4c7c48 vert logo
-#2f5a1a vert sombre
-#f96852 orange logo
-#b3311d orange sombre
-#251f12 anthracite police
-#cdc1a7 fond image vide (beige foncé ?)
-rgb(240, 235, 213);
-*/
-
-/*
 test nouveau nuancier
 #577843 vert logo
 #424f2f vert sombre
@@ -24,6 +14,7 @@ test nouveau nuancier
 
 
 *, ::before, ::after {
+	/*box-sizing: border-box;*/
 	margin: 0;
 	padding: 0;
 }
@@ -34,6 +25,10 @@ body{
 	color: #404336;
 	font-family: verdana;
 	width: 90%;
+}
+
+p, label, a, h2, h3, h1 { 
+	font-family: 'Montserrat', sans-serif;
 }
 
 nav {
@@ -94,9 +89,10 @@ button:hover {
 input {
 	background-color: #ebe4d5;	
 	color: #251f12;
-	border: 2px solid #404336;
+	border: 2px solid #d0b998;
 	border-radius: 5px;
 	margin: 0.4em;
+	min-height: 1.8em;
 	
 }
 
@@ -107,7 +103,7 @@ input:focus {
 select {
 	background-color: #ebe4d5;	
 	color: #251f12;
-	border: 2px solid #404336;
+	border: 2px solid #d0b998;
 	border-radius: 5px;
 	margin: 0.4em;
 	min-height: 1.8em;
@@ -126,6 +122,8 @@ form {
 	flex-direction : column;	
 }
 
+/*************************TYPE***************************/
+
 input[type="checkbox"]:checked, input[type="radio"]:checked{
 	outline: none;
 }
@@ -133,6 +131,8 @@ input[type="checkbox"]:checked, input[type="radio"]:checked{
 input[type="checkbox"]:focus, input[type="radio"]:focus{
 	outline: none;
 }
+
+/*************************CLASS***************************/
 
 .bouttonContainer {
 	display: flex;
@@ -191,8 +191,6 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	background-color: #dacdba; 
 	padding: 10px;
 	display: flex;
-	
-
 }
 
 .imgAfficherEnchereBloc {
@@ -247,6 +245,34 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	flex-direction: row;
 }
 
+.profilContainer {
+	display: flex;
+	flex-direction : column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	max-width: 400px;
+	background-color: #dacdba;
+	border-radius: 5px;
+	margin: auto;
+}
+
+.profilText {
+	display: flex;
+	flex-direction : column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+
+/*********************ELEMENT IN CLASS***********************/
+
+.profilText p {
+	margin: 10px;
+	font-size: 1.4em;
+}
+
 .ulItem li {
 	margin:5px;
 }
@@ -256,6 +282,21 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	min-width: 160px;
 }
 
+
+/*************************ID***************************/
+
+
+#nomArticle {
+	width: 160px;
+}
+
+#categories {
+	width: 160px;
+}
+
+#inputCategorieEnchere label {
+	vertical-align: middle;
+}
 
 #connexionForm {
 	padding: 20px;
@@ -286,6 +327,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	display: flex;
 	flex-direction : row;
 	justify-content: space-between;
+	align-items: center;
 	width: 94%;
 }
 
@@ -297,6 +339,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 #inputEnchereBase {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
@@ -311,6 +354,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 }
 
 
+/*************************PORTABLE***************************/
 
 @media screen and (max-width: 1000px) {
 	
@@ -353,6 +397,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	margin-bottom: 15px;
 	}
 	
 	.radio-option {
@@ -380,16 +425,23 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	flex-direction : row;
 	justify-content: center;
 	align-items: center;
+	width: 170px;
 	}
+	
+	.afficherEnchereContainer {
+	justify-content: center;
+	}	
 	
 	.checkbox-container input, label{
 	margin: 0px;
 	}
 	
-	.afficherEnchereContainer {
-	justify-content: center;
-	}
-	
+	.profilText p {
+	margin: 5px;
+	font-size: 1em;
+}
+
+		
 	
 	#inputEnchere {
 	display: flex;
@@ -408,7 +460,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	flex-direction : row;
 	justify-content: space-around;
 	text-align: center;
-	margin-top: 0px;
+	margin-top: 20px;
     margin-bottom: 0px;
 	}
 	
@@ -429,6 +481,9 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
     }
 
 }
+
+
+/*************************ENTRE DEUX***************************/
 
 @media screen and (max-width: 500px) {
 	.filtreContainer label {

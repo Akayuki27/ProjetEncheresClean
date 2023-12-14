@@ -47,7 +47,7 @@
         <input type="password" id="confirmation" name="confirmation" required> <!-- controle MDP-->
     
         <button type="submit">Créer</button>
-        <button type="button" onclick="location.href='accueil.jsp'">Annuler</button>
+        <button type="button" onclick="location.href='accueilServlet'">Annuler</button>
       </form>
 </div>
 </body>
