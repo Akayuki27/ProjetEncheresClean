@@ -238,6 +238,12 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	margin-bottom: 10px;
 }
 
+.checkbox-Item {
+	display: flex;
+	flex-direction : row;
+	align-items: center;
+}
+
 .radio-option{
 	display: flex;
 	flex-direction: row;
