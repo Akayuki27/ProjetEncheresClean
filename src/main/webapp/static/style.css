@@ -27,7 +27,7 @@ body{
 	width: 90%;
 }
 
-p, label, a, h2, h3, h1 { 
+p, label, a, h2, h3, h1, input, select { 
 	font-family: 'Montserrat', sans-serif;
 }
 
@@ -88,11 +88,12 @@ button:hover {
 
 input {
 	background-color: #ebe4d5;	
-	color: #251f12;
 	border: 2px solid #d0b998;
 	border-radius: 5px;
 	margin: 0.4em;
 	min-height: 1.8em;
+	font-size: 1em;
+	color: #404336;
 	
 }
 
@@ -102,11 +103,12 @@ input:focus {
 
 select {
 	background-color: #ebe4d5;	
-	color: #251f12;
 	border: 2px solid #d0b998;
 	border-radius: 5px;
 	margin: 0.4em;
-	min-height: 1.8em;
+	height: 2em;
+	font-size: 1em;
+	color: #404336;
 }
 
 select:focus {
@@ -120,6 +122,10 @@ select option:hover {
 form {
 	display: flex;
 	flex-direction : column;	
+}
+
+input, select{
+	padding-left: 5px;
 }
 
 /*************************TYPE***************************/
@@ -195,6 +201,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 
 .imgAfficherEnchereBloc {
 	width: 200px;
+	min-width: 200px;
 	height: 200px;
 	background-color: #d0b998; 
 	border-radius: 5px;
@@ -208,6 +215,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 
 .imgAfficherEnchere {
 	width: 100%;
+	min-width: 200px;
 	height: 100%;
 	object-fit: cover;
 	border-radius: 5px;
@@ -265,6 +273,58 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	margin-bottom: 20px;
 }
 
+.detailArticleContainer {
+	display: flex;
+	flex-direction : column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	max-width: 800px;
+	background-color: #dacdba;
+	border-radius: 5px;
+	margin: auto;
+	overflow: hidden;
+}
+
+.detailArticleItem {
+	display: flex;
+	flex-direction : row;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+.detailArticleText {
+	display: flex;
+	flex-direction : column;
+	padding: 20px;
+}
+
+.imgAfficherAticleContainer{
+	display: flex;
+	flex-direction : row;
+	justify-content: center;
+	align-items: center;
+	max-width: 50%;
+	width: 300px;
+	height: 200px;
+	min-width: 200px;
+	min-height: 200px;
+	background-color: #d0b998; 
+	border-radius: 5px;
+	overflow: hidden;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+}
+
+.bouttonEncherir {
+	display: flex;
+	flex-direction : row;
+	justify-content: center;
+	align-items: center;
+}
+
 
 /*********************ELEMENT IN CLASS***********************/
 
@@ -280,6 +340,11 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 .headerContainer img {
 	max-width: 20vw;
 	min-width: 160px;
+}
+
+.detailArticleText p, a{
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 
@@ -430,7 +495,19 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	
 	.afficherEnchereContainer {
 	justify-content: center;
-	}	
+	}
+	
+	.detailArticleItem {
+	flex-direction : column;
+	}
+	
+	.imgAfficherAticleContainer{
+	margin-bottom: 0px;
+	}
+	
+	.bouttonEncherir	{
+	flex-direction : column;
+	}
 	
 	.checkbox-container input, label{
 	margin: 0px;
