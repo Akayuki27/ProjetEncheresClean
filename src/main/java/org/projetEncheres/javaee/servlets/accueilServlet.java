@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.projetEncheres.javaee.bll.ArticleManager;
 import org.projetEncheres.javaee.bll.BLLException;
 import org.projetEncheres.javaee.bll.CategorieManager;
+import org.projetEncheres.javaee.bll.EncheresManager;
 import org.projetEncheres.javaee.bll.UtilisateurManager;
 import org.projetEncheres.javaee.bo.ArticleVendu;
 import org.projetEncheres.javaee.bo.Categorie;
@@ -38,6 +39,7 @@ public class accueilServlet extends HttpServlet {
 		List<Categorie> cat;
 		List<ArticleVendu> articles;
 		ArticleManager amgr = new ArticleManager();
+		EncheresManager emgr = new EncheresManager();
 		//recuperer categorie pour la liste de choix		
 		CategorieManager catrg = new CategorieManager();
 		Utilisateur u2 = null;
@@ -50,6 +52,7 @@ public class accueilServlet extends HttpServlet {
 					u2 = umgr.selectByID(id);
 					a.setU2(u2);
 					request.setAttribute("u2", u2);
+					emgr.vainqueurEnchere(a);
 				}
 				request.setAttribute("categories", cat);
 				request.setAttribute("articles", articles);

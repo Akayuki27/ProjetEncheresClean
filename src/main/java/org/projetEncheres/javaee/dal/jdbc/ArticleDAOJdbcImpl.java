@@ -21,7 +21,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	private final static String SELECTBYID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article=?";
-	private final static String SELECTALL = "SELECT * FROM ARTICLES_VENDUS";
+	private final static String SELECTALL = "SELECT * FROM ARTICLES_VENDUS WHERE etat_vente=0";
 	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, "
 			+ "prix_vente=?, no_utilisateur=?, no_categorie=?, image=?, winner=? WHERE no_article=?";
 	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?";

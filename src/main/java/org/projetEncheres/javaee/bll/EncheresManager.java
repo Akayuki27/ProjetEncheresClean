@@ -1,5 +1,6 @@
 package org.projetEncheres.javaee.bll;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.projetEncheres.javaee.bo.ArticleVendu;
@@ -10,92 +11,94 @@ import org.projetEncheres.javaee.dal.DAOFactory;
 import org.projetEncheres.javaee.dal.EnchereDAO;
 
 public class EncheresManager {
-	
+
 	private EnchereDAO encheres;
-	
+
 	public EncheresManager() {
 		this.encheres = DAOFactory.getEnchereDAO();
 	}
-	
-	public void insertEnchere (Enchere e, ArticleVendu a, Utilisateur u) throws DALException, BLLException {
-		
+
+	public void insertEnchere(Enchere e, ArticleVendu a, Utilisateur u) throws DALException, BLLException {
+
 		try {
-			if(selectByIdArt(e.getNo_article()) == null && enchereValide(e)) {
-			
-			this.encheres.insertEnchere(e, a, u);
+			if (selectByIdArt(e.getNo_article()) == null && enchereValide(e)) {
+
+				this.encheres.insertEnchere(e, a, u);
 			} else {
 				e.setNo_utilisateur(u.getNoUtilisateur());
 				update(e);
 			}
-		} catch (DALException d){
-			throw new BLLException ("Erreur dans l'insertion de l'enchère");
+		} catch (DALException d) {
+			throw new BLLException("Erreur dans l'insertion de l'enchère");
 		}
 	}
-	
+
 	public List<Enchere> selectAll() throws DALException, BLLException {
 		try {
 			return this.encheres.selectAll();
-		} catch (DALException d){
-			throw new BLLException ("Erreur dans la selection des enchères");
+		} catch (DALException d) {
+			throw new BLLException("Erreur dans la selection des enchères");
 		}
 	}
-	
+
 	public Enchere selectByIdArt(int id) throws DALException, BLLException {
 		try {
-		return this.encheres.selectByIdArticle(id);
-		} catch (DALException d){
-			throw new BLLException ("Erreur dans la sélection de l'enchère par le no_article");
+			return this.encheres.selectByIdArticle(id);
+		} catch (DALException d) {
+			throw new BLLException("Erreur dans la sélection de l'enchère par le no_article");
 		}
 	}
-	
+
 	public List<Enchere> selectByIdUser(int id) throws DALException, BLLException {
 		try {
 			return this.encheres.selectByIdUtilisateur(id);
-		} catch (DALException d){
-			throw new BLLException ("Erreur dans la sélection de l'enchère par le no_utilisateur");
+		} catch (DALException d) {
+			throw new BLLException("Erreur dans la sélection de l'enchère par le no_utilisateur");
 		}
 	}
-	
-	public void update(Enchere e) throws DALException, BLLException{
-		
+
+	public void update(Enchere e) throws DALException, BLLException {
+
 		try {
 			if (enchereValide(e)) {
-		this.encheres.update(e);
+				this.encheres.update(e);
 			} else {
 				throw new BLLException("L'enchère ne peut pas être inférieure à celle déjà faite");
 			}
-		} catch (DALException d){
-			throw new BLLException ("Erreur dans l'update de l'enchère par le no_utilisateur");
+		} catch (DALException d) {
+			throw new BLLException("Erreur dans l'update de l'enchère par le no_utilisateur");
 		}
 	}
-	
+
 	public Utilisateur vainqueurEnchere(ArticleVendu a) throws DALException, BLLException {
 		Utilisateur vainqueurEnchere = null;
 		Utilisateur vendeur = null;
 		Enchere e = selectByIdArt(a.getNoArticle());
 		UtilisateurManager umgr = new UtilisateurManager();
 		ArticleManager amgr = new ArticleManager();
-		if (e == null) {
-			vendeur = umgr.selectByID(a.getNo_utilisateur());
-			return vendeur;
-		}
-		if (a.getDateFinEncheres() == e.getDateEnchere()) {
-			vainqueurEnchere = umgr.selectByID(e.getNo_utilisateur());
-			vendeur = umgr.selectByID(a.getNo_utilisateur());
-			vainqueurEnchere.setCredit(vainqueurEnchere.getCredit() - a.getPrixVente());
-			umgr.updateUtilisateur(vainqueurEnchere);
-			vendeur.setCredit(vendeur.getCredit() + a.getPrixVente());
-			umgr.updateUtilisateur(vendeur);
-			a.setWinner(vainqueurEnchere.getNoUtilisateur());
-			amgr.update(a);
-			amgr.updateEtatVente(a.getNoArticle());
-			
+		if (a.getDateFinEncheres().isEqual(LocalDate.now()) || a.getDateFinEncheres().isBefore(LocalDate.now())) {
+			if (e == null) {
+				vendeur = umgr.selectByID(a.getNo_utilisateur());
+				amgr.updateEtatVente(a.getNoArticle());
+				return vendeur;
+			}
+			if (a.getDateFinEncheres() == e.getDateEnchere()) {
+				vainqueurEnchere = umgr.selectByID(e.getNo_utilisateur());
+				vendeur = umgr.selectByID(a.getNo_utilisateur());
+				vainqueurEnchere.setCredit(vainqueurEnchere.getCredit() - a.getPrixVente());
+				umgr.updateUtilisateur(vainqueurEnchere);
+				vendeur.setCredit(vendeur.getCredit() + a.getPrixVente());
+				umgr.updateUtilisateur(vendeur);
+				a.setWinner(vainqueurEnchere.getNoUtilisateur());
+				amgr.update(a);
+				amgr.updateEtatVente(a.getNoArticle());
+
+			}
 		}
 		return vainqueurEnchere;
-		
-		
+
 	}
-	
+
 	public boolean enchereValide(Enchere e) {
 		boolean enchereOK = true;
 		ArticleVendu a;
@@ -116,4 +119,3 @@ public class EncheresManager {
 		return enchereOK;
 	}
 }
-
