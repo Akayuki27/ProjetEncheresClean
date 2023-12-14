@@ -132,6 +132,7 @@ input, select{
 
 input[type="checkbox"]:checked, input[type="radio"]:checked{
 	outline: none;
+	accent-color : #ee7214;
 }
 
 input[type="checkbox"]:focus, input[type="radio"]:focus{
@@ -263,6 +264,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 .filtreRadio {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
 .profilContainer {
@@ -612,14 +614,18 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	margin: 0px;
 	}
 	
+	.inscriptionText {
+	display: flex;
+	flex-direction: column;
+	}	
+	
 	.profilText p {
 	margin: 5px;
 	font-size: 1em;
 	}
 
-	.inscriptionText {
-	display: flex;
-	flex-direction: column;
+	.checkbox-Item label {
+	margin-left: 10px;
 	}	
 	
 	#inputEnchere {
