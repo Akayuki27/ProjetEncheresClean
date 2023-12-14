@@ -40,8 +40,8 @@ h1 {
 	color: #404336;
 	text-align: center;
 	font-size: 1.6em;
-	margin-top: 0px;
-	margin-bottom: 1.4em;
+	margin-top: 1.2em;
+	margin-bottom: 1.2em;
 }
 
 h2 {
@@ -171,6 +171,12 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: end;
+}
+
+.headerTextCredit {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }
 
 .ulItem {
@@ -392,6 +398,10 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	margin-bottom: 10px;
 }
 
+.headerTextCredit p{
+	margin: 5px;
+}
+
 
 /*************************ID***************************/
 
@@ -486,6 +496,12 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
     display: flex;
     flex-direction: column;
     align-items: center; 
+	}
+	
+	.headerTextCredit {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 	}
 
 	.ulItem {
