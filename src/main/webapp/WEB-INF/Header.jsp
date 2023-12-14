@@ -1,4 +1,5 @@
   <!-- Logo renvoyant à l'accueil -->
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="header">
 	<div class="headerContainer"> 
 		<a href="accueilServlet"><img src="<%=request.getContextPath() %>/ressources/LOSNA3.png" alt="Logo"></a> <!-- Logo renvoyant à l'accueil -->
