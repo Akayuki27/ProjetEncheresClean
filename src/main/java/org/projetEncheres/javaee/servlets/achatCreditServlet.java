@@ -21,35 +21,32 @@ import org.projetEncheres.javaee.dal.DALException;
 public class achatCreditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/acheterCredit.jsp");
 		rd.forward(request, response);
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		UtilisateurManager umgr = new UtilisateurManager();
 		HttpSession session = request.getSession();
 		int credit = Integer.parseInt(request.getParameter("creditAchat"));
 		Utilisateur u = (Utilisateur) session.getAttribute("userCo");
-		
+
 		try {
 			umgr.ajouterCredits(u, credit);
-			u.setCredit(u.getCredit()+ credit);
+			u.setCredit(u.getCredit() + credit);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		response.sendRedirect("accueilServlet");
-		//RequestDispatcher rd = request.getRequestDispatcher("accueilServlet");
-		//rd.forward(request, response);
-		
+
 	}
 
 }

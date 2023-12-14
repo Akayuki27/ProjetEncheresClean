@@ -5,7 +5,7 @@
 		<a href="accueilServlet"><img src="<%=request.getContextPath() %>/ressources/LOSNA3.png" alt="Logo"></a>
 		<div class="headerTextContainer">
 			<div class="headerTextCredit">
-			<%if (session.getAttribute("userCo") == null) { %>
+			<%if (session.getAttribute("userCo") != null) { %>
 			<p>Vous avez ${userCo.credit} crédits !</p>
 			<%} %>
 			</div>
