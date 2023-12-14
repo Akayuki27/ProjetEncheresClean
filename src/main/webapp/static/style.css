@@ -427,6 +427,10 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	margin: 5px;
 }
 
+.texteAfficherEnchere p{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
 /*************************ID***************************/
 
@@ -507,7 +511,6 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 #creditAchat {
 	max-width: 160px;
 }
-
 
 /*************************PORTABLE***************************/
 
@@ -657,7 +660,6 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
     }
 
 }
-
 
 /*************************ENTRE DEUX***************************/
 
