@@ -8,6 +8,10 @@
 		<%if (session.getAttribute("userCo") == null) { %>
 			<li><a href="connexionServlet">Connexion/Inscription</a></li>
 		<%} else {%>
+		<c:if test="${userCo.administrateur}">
+    		<li><a href="GestionCategorieAdmin">Gestion des catégories</a></li>
+		</c:if>
+
 			<li><a href="ajoutArticleServlet">Vendre un Article</a></li>
 			<li><a href="afficherProfilServlet">Mon Profil</a></li>
 			<li>
