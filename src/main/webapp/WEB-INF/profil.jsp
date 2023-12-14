@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 	<title>${requestScope.u.pseudo}</title>
-	<link rel="stylesheet" href="/ProjetEncheresClean/static/style.css"> 
+	<link rel="stylesheet" href="/ProjetEncheresClean/static/style.css">
+	<link rel="icon" href="/ProjetEncheresClean/ressources/LOSNAfavicon.png" type="image/png"> 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"> 
