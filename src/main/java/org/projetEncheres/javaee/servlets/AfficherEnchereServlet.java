@@ -93,10 +93,10 @@ public class AfficherEnchereServlet extends HttpServlet {
 			for (String s : filter) {
 				switch (s) {
 				case "EnchereOuvertes":
-					where += "AND date_fin_encheres >= GETDATE()";
+					where += "AND date_fin_encheres >= CAST(GETDATE() AS Date)";
 					break;
 				case "EnchereEnCours":
-					where += "AND GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres AND no_article IN(";
+					where += "AND CAST(GETDATE() AS Date) BETWEEN date_debut_encheres AND date_fin_encheres AND no_article IN(";
 					int compt = 0;
 					for (Cookie c : cookies) {
 						if (c.getValue() == "1") {
@@ -115,20 +115,20 @@ public class AfficherEnchereServlet extends HttpServlet {
 					break;
 				case "VenteEnCours":
 					where += "AND no_utilisateur=" + u.getNoUtilisateur()
-							+ " AND GETDATE() BETWEEN date_debut_encheres AND date_fin_encheres";
+							+ " AND CAST(GETDATE() AS Date) BETWEEN date_debut_encheres AND date_fin_encheres";
 					break;
 				case "VenteNonDebutes":
-					where += "AND no_utilisateur=" + u.getNoUtilisateur() + " AND date_debut_encheres > GETDATE()";
+					where += "AND no_utilisateur=" + u.getNoUtilisateur() + " AND date_debut_encheres > CAST(GETDATE() AS Date)";
 					break;
 				case "VentesTermines":
 					where += "AND no_utilisateur=" + u.getNoUtilisateur() + " AND etat_vente=1";
 					break;
 				default:
-					where += "AND date_debut_encheres >= GETDATE()";
+					where += "AND date_debut_encheres >= CAST(GETDATE() AS Date)";
 				}
 			}
 		} else {
-			where += "AND date_fin_encheres >= GETDATE()";
+			where += "AND date_fin_encheres >= CAST(GETDATE() AS Date)";
 		}
 		} 
 		System.out.println(where);

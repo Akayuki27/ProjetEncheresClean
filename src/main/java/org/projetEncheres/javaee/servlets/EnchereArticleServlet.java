@@ -79,7 +79,9 @@ public class EnchereArticleServlet extends HttpServlet {
 				a = amgr.selectByID(idArt);
 				int enchereNew = Integer.parseInt(request.getParameter("enchere"));
 				if (enchereNew > u.getCredit()) {
-					out.println("<b><font color='red'>Vous ne disposez pas de suffisamment de crédits pour enchérir</font></b>");
+					// out.println("<b><font color='red'>Vous ne disposez pas de suffisamment de
+					// crédits pour enchérir</font></b>");
+					response.sendError(400, "Vous ne disposez pas de suffisamment de crédits pour enchérir");
 				} else {
 					e = new Enchere(u.getNoUtilisateur(), a.getNoArticle(), LocalDate.now(), enchereNew);
 					if (emgr.enchereValide(e)) {
@@ -96,8 +98,7 @@ public class EnchereArticleServlet extends HttpServlet {
 						rd.forward(request, response);
 
 					} else {
-						out.println(
-								"<b><font color='red'>Le montant de l'enchère ne peut pas être inférieur au prix de l'article</font></b>");
+						response.sendError(401, "Vous ne disposez pas de suffisamment de crédits pour enchérir");
 					}
 				}
 

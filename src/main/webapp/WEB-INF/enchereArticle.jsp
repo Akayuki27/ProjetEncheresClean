@@ -44,7 +44,7 @@
 		    </div>
 	    </div>
 		<div>
-	        <c:if test="${a.dateFinEncheres.isAfter(LocalDate.now()) }">        
+	        <c:if test="${a.dateFinEncheres.isAfter(LocalDate.now()) || a.dateFinEncheres.isEqual(LocalDate.now())}">        
 		        <form class="bouttonEncherir" method="post" action="EnchereArticleServlet">
 			        <input type="hidden" id="idArt" name="idArt" value="${a.noArticle}">
 			        <input type="number" id="enchere" name="enchere" value="${a.prixVente}">

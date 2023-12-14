@@ -21,43 +21,39 @@ import org.projetEncheres.javaee.dal.DALException;
 @WebServlet("/modificationCategorieServlet")
 public class modificationCategorieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
- 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		int id = Integer.parseInt(request.getParameter("id"));
-		String libelle= request.getParameter("libelle");
+		String libelle = request.getParameter("libelle");
 		Categorie c = new Categorie(id, libelle);
-		
+
 		session.setAttribute("categorie", c);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ModificationArticle.jsp");
+
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modificationCategorie.jsp");
 		rd.forward(request, response);
-		
-		
+
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		CategorieManager cmgr = new CategorieManager();
 		String libelle = request.getParameter("nomCategorie");
-		int id =  Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		Categorie c = new Categorie(id, libelle);
-		
+
 		try {
 			cmgr.update(c);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 		RequestDispatcher rd = request.getRequestDispatcher("accueilServlet");
 		rd.forward(request, response);
 	}
