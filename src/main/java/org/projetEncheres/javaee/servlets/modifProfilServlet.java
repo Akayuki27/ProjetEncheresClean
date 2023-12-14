@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import org.projetEncheres.javaee.bll.BLLException;
 import org.projetEncheres.javaee.bll.UtilisateurManager;
 import org.projetEncheres.javaee.bo.Utilisateur;
+import org.projetEncheres.javaee.dal.DALException;
 
 /**
  * Servlet implementation class modifProfilServlet
@@ -24,10 +26,7 @@ public class modifProfilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Utilisateur u;
-		u = (Utilisateur) session.getAttribute("userCo");
-		request.setAttribute("u", u);
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modifProfil.jsp");
 		rd.forward(request, response);
 	}
@@ -47,42 +46,46 @@ public class modifProfilServlet extends HttpServlet {
 		String ville = request.getParameter("ville");
 		String erreurModifProfil = null;
 		HttpSession session = request.getSession();
-		
-		
-		
+		Utilisateur user = (Utilisateur) session.getAttribute("userCo");
+
 		if (request.getParameter("motDePasse") != null) {
 			String motdePasse = request.getParameter("motDePasse");
 			String confirmation = request.getParameter("confirmation");
 			if (motdePasse.equals(confirmation)) {
 				try {
-					u = new Utilisateur(id, pseudo, nom, prenom, email, tel, rue, codePostal, ville, motdePasse, 0,
-							false);
+					u = new Utilisateur(id, pseudo, nom, prenom, email, tel, rue, codePostal, ville, motdePasse,
+							user.getCredit(), user.getAdministrateur());
 					mgr.updateUtilisateur(u);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			} else {
-				try {
-					motdePasse = mgr.selectByID(id).getMotDePasse();
-					u = new Utilisateur(id, pseudo, nom, prenom, email, tel, rue, codePostal, ville, motdePasse, 0,
-							false);
-					mgr.updateUtilisateur(u);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				response.sendError(403, "Veuillez taper un mot de passe identique pour la confirmation");
 			}
-			
-			
+
 			session.setAttribute("userCo", u);
 
 			response.sendRedirect("afficherProfilServlet");
-			
+
+		} else if (request.getParameter("motDePasse") == null || request.getParameter("motDePasse").isEmpty()) {
+			u = new Utilisateur(id, pseudo, nom, prenom, email, tel, rue, codePostal, ville, user.getMotDePasse(),
+					user.getCredit(), user.getAdministrateur());
+			try {
+				mgr.updateUtilisateur(u);
+				session.setAttribute("userCo", u);
+				response.sendRedirect("afficherProfilServlet");
+				
+			} catch (DALException e) {
+				e.printStackTrace();
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
 		} else {
 			erreurModifProfil = "<b><font color='red'>La modification du profil à échouer, veuillez saisir des informations valides</font></b>";
-			session .setAttribute("erreurModifProfil", erreurModifProfil);
+			session.setAttribute("erreurModifProfil", erreurModifProfil);
 			response.sendRedirect("modifProfilServlet");
 		}
-
 
 	}
 
