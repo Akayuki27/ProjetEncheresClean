@@ -84,6 +84,18 @@ public class UtilisateurManager {
 			throw new BLLException ("Erreur dans la mise à jour de l'utilisateur");
 		}
 	}
+	
+	public Utilisateur selectByEmail(String email) throws DALException, BLLException {
+		
+		try {
+			verificationEmail(email);
+			return this.utilisateur.selectByEmail(email);
+		} catch (DALException e) {
+			e.printStackTrace();
+			throw new BLLException("La sélection par email de l'utilisateur a échouée");
+		}
+		
+	}
 
 	public boolean verificationEmail(String email) {
 		if (email.contains("@")) {
@@ -92,6 +104,8 @@ public class UtilisateurManager {
 
 		return false;
 	}
+	
+	
 
 	public boolean verificationPassword(String motDePasse) {
 		// Vérifier la longueur minimale

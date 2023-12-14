@@ -16,42 +16,43 @@ import org.projetEncheres.javaee.bo.Utilisateur;
 import org.projetEncheres.javaee.dal.DALException;
 
 /**
- * Servlet implementation class modificationMotDePasse
+ * Servlet implementation class transitionMotDePasseServlet
  */
-@WebServlet("/modificationMotDePasse")
-public class modificationMotDePasse extends HttpServlet {
+@WebServlet("/transitionMotDePasseServlet")
+public class transitionMotDePasseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/motDePasseOublie.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/transitionMotDePasseOublie.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String motDePasse = request.getParameter("motDePasse");
-		String confirmation = request.getParameter("confirmation");
 		HttpSession session = request.getSession();
-		Utilisateur u = null;
-		PrintWriter out = response.getWriter();
+		String email = request.getParameter("email");
 		UtilisateurManager umgr = new UtilisateurManager();
-		int idUser = (int) session.getAttribute("idUser");
-
+		Utilisateur u = null;
+		int idUser = 0;
+		PrintWriter out = response.getWriter();
 		try {
-			if (motDePasse.equals(confirmation) && motDePasse != null) {
-				u = umgr.selectByID(idUser);
-				u.setMotDePasse(motDePasse);
-				umgr.updateUtilisateur(u);
-				response.sendRedirect("connexionServlet");
+			u = umgr.selectByEmail(email);
+			if (u != null) {
+			idUser = u.getNoUtilisateur();
+			session.setAttribute("idUser", idUser);
+			response.sendRedirect("modificationMotDePasse");
 			} else {
-				out.println("La confirmation du mot de passe n'est pas identique au mot de passe, veuillez réessayer.");
+				out.println("<b><font color='red'>Aucun utilisateur n'a été trouvé avec cette adresse email</font></b>");
 			}
-		} catch (DALException e) {
-			e.printStackTrace();
 		} catch (BLLException e) {
 			e.printStackTrace();
+		} catch (DALException e) {
+			e.printStackTrace();
 		}
-
+		
+			
+		}
+		
 	}
 
-}
+

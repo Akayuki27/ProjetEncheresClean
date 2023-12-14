@@ -23,6 +23,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?";
 	private static final String LOGIN = "SELECT * FROM UTILISATEURS WHERE pseudo=? and mot_de_passe=?";
 	private static final String LOGIN_MAIL = "SELECT * FROM UTILISATEURS WHERE email=? and mot_de_passe=?";
+	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email=?";
 	
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
@@ -202,6 +203,23 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw new DALException("Problème dans la récupération des données utilisateur pour le login");
 		}
 		
+		return u;
+	}
+
+	@Override
+	public Utilisateur selectByEmail(String email) throws DALException {
+		Utilisateur u = null;
+		try (Connection con = ConnectionProvider.getConnection();
+				PreparedStatement rqt = con.prepareStatement(SELECT_BY_EMAIL);) {
+			rqt.setString(1, email);
+			ResultSet rs = rqt.executeQuery();
+			if(rs.next()) {
+				u = mapping(rs);
+				}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			throw new DALException("Problème dans la récupération des données de l'utilisateur par l'email");
+		}
 		return u;
 	}
 

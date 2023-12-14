@@ -35,7 +35,7 @@
 	</div>
 	<div id="connexionLink">
     <a href="inscriptionServlet">S'inscrire</a>
-    <a href="modifierProfilServlet">Mot de passe oublié</a><!-- insérer un truc -->
+    <a href="transitionMotDePasseServlet">Mot de passe oublié</a><!-- insérer un truc -->
     </div>
   </form>
 </div>
