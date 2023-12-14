@@ -12,12 +12,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">  
 </head>
+
 <body>
+
 <jsp:include page="/WEB-INF/Header.jsp">
 <jsp:param value="" name="header"/>
 </jsp:include>
-	<h1>Inscription</h1>
-	<!--Le mot de passe doit contenir 8 charactères, au moins 1 Maj, 1 min et 1 chiffre, à mettre en popup-->
+
+<h1>Inscription</h1>
+<!--Le mot de passe doit contenir 8 charactères, au moins 1 Maj, 1 min et 1 chiffre, à mettre en popup-->
 
 <div class="FormContainer">
 	<div class="inscriptionContainer">

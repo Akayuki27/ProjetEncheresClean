@@ -403,6 +403,11 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	align-items: center;
 }
 
+.mdpActuel {
+	margin-left: 0.4em;
+	margin-bottom: 10px;
+}
+
 
 /*********************ELEMENT IN CLASS***********************/
 
