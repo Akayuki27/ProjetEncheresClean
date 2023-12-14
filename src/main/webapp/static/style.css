@@ -331,6 +331,45 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	align-items: center;
 }
 
+.inscriptionContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #dacdba;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	padding: 20px;	
+}
+
+.inscriptionText {
+	display: flex;
+	flex-direction: row;
+}
+
+.inscriptionText1 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.inscriptionText2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.inscriptionBoutton{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.inscriptionTextItem {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 
 /*********************ELEMENT IN CLASS***********************/
 
@@ -522,9 +561,12 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 	.profilText p {
 	margin: 5px;
 	font-size: 1em;
-}
+	}
 
-		
+	.inscriptionText {
+	display: flex;
+	flex-direction: column;
+	}	
 	
 	#inputEnchere {
 	display: flex;
