@@ -160,10 +160,7 @@ public class AfficherEnchereServlet extends HttpServlet {
 			} catch (BLLException e) {
 				e.printStackTrace();
 			}
-		   }
-		 
-
-		
+		 } 		
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		rd.forward(request, response);

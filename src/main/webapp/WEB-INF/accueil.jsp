@@ -22,6 +22,7 @@
         <jsp:param value="" name="Accueil" />
     </jsp:include>
     <h1>Liste des enchères</h1>
+    
 
 	<c:if test="${not empty erreurSuppression && erreurSuppression != null}">
 		${erreurSuppression}
@@ -97,13 +98,12 @@
 	                                </div>
 	                            </div>
                             </div>
-
                         </div>
                         <script src="/ProjetEncheresClean/static/filtre.js"></script>
                         <% } %>
                 </div>
             </div>
-
+            
             <div class="inputChercher">
                 <button type="submit" name="rechercher">Rechercher</button>
             </div>

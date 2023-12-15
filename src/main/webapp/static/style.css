@@ -236,6 +236,7 @@ input[type="checkbox"]:focus, input[type="radio"]:focus{
 .FormContainer {
 	display: flex;
 	justify-content: center;
+	margin-bottom: 50px;
 }
 
 .checkbox-container {
